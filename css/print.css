@@ -1,0 +1,391 @@
+/* Print Styles - Optimized for printing */
+
+@media print {
+    /* Reset and base styles */
+    * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        filter: none !important;
+        -ms-filter: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+        margin: 0;
+        padding: 20px;
+        background: white !important;
+        color: black !important;
+    }
+
+    /* Hide unnecessary elements */
+    header,
+    footer,
+    nav,
+    .social-links,
+    .share-btn,
+    .theme-toggle,
+    .consent-banner,
+    .notification,
+    .modal,
+    .btn,
+    button,
+    .admin-panel,
+    .contact-form {
+        display: none !important;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        page-break-inside: avoid;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+        color: black !important;
+    }
+
+    h1 {
+        font-size: 24pt;
+        border-bottom: 2pt solid black;
+        padding-bottom: 0.5em;
+    }
+
+    h2 {
+        font-size: 18pt;
+        border-bottom: 1pt solid black;
+        padding-bottom: 0.3em;
+    }
+
+    h3 {
+        font-size: 14pt;
+    }
+
+    p {
+        margin: 0.5em 0;
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Links */
+    a {
+        color: black !important;
+        text-decoration: underline;
+    }
+
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 10pt;
+        color: #666 !important;
+    }
+
+    a[href^="#"]:after {
+        content: "";
+    }
+
+    /* Images */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+        page-break-inside: avoid;
+        border: 1pt solid #ccc;
+    }
+
+    /* Project cards */
+    .project-card {
+        page-break-inside: avoid;
+        border: 1pt solid #ccc;
+        margin: 1em 0;
+        padding: 1em;
+        background: white !important;
+    }
+
+    .project-title {
+        font-size: 14pt;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+        color: black !important;
+    }
+
+    .project-description {
+        font-size: 11pt;
+        margin-bottom: 0.5em;
+        color: black !important;
+    }
+
+    .project-meta {
+        font-size: 10pt;
+        color: #666 !important;
+    }
+
+    .project-tags {
+        margin-top: 0.5em;
+    }
+
+    .tag {
+        display: inline-block;
+        background: #f0f0f0 !important;
+        border: 1pt solid #ccc;
+        padding: 0.2em 0.5em;
+        margin: 0.2em;
+        font-size: 9pt;
+        color: black !important;
+    }
+
+    /* Sections */
+    .section {
+        page-break-before: auto;
+        page-break-after: auto;
+        margin: 2em 0;
+    }
+
+    .section-header {
+        page-break-after: avoid;
+        margin-bottom: 1em;
+    }
+
+    /* Lists */
+    ul, ol {
+        margin: 0.5em 0;
+        padding-left: 2em;
+    }
+
+    li {
+        margin: 0.2em 0;
+        page-break-inside: avoid;
+    }
+
+    /* Tables */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 1em 0;
+    }
+
+    th, td {
+        border: 1pt solid #ccc;
+        padding: 0.5em;
+        text-align: left;
+        color: black !important;
+    }
+
+    th {
+        background: #f0f0f0 !important;
+        font-weight: bold;
+    }
+
+    /* Code blocks */
+    pre, code {
+        font-family: 'Courier New', monospace;
+        font-size: 10pt;
+        background: #f0f0f0 !important;
+        border: 1pt solid #ccc;
+        padding: 0.5em;
+        overflow: hidden;
+        page-break-inside: avoid;
+    }
+
+    /* Blockquotes */
+    blockquote {
+        border-left: 3pt solid #ccc;
+        margin: 1em 0;
+        padding-left: 1em;
+        font-style: italic;
+        color: #666 !important;
+    }
+
+    /* Page breaks */
+    .page-break {
+        page-break-before: always;
+    }
+
+    .no-break {
+        page-break-inside: avoid;
+    }
+
+    /* Headers and footers */
+    @page {
+        margin: 2cm;
+        size: A4;
+    }
+
+    @page :first {
+        margin-top: 3cm;
+    }
+
+    /* Print header */
+    .print-header {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 2em;
+        border-bottom: 2pt solid black;
+        padding-bottom: 1em;
+    }
+
+    .print-header h1 {
+        font-size: 28pt;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+
+    .print-header p {
+        font-size: 12pt;
+        margin: 0.5em 0;
+        color: #666 !important;
+    }
+
+    /* Contact information */
+    .contact-info {
+        display: block !important;
+        margin: 2em 0;
+        padding: 1em;
+        border: 1pt solid #ccc;
+        background: #f9f9f9 !important;
+    }
+
+    .contact-info h3 {
+        margin-top: 0;
+        color: black !important;
+    }
+
+    .contact-info p {
+        margin: 0.3em 0;
+        color: black !important;
+    }
+
+    /* Skills section */
+    .skills-section {
+        page-break-inside: avoid;
+        margin: 2em 0;
+    }
+
+    .skill-item {
+        display: inline-block;
+        margin: 0.2em;
+        padding: 0.3em 0.6em;
+        border: 1pt solid #ccc;
+        background: #f0f0f0 !important;
+        font-size: 10pt;
+        color: black !important;
+    }
+
+    /* Portfolio grid */
+    .portfolio-grid {
+        display: block !important;
+    }
+
+    .portfolio-grid .project-card {
+        display: block !important;
+        width: 100% !important;
+        margin: 1em 0;
+        float: none !important;
+    }
+
+    /* Blog posts */
+    .blog-post {
+        page-break-inside: avoid;
+        margin: 2em 0;
+    }
+
+    .blog-post .post-meta {
+        font-size: 10pt;
+        color: #666 !important;
+        margin-bottom: 1em;
+    }
+
+    .blog-post .post-content {
+        font-size: 11pt;
+        line-height: 1.5;
+    }
+
+    /* Footer for print */
+    .print-footer {
+        display: block !important;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 10pt;
+        color: #666 !important;
+        border-top: 1pt solid #ccc;
+        padding-top: 0.5em;
+    }
+
+    /* QR code for digital version */
+    .qr-code {
+        display: block !important;
+        text-align: center;
+        margin: 2em 0;
+    }
+
+    .qr-code img {
+        max-width: 100px;
+        border: none;
+    }
+
+    .qr-code p {
+        font-size: 9pt;
+        margin-top: 0.5em;
+        color: #666 !important;
+    }
+
+    /* Hide decorative elements */
+    .decoration,
+    .background-pattern,
+    .gradient,
+    .shadow {
+        display: none !important;
+    }
+
+    /* Ensure text is readable */
+    .text-light,
+    .text-muted {
+        color: #333 !important;
+    }
+
+    /* Force background colors for important elements */
+    .highlight,
+    .important {
+        background: #ffffcc !important;
+        color: black !important;
+    }
+
+    /* Print-specific classes */
+    .print-only {
+        display: block !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    /* Page numbers */
+    @page {
+        @bottom-center {
+            content: counter(page);
+            font-size: 10pt;
+            color: #666;
+        }
+    }
+
+    /* Avoid orphaned headings */
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+
+    /* Keep related content together */
+    .project-card,
+    .blog-post,
+    .section {
+        page-break-inside: avoid;
+    }
+
+    /* Optimize for ink usage */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+} 

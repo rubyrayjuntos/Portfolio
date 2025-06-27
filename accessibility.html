@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility - Ray Swan Portfolio</title>
+    <meta name="description" content="Accessibility information and features for Ray Swan's portfolio website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon-32x32.svg">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.svg">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/themes.css">
+    <link rel="stylesheet" href="/css/print.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/css/main.css" as="style">
+    <link rel="preload" href="/js/app.js" as="script">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a href="/" class="nav-logo">
+                    <span class="logo-text">Ray Swan</span>
+                </a>
+                <div class="nav-links">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/#about" class="nav-link">About</a>
+                    <a href="/#portfolio" class="nav-link">Portfolio</a>
+                    <a href="/#blog" class="nav-link">Blog</a>
+                    <a href="/#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="nav-controls">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+        <div class="container">
+            <article class="legal-content">
+                <header class="legal-header">
+                    <h1>Accessibility Statement</h1>
+                    <p class="legal-meta">Last updated: January 2025</p>
+                </header>
+
+                <section class="legal-section">
+                    <h2>Our Commitment</h2>
+                    <p>Ray Swan is committed to ensuring digital accessibility for people with disabilities. I am continually improving the user experience for everyone and applying the relevant accessibility standards.</p>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Conformance Status</h2>
+                    <p>This website strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. These guidelines explain how to make web content more accessible for people with disabilities and more user-friendly for everyone.</p>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Accessibility Features</h2>
+                    <p>This website includes the following accessibility features:</p>
+                    <ul>
+                        <li><strong>Keyboard Navigation:</strong> All interactive elements can be accessed using only a keyboard</li>
+                        <li><strong>Screen Reader Support:</strong> Proper heading structure, alt text for images, and ARIA labels</li>
+                        <li><strong>High Contrast Mode:</strong> Dark theme option for better visibility</li>
+                        <li><strong>Focus Indicators:</strong> Clear visual focus indicators for keyboard navigation</li>
+                        <li><strong>Skip Links:</strong> Skip to main content links for faster navigation</li>
+                        <li><strong>Responsive Design:</strong> Works on all screen sizes and devices</li>
+                        <li><strong>Reduced Motion:</strong> Respects user preferences for reduced motion</li>
+                        <li><strong>Semantic HTML:</strong> Proper use of HTML elements for better structure</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Known Limitations</h2>
+                    <p>While I strive to ensure the highest level of accessibility, some content may have limitations:</p>
+                    <ul>
+                        <li>Some older portfolio images may lack detailed alt text descriptions</li>
+                        <li>Complex animations may not be fully accessible to all users</li>
+                        <li>Third-party content (if any) may not meet the same accessibility standards</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Browser Compatibility</h2>
+                    <p>This website is designed to work with the following browsers and assistive technologies:</p>
+                    <ul>
+                        <li>Chrome, Firefox, Safari, and Edge (latest versions)</li>
+                        <li>Screen readers: NVDA, JAWS, VoiceOver, and TalkBack</li>
+                        <li>Voice recognition software</li>
+                        <li>Keyboard-only navigation</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Feedback and Support</h2>
+                    <p>I welcome your feedback on the accessibility of this website. If you experience accessibility barriers or have suggestions for improvement, please contact me:</p>
+                    <div class="contact-info">
+                        <p>📧 Email: hello@yourportfolio.com</p>
+                        <p>💼 LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">linkedin.com/in/yourprofile</a></p>
+                    </div>
+                    <p>I will respond to accessibility feedback within 2 business days.</p>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Continuous Improvement</h2>
+                    <p>I am committed to continuously improving the accessibility of this website. This includes:</p>
+                    <ul>
+                        <li>Regular accessibility audits and testing</li>
+                        <li>Staying updated with WCAG guidelines</li>
+                        <li>Incorporating user feedback and suggestions</li>
+                        <li>Testing with various assistive technologies</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Technical Specifications</h2>
+                    <p>Accessibility of this website relies on the following technologies:</p>
+                    <ul>
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>WAI-ARIA</li>
+                    </ul>
+                    <p>These technologies are relied upon for conformance with the accessibility standards used.</p>
+                </section>
+
+                <section class="legal-section">
+                    <h2>Assessment Methods</h2>
+                    <p>The accessibility of this website was assessed using the following methods:</p>
+                    <ul>
+                        <li>Self-evaluation using accessibility evaluation tools</li>
+                        <li>Manual testing with keyboard navigation</li>
+                        <li>Testing with screen reader software</li>
+                        <li>Color contrast analysis</li>
+                        <li>Mobile device testing</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Connect With Me</h3>
+                <div class="social-buttons">
+                    <a href="https://twitter.com/yourusername" target="_blank" rel="noopener" aria-label="Follow on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener" aria-label="Connect on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/yourusername" target="_blank" rel="noopener" aria-label="View on GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://instagram.com/yourusername" target="_blank" rel="noopener" aria-label="Follow on Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://youtube.com/@yourchannel" target="_blank" rel="noopener" aria-label="Subscribe on YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <div class="footer-links">
+                    <a href="/privacy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Service</a>
+                    <a href="/accessibility.html">Accessibility</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <div class="footer-contact">
+                    <p>📧 hello@yourportfolio.com</p>
+                    <p>💼 Available for freelance work</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">
+                <p>&copy; 2025 Ray Swan. All rights reserved.</p>
+                <p class="license-info">This website is open source under the <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT License</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="/js/utils.js"></script>
+</body>
+</html> 

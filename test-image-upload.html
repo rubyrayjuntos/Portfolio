@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            border-color: #007bff;
+            background: #f8f9fa;
+        }
+        .upload-area.dragover {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+        .image-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .image-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .image-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .status {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .debug-info {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Image Upload Test</h1>
+        <p>This page tests the image upload functionality to help debug issues with the admin panel.</p>
+        
+        <div class="upload-area" id="upload-area">
+            <p>Click to select images or drag and drop</p>
+            <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+        </div>
+        
+        <div id="status"></div>
+        <div id="debug-info" class="debug-info"></div>
+        
+        <div class="image-preview" id="image-preview"></div>
+        
+        <button onclick="testImageOptimizer()">Test ImageOptimizer</button>
+        <button onclick="clearPreview()">Clear Preview</button>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script>
+        let debugInfo = [];
+        
+        function log(message, data = null) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = `[${timestamp}] ${message}`;
+            console.log(logEntry, data);
+            debugInfo.push(logEntry);
+            updateDebugInfo();
+        }
+        
+        function updateDebugInfo() {
+            document.getElementById('debug-info').textContent = debugInfo.join('\n');
+        }
+        
+        function showStatus(message, type = 'success') {
+            const status = document.getElementById('status');
+            status.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function setupUpload() {
+            const uploadArea = document.getElementById('upload-area');
+            const fileInput = document.getElementById('file-input');
+            
+            uploadArea.addEventListener('click', () => fileInput.click());
+            
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                handleFiles(files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                const files = Array.from(e.target.files);
+                handleFiles(files);
+            });
+        }
+        
+        async function handleFiles(files) {
+            const imageFiles = files.filter(file => file.type.startsWith('image/'));
+            
+            if (imageFiles.length === 0) {
+                showStatus('No valid image files selected', 'warning');
+                return;
+            }
+            
+            log(`Processing ${imageFiles.length} image files`);
+            
+            for (const file of imageFiles) {
+                try {
+                    log(`Starting upload for: ${file.name}`);
+                    
+                    // Check if imageOptimizer is available
+                    if (typeof imageOptimizer === 'undefined') {
+                        throw new Error('ImageOptimizer not available');
+                    }
+                    
+                    // Show loading state
+                    addImagePreview('', file.name, true);
+                    
+                    // Upload image
+                    const result = await imageOptimizer.uploadImage(file);
+                    
+                    log(`Upload successful for: ${file.name}`, result);
+                    
+                    // Remove loading and add result
+                    removeLoadingItem(file.name);
+                    addImagePreview(result.optimized.src, file.name, false, result);
+                    
+                    showStatus(`Successfully uploaded: ${file.name}`, 'success');
+                    
+                } catch (error) {
+                    log(`Upload failed for: ${file.name}`, error);
+                    removeLoadingItem(file.name);
+                    showStatus(`Failed to upload ${file.name}: ${error.message}`, 'error');
+                }
+            }
+        }
+        
+        function addImagePreview(src, name, isLoading = false, imageData = null) {
+            const preview = document.getElementById('image-preview');
+            const item = document.createElement('div');
+            item.className = 'image-item';
+            
+            if (isLoading) {
+                item.innerHTML = `
+                    <div style="height: 150px; display: flex; align-items: center; justify-content: center; background: #f8f9fa;">
+                        <div>Uploading ${name}...</div>
+                    </div>
+                `;
+                item.dataset.loading = 'true';
+                item.dataset.fileName = name;
+            } else {
+                item.innerHTML = `<img src="${src}" alt="${name}">`;
+                if (imageData) {
+                    item.dataset.imageData = JSON.stringify(imageData);
+                }
+            }
+            
+            preview.appendChild(item);
+            return item;
+        }
+        
+        function removeLoadingItem(fileName) {
+            const loadingItems = document.querySelectorAll('[data-loading="true"]');
+            loadingItems.forEach(item => {
+                if (item.dataset.fileName === fileName) {
+                    item.remove();
+                }
+            });
+        }
+        
+        function clearPreview() {
+            document.getElementById('image-preview').innerHTML = '';
+            debugInfo = [];
+            updateDebugInfo();
+        }
+        
+        function testImageOptimizer() {
+            log('Testing ImageOptimizer availability...');
+            
+            if (typeof imageOptimizer === 'undefined') {
+                showStatus('ImageOptimizer is not available', 'error');
+                return;
+            }
+            
+            showStatus('ImageOptimizer is available', 'success');
+            log('ImageOptimizer methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(imageOptimizer)));
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Test page loaded');
+            setupUpload();
+            testImageOptimizer();
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .login-header p {
+            color: #666;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: white;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-btn {
+            background: #667eea;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #5a67d8;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background: #e53e3e;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message {
+            background: #38a169;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .debug-info {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.875rem;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Admin Login</h1>
+            <p>Access the portfolio management panel</p>
+        </div>
+        
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn" id="loginBtn">
+                Login
+            </button>
+        </form>
+        
+        <div class="back-link">
+            <a href="/">← Back to Portfolio</a>
+        </div>
+
+        <div class="debug-info" id="debugInfo">
+            <strong>Debug Info:</strong><br>
+            <span id="debugStatus">Initializing...</span>
+        </div>
+    </div>
+
+    <script>
+        console.log('Admin login page loaded');
+
+        class AdminAuth {
+            constructor() {
+                this.form = document.getElementById('loginForm');
+                this.errorMessage = document.getElementById('errorMessage');
+                this.successMessage = document.getElementById('successMessage');
+                this.loginBtn = document.getElementById('loginBtn');
+                this.debugInfo = document.getElementById('debugInfo');
+                this.debugStatus = document.getElementById('debugStatus');
+                
+                this.updateDebug('AdminAuth class initialized');
+                this.setupEventListeners();
+                this.checkAuthStatus();
+            }
+
+            updateDebug(message) {
+                console.log(message);
+                this.debugStatus.textContent = message;
+            }
+
+            setupEventListeners() {
+                this.updateDebug('Setting up event listeners');
+                
+                this.form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.updateDebug('Form submitted, preventing default');
+                    this.handleLogin();
+                });
+
+                // Also add click handler to button as backup
+                this.loginBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.updateDebug('Button clicked, preventing default');
+                    this.handleLogin();
+                });
+            }
+
+            async checkAuthStatus() {
+                this.updateDebug('Checking auth status...');
+                try {
+                    const response = await fetch('/api/auth/status', {
+                        credentials: 'include'
+                    });
+                    const data = await response.json();
+                    
+                    this.updateDebug(`Auth status: ${data.authenticated ? 'Authenticated' : 'Not authenticated'}`);
+                    
+                    if (data.authenticated) {
+                        this.updateDebug('Already authenticated, redirecting...');
+                        window.location.href = '/admin';
+                    }
+                } catch (error) {
+                    this.updateDebug(`Auth status check failed: ${error.message}`);
+                    console.error('Auth status check failed:', error);
+                }
+            }
+
+            async handleLogin() {
+                const formData = new FormData(this.form);
+                const username = formData.get('username');
+                const password = formData.get('password');
+
+                this.updateDebug(`Login attempt for username: ${username}`);
+
+                this.loginBtn.disabled = true;
+                this.loginBtn.textContent = 'Logging in...';
+                this.hideMessages();
+
+                try {
+                    this.updateDebug('Sending login request...');
+                    const response = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ username, password })
+                    });
+
+                    this.updateDebug(`Response status: ${response.status}`);
+                    const data = await response.json();
+                    this.updateDebug(`Response data: ${JSON.stringify(data)}`);
+
+                    if (data.success) {
+                        this.updateDebug('Login successful, redirecting to admin panel...');
+                        this.showSuccess('Login successful! Redirecting...');
+                        
+                        setTimeout(() => {
+                            window.location.href = '/admin';
+                        }, 1500);
+                    } else {
+                        this.updateDebug(`Login failed: ${data.error}`);
+                        this.showError(data.error || 'Login failed');
+                    }
+                } catch (error) {
+                    this.updateDebug(`Login error: ${error.message}`);
+                    console.error('Login error:', error);
+                    this.showError('Network error. Please try again.');
+                } finally {
+                    this.loginBtn.disabled = false;
+                    this.loginBtn.textContent = 'Login';
+                }
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.style.display = 'block';
+                this.successMessage.style.display = 'none';
+            }
+
+            showSuccess(message) {
+                this.successMessage.textContent = message;
+                this.successMessage.style.display = 'block';
+                this.errorMessage.style.display = 'none';
+            }
+
+            hideMessages() {
+                this.errorMessage.style.display = 'none';
+                this.successMessage.style.display = 'none';
+            }
+        }
+
+        // Initialize authentication when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM loaded, initializing AdminAuth');
+            new AdminAuth();
+        });
+
+        // Also try to initialize immediately in case DOM is already loaded
+        if (document.readyState === 'loading') {
+            console.log('DOM still loading, waiting...');
+        } else {
+            console.log('DOM already loaded, initializing immediately');
+            new AdminAuth();
+        }
+    </script>
+</body>
+</html> 

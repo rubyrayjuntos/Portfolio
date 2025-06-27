@@ -1,0 +1,62 @@
+{
+  "name": "Portfolio - Professional Developer Portfolio",
+  "short_name": "Portfolio",
+  "description": "A modern, responsive developer portfolio showcasing projects, skills, and experience",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/icons/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "short_name": "Projects",
+      "description": "View my projects",
+      "url": "/#portfolio"
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch",
+      "url": "/#contact"
+    },
+    {
+      "name": "About",
+      "short_name": "About",
+      "description": "Learn about me",
+      "url": "/#about"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  },
+  "handle_links": "preferred",
+  "protocol_handlers": [
+    {
+      "protocol": "web+portfolio",
+      "url": "/?action=%s"
+    }
+  ]
+} 

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroids Game - Portfolio</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .game-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .game-header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .game-canvas-container {
+            position: relative;
+            border: 2px solid var(--accent-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.3);
+        }
+
+        #gameCanvas {
+            display: block;
+            background: #000;
+            cursor: crosshair;
+        }
+
+        .game-controls {
+            margin-top: 20px;
+            text-align: center;
+            background: var(--bg-secondary);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-controls h3 {
+            margin-bottom: 15px;
+            color: var(--accent-primary);
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .control-group {
+            text-align: left;
+        }
+
+        .control-group strong {
+            color: var(--accent-secondary);
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .stat {
+            background: var(--bg-tertiary);
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .game-over h2 {
+            color: #ff4444;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .game-header h1 {
+                font-size: 2rem;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .control-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+    
+    <div class="game-container">
+        <div class="game-header">
+            <h1>🚀 Ray CS's Asteroids</h1>
+            <p>Navigate through space, avoid asteroids, and survive as long as possible!</p>
+        </div>
+
+        <div class="game-canvas-container">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+            
+            <div class="game-over" id="gameOver">
+                <h2>Game Over!</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <p>Time Survived: <span id="finalTime">0</span>s</p>
+                <button class="btn" onclick="restartGame()">Play Again</button>
+            </div>
+        </div>
+
+        <div class="game-stats">
+            <div class="stat">Score: <span id="score">0</span></div>
+            <div class="stat">Time: <span id="time">0</span>s</div>
+            <div class="stat">Asteroids: <span id="asteroidCount">0</span></div>
+        </div>
+
+        <div class="game-controls">
+            <h3>🎮 Controls</h3>
+            <div class="control-grid">
+                <div class="control-group">
+                    <strong>Movement:</strong><br>
+                    ← → Arrow Keys: Rotate Ship<br>
+                    ↑ Up Arrow: Thrust Forward<br>
+                    ↓ Down Arrow: Reverse Thrust
+                </div>
+                <div class="control-group">
+                    <strong>Combat:</strong><br>
+                    Spacebar: Shoot Laser<br>
+                    P: Pause/Resume Game<br>
+                    R: Restart Game
+                </div>
+            </div>
+            
+            <div class="game-buttons">
+                <button class="btn" id="startBtn" onclick="console.log('Button clicked!'); startGame();">Start Game</button>
+                <button class="btn" id="pauseBtn" onclick="togglePause()" disabled>Pause</button>
+                <button class="btn" onclick="restartGame()">Restart</button>
+                <button class="btn" onclick="toggleSound()" id="soundBtn">🔊 Sound On</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/asteroids.js"></script>
+</body>
+</html> 

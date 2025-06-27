@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Structure Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #portfolio-container {
+            border: 2px dashed #ccc;
+            padding: 2rem;
+            margin: 2rem 0;
+            min-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Structure Test</h1>
+    
+    <div class="test-section">
+        <h2>1. Data Structure Test</h2>
+        <button onclick="testDataStructure()">Test JSON Structure</button>
+        <div id="data-test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Portfolio Rendering Test</h2>
+        <button onclick="testPortfolioRendering()">Test Portfolio Rendering</button>
+        <div id="portfolio-container">
+            <!-- Portfolio content will be rendered here -->
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Navigation Test</h2>
+        <button onclick="testNavigation()">Test Navigation Flow</button>
+        <div id="navigation-test-result"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Admin Panel Test</h2>
+        <button onclick="testAdminPanel()">Test Admin Panel</button>
+        <div id="admin-test-result"></div>
+    </div>
+
+    <script>
+        // Test 1: Data Structure
+        async function testDataStructure() {
+            const resultDiv = document.getElementById('data-test-result');
+            resultDiv.innerHTML = '<div class="info">Testing data structure...</div>';
+            
+            try {
+                const response = await fetch('/data/projects.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Check if the new structure exists
+                if (data.projectTypes) {
+                    const types = Object.keys(data.projectTypes);
+                    let html = '<div class="success">✅ Data structure is correct!</div>';
+                    html += '<div class="info">Found project types: ' + types.join(', ') + '</div>';
+                    
+                    // Check each type
+                    types.forEach(type => {
+                        const typeData = data.projectTypes[type];
+                        if (type === 'blog') {
+                            const count = typeData.posts ? typeData.posts.length : 0;
+                            html += `<div class="info">📝 ${type}: ${count} posts</div>`;
+                        } else {
+                            const count = typeData.projects ? typeData.projects.length : 0;
+                            html += `<div class="info">🎨 ${type}: ${count} projects</div>`;
+                        }
+                    });
+                    
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ projectTypes not found in data structure</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">❌ Error loading data: ' + error.message + '</div>';
+            }
+        }
+
+        // Test 2: Portfolio Rendering
+        async function testPortfolioRendering() {
+            const container = document.getElementById('portfolio-container');
+            container.innerHTML = '<div class="info">Loading portfolio...</div>';
+            
+            try {
+                // Load the portfolio.js script if not already loaded
+                if (typeof PortfolioManager === 'undefined') {
+                    await loadScript('/js/portfolio.js');
+                }
+                
+                // Initialize portfolio manager
+                if (typeof PortfolioManager !== 'undefined') {
+                    const portfolio = new PortfolioManager();
+                    container.innerHTML = '<div class="success">✅ Portfolio manager initialized successfully!</div>';
+                } else {
+                    container.innerHTML = '<div class="error">❌ PortfolioManager not found</div>';
+                }
+            } catch (error) {
+                container.innerHTML = '<div class="error">❌ Error initializing portfolio: ' + error.message + '</div>';
+            }
+        }
+
+        // Test 3: Navigation
+        async function testNavigation() {
+            const resultDiv = document.getElementById('navigation-test-result');
+            resultDiv.innerHTML = '<div class="info">Testing navigation...</div>';
+            
+            try {
+                // Test if we can navigate to different sections
+                const response = await fetch('/data/projects.json');
+                const data = await response.json();
+                
+                if (data.projectTypes) {
+                    const types = Object.keys(data.projectTypes);
+                    let html = '<div class="success">✅ Navigation structure ready!</div>';
+                    html += '<div class="info">Available navigation paths:</div>';
+                    
+                    types.forEach(type => {
+                        html += `<div class="info">→ /${type} (list of ${type} items)</div>`;
+                        const typeData = data.projectTypes[type];
+                        if (type === 'blog' && typeData.posts) {
+                            typeData.posts.forEach(post => {
+                                html += `<div class="info">  → /${type}/${post.id} (${post.title})</div>`;
+                            });
+                        } else if (typeData.projects) {
+                            typeData.projects.forEach(project => {
+                                html += `<div class="info">  → /${type}/${project.id} (${project.title})</div>`;
+                            });
+                        }
+                    });
+                    
+                    resultDiv.innerHTML = html;
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ No project types found for navigation</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">❌ Error testing navigation: ' + error.message + '</div>';
+            }
+        }
+
+        // Test 4: Admin Panel
+        async function testAdminPanel() {
+            const resultDiv = document.getElementById('admin-test-result');
+            resultDiv.innerHTML = '<div class="info">Testing admin panel...</div>';
+            
+            try {
+                // Test if admin.js is accessible
+                const response = await fetch('/js/admin.js');
+                if (response.ok) {
+                    resultDiv.innerHTML = '<div class="success">✅ Admin panel JavaScript is accessible</div>';
+                } else {
+                    resultDiv.innerHTML = '<div class="error">❌ Admin panel JavaScript not found</div>';
+                }
+            } catch (error) {
+                resultDiv.innerHTML = '<div class="error">❌ Error testing admin panel: ' + error.message + '</div>';
+            }
+        }
+
+        // Helper function to load scripts
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Run all tests on page load
+        window.addEventListener('load', () => {
+            console.log('Portfolio Structure Test Page Loaded');
+            console.log('Available tests:');
+            console.log('- testDataStructure()');
+            console.log('- testPortfolioRendering()');
+            console.log('- testNavigation()');
+            console.log('- testAdminPanel()');
+        });
+    </script>
+</body>
+</html> 
