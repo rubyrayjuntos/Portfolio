@@ -1,0 +1,28 @@
+{
+  "navigation": {
+    "logo": "Portfolio",
+    "tagline": "Creative Developer"
+  },
+  "accordion": {
+    "home": {
+      "title": "Home",
+      "subtitle": "Welcome to my creative portfolio"
+    },
+    "work": {
+      "title": "Work",
+      "subtitle": "Explore my creative projects"
+    },
+    "about": {
+      "title": "About",
+      "subtitle": "Learn more about me and my skills"
+    },
+    "contact": {
+      "title": "Contact",
+      "subtitle": "Get in touch and connect with me"
+    }
+  },
+  "footer": {
+    "copyright": "© 2024 Creative Developer",
+    "description": "Building digital experiences with creativity and code"
+  }
+}

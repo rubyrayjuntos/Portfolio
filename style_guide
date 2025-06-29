@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">Image Style Guide Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght:300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #52D1DC;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Styling for the generated analysis content to mimic infographic style */
+        #generatedAnalysisContent {
+            background-color: #112240; /* bg-[#112240] */
+            padding: 2rem; /* p-8 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-2xl */
+            line-height: 1.75; /* leading-relaxed */
+            color: #E6F1FF; /* text-[#E6F1FF] */
+        }
+        #generatedAnalysisContent h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            text-align: center;
+            margin-bottom: 2.5rem; /* mb-10 */
+            color: #52D1DC; /* cyan */
+        }
+        #generatedAnalysisContent h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+            margin-top: 2.5rem; /* mt-10 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            color: #F344A3; /* pink */
+            border-bottom: 1px solid rgba(82, 209, 220, 0.3); /* subtle border */
+            padding-bottom: 0.5rem;
+        }
+        #generatedAnalysisContent h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #FFB347; /* orange */
+        }
+        #generatedAnalysisContent p {
+            margin-bottom: 1rem; /* mb-4 */
+            line-height: 1.75; /* leading-relaxed */
+            color: #E6F1FF; /* light blue */
+        }
+        #generatedAnalysisContent ul {
+            list-style-type: disc;
+            margin-left: 1.5rem; /* ml-6 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #E6F1FF;
+        }
+        #generatedAnalysisContent ol {
+            list-style-type: decimal;
+            margin-left: 1.5rem; /* ml-6 */
+            margin-bottom: 1rem; /* mb-4 */
+            color: #E6F1FF;
+        }
+        #generatedAnalysisContent strong {
+            color: #52D1DC; /* cyan */
+            font-weight: 700;
+        }
+        #generatedAnalysisContent table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            color: #E6F1FF;
+            border-radius: 0.5rem; /* rounded corners for table */
+            overflow: hidden; /* ensures rounded corners clip content */
+        }
+        #generatedAnalysisContent th, #generatedAnalysisContent td {
+            border: 1px solid rgba(136, 146, 176, 0.2);
+            padding: 0.75rem;
+            text-align: left;
+        }
+        #generatedAnalysisContent th {
+            background-color: rgba(17, 34, 64, 0.7); /* #112240 with more transparency */
+            color: #FFB347; /* orange */
+            font-weight: 700;
+        }
+        #generatedAnalysisContent tr:nth-child(even) {
+            background-color: rgba(17, 34, 64, 0.3); /* Slightly lighter row */
+        }
+        #generatedAnalysisContent code {
+            background-color: #0A192F;
+            padding: 0.2em 0.4em;
+            border-radius: 0.3em;
+            font-family: monospace;
+            color: #52D1DC;
+        }
+        #generatedAnalysisContent pre {
+            background-color: #0A192F;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(82, 209, 220, 0.2); /* subtle cyan border */
+        }
+        /* Specific styling for new Gemini feature sections within the generated analysis */
+        #generatedAnalysisContent .gemini-feature-card {
+            background-color: #0A192F; /* Darker background for nested cards */
+            padding: 1.5rem; /* p-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06); /* subtle inner shadow */
+            margin-top: 1.5rem; /* mt-6 */
+        }
+        #generatedAnalysisContent .gemini-feature-card h3 {
+            color: #52D1DC; /* Cyan for inner headings */
+        }
+    </style>
+</head>
+<body class="bg-[#0A192F] text-[#E6F1FF]">
+
+    <header class="text-center py-16 px-4 bg-cover bg-center" style="background-image: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 1)), url('https://i.imgur.com/gM1gS7U.jpeg');">
+        <h1 class="font-cinzel text-4xl md:text-6xl font-bold text-white tracking-wider" data-i18n="mainHeading">Image Style Guide Analyzer</h1>
+        <p class="mt-4 text-lg md:text-xl text-[#8892B0] max-w-3xl mx-auto" data-i18n="mainDescription">Upload your images to generate a custom artistic style guide.</p>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <section id="upload-section" class="mb-12 bg-[#112240] p-8 rounded-lg shadow-2xl">
+            <h2 class="font-cinzel text-3xl md:text-4xl font-bold text-center mb-8 text-[#52D1DC]" data-i18n="uploadSectionHeading">Upload Your Images</h2>
+            <p class="text-center text-[#8892B0] mb-6" data-i18n="uploadSectionDescription">Select up to 5 images (JPEG, PNG, GIF) to analyze their collective artistic style.</p>
+            <input type="file" id="imageUploadInput" multiple accept="image/jpeg,image/png,image/gif" class="w-full p-3 rounded-md bg-[#0A192F] text-[#E6F1FF] border border-[#112240] focus:outline-none focus:border-[#5D5FEF] mb-6">
+            
+            <div id="imagePreviews" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
+                <!-- Image previews will be dynamically inserted here -->
+            </div>
+
+            <button id="generateAnalysisBtn" class="w-full bg-[#FFB347] text-white py-4 px-6 rounded-lg hover:bg-[#d69f3f] transition-colors font-bold flex items-center justify-center text-xl">
+                <span data-i18n="generateAnalysisButton">Generate Style Guide Analysis</span>
+                <div id="analysisSpinner" class="loading-spinner ml-4 hidden"></div>
+            </button>
+            <p id="uploadMessage" class="mt-4 text-center text-red-400 hidden"></p>
+        </section>
+
+        <section id="generated-analysis-section" class="mb-12 hidden">
+            <h2 class="font-cinzel text-3xl md:text-4xl font-bold text-center mb-12 text-[#F344A3]" data-i18n="customStyleGuideHeading">Your Custom Style Guide Analysis</h2>
+            <div id="generatedAnalysisContent">
+                <!-- LLM generated analysis will be injected here -->
+            </div>
+
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-[#112240] p-6 rounded-lg shadow-2xl">
+                    <h3 class="font-cinzel text-2xl font-bold text-center mb-4 text-[#52D1DC]" data-i18n="suggestStrategyHeading">Suggest Image Generation Strategy ✨</h3>
+                    <p class="text-center text-[#8892B0] mb-6" data-i18n="suggestStrategyDescription">Receive recommendations for AI image generation tools and prompt techniques based on your style.</p>
+                    <button id="suggestGenStrategyBtn" class="w-full bg-[#5D5FEF] text-white py-3 px-6 rounded-lg hover:bg-[#4a4cc7] transition-colors font-bold flex items-center justify-center">
+                        <span data-i18n="getSuggestionsButton">Get Suggestions</span>
+                        <div id="genStrategySpinner" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+                    <div id="genStrategyOutput" class="mt-6 p-4 bg-[#0A192F] rounded-md text-[#E6F1FF] text-sm whitespace-pre-wrap"></div>
+                </div>
+
+                <div class="bg-[#112240] p-6 rounded-lg shadow-2xl">
+                    <h3 class="font-cinzel text-2xl font-bold text-center mb-4 text-[#52D1DC]" data-i18n="generatePromptVariationsHeading">Generate Prompt Variations ✨</h3>
+                    <p class="text-center text-[#8892B0] mb-6" data-i18n="generatePromptVariationsDescription">Enter a core concept, and get multiple prompt variations tailored to your style.</p>
+                    <textarea id="promptConceptInput" class="w-full p-3 rounded-md bg-[#0A192F] text-[#E6F1FF] border border-[#112240] focus:outline-none focus:border-[#5D5FEF] mb-4" rows="3" placeholder="e.g., A lone traveler in a magical forest" data-i18n-placeholder="promptConceptPlaceholder"></textarea>
+                    <button id="generatePromptVariationsBtn" class="w-full bg-[#F344A3] text-white py-3 px-6 rounded-lg hover:bg-[#c43682] transition-colors font-bold flex items-center justify-center">
+                        <span data-i18n="generateVariationsButton">Generate Variations</span>
+                        <div id="promptVariationsSpinner" class="loading-spinner ml-3 hidden"></div>
+                    </button>
+                    <div id="promptVariationsOutput" class="mt-6 p-4 bg-[#0A192F] rounded-md text-[#E6F1FF] text-sm whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="text-center py-8 border-t border-[#112240]">
+        <p class="text-[#8892B0]" data-i18n="footerText">Powered by Gemini API for image analysis and content generation.</p>
+    </footer>
+
+    <script>
+        const imageUploadInput = document.getElementById('imageUploadInput');
+        const imagePreviews = document.getElementById('imagePreviews');
+        const generateAnalysisBtn = document.getElementById('generateAnalysisBtn');
+        const analysisSpinner = document.getElementById('analysisSpinner');
+        const generatedAnalysisSection = document.getElementById('generated-analysis-section');
+        const generatedAnalysisContent = document.getElementById('generatedAnalysisContent');
+        const uploadMessage = document.getElementById('uploadMessage');
+
+        const suggestGenStrategyBtn = document.getElementById('suggestGenStrategyBtn');
+        const genStrategySpinner = document.getElementById('genStrategySpinner');
+        const genStrategyOutput = document.getElementById('genStrategyOutput');
+
+        const promptConceptInput = document.getElementById('promptConceptInput');
+        const generatePromptVariationsBtn = document.getElementById('generatePromptVariationsBtn');
+        const promptVariationsSpinner = document.getElementById('promptVariationsSpinner');
+        const promptVariationsOutput = document.getElementById('promptVariationsOutput');
+
+        let uploadedFilesData = []; // Stores { file, base64, mimeType }
+
+        const apiKey = ""; 
+        let currentLanguage = 'en'; // Default language
+
+        // Localization strings
+        const i18n = {
+            en: {
+                pageTitle: "Image Style Guide Analysis",
+                mainHeading: "Image Style Guide Analyzer",
+                mainDescription: "Upload your images to generate a custom artistic style guide.",
+                uploadSectionHeading: "Upload Your Images",
+                uploadSectionDescription: "Select up to 5 images (JPEG, PNG, GIF) to analyze their collective artistic style.",
+                generateAnalysisButton: "Generate Style Guide Analysis",
+                uploadMaxError: "Please select a maximum of 5 images.",
+                uploadMinError: "Please upload at least one image to generate the analysis.",
+                apiError: "Error: Could not get a valid response from the API.",
+                fetchError: "Error: {message}. Please try again.",
+                customStyleGuideHeading: "Your Custom Style Guide Analysis",
+                suggestStrategyHeading: "Suggest Image Generation Strategy ✨",
+                suggestStrategyDescription: "Receive recommendations for AI image generation tools and prompt techniques based on your style.",
+                getSuggestionsButton: "Get Suggestions",
+                generatePromptVariationsHeading: "Generate Prompt Variations ✨",
+                generatePromptVariationsDescription: "Enter a core concept, and get multiple prompt variations tailored to your style.",
+                promptConceptPlaceholder: "e.g., A lone traveler in a magical forest",
+                generateVariationsButton: "Generate Variations",
+                missingInputError: "Please generate the style guide analysis and enter a concept.",
+                footerText: "Powered by Gemini API for image analysis and content generation.",
+                individualAnalysisPrompt: (language) => `Analyze this image for its artistic style. Focus on:
+                - Dominant and accent colors present.
+                - Types and quality of light (e.g., volumetric, glowing, direct, diffused).
+                - Key objects or recurring motifs (e.g., lanterns, symbols, specific flora/fauna).
+                - Overall composition (e.g., depth, leading lines, framing).
+                - Emotional tone or atmosphere evoked.
+                Be concise (max 200 words) and provide the analysis as plain text in ${language === 'es' ? 'Spanish' : 'English'}.`,
+                masterAnalysisPrompt: (language, individualAnalyses, styleGuideMarkdown) => `You are an expert art analyst. Your task is to generate a comprehensive artistic style guide analysis based on the provided 'Reference Style Guide Template' and observations from 'New Image Analyses'.
+
+                Reference Style Guide Template (Structure and sections for content generation, do not verbatim copy the example tables but understand their purpose for content structure):
+                ${styleGuideMarkdown}
+
+                New Image Analyses:
+                ${individualAnalyses.join('\n')}
+
+                Instructions:
+                Generate a new, complete artistic style guide analysis.
+                1. Adhere strictly to the structure and section headings (e.g., 'I. Introduction', 'II. Core Aesthetic Principles', 'A. Color Palette & Mood Architecture', etc.) as defined in the 'Reference Style Guide Template'. Do NOT create new sections, reorder existing ones, or change the heading levels.
+                2. Integrate the insights from the 'New Image Analyses' into the appropriate sections of the style guide. For example, if a new image analysis mentions a specific color or lighting effect, incorporate that observation into the 'Color Palette' or 'Lighting' sections, blending it with the existing principles.
+                3. Synthesize information: Do not just list the new image analyses. Instead, use them to update, reinforce, or slightly modify the descriptions within each section of the template, making the analysis coherent and specific to the uploaded images.
+                4. Maintain the tone and level of detail of the 'Reference Style Guide Template' (detailed, analytical, energetic, not cartoonish, vivid imagery).
+                5. If the template includes sections like 'Table 1: Primary Color Palette & Mood Associations' or 'Table 2: Key Visual Motifs & Their Symbolic Significance' or 'Table 3: Consistency Checklist for New Creations', create actual markdown tables with relevant data derived from the analysis of the new images. Populate these tables with specific details from your analysis.
+                6. Ensure the output is directly in Markdown format, using appropriate markdown syntax for headings, paragraphs, lists, and tables. Ensure the response is entirely in ${language === 'es' ? 'Spanish' : 'English'}. Do NOT include any HTML, <script> tags, or conversational text outside the markdown content.
+
+                Generated Style Guide Analysis:`,
+                suggestStrategyPrompt: (language, styleGuide) => `Based on the following artistic style guide, suggest suitable AI image generation tools (e.g., Midjourney, Stable Diffusion, DALL-E) and general prompt strategies to consistently produce images in this style. Focus on keywords, lighting techniques, and compositional elements that should be emphasized in prompts. Provide a concise response (approx. 5-7 sentences). Ensure the response is entirely in ${language === 'es' ? 'Spanish' : 'English'}.
+
+                Artistic Style Guide:
+                ${styleGuide}
+
+                Suggested Image Generation Strategy:`,
+                generatePromptVariationsPrompt: (language, styleGuide, concept) => `Based on the following artistic style guide, generate 3 distinct prompt variations (each 1-2 sentences) for an AI image generation tool. Each variation should incorporate the core concept: "${concept}" and emphasize different aspects of the style guide (e.g., a specific motif, lighting effect, or emotional tone). Present each variation clearly. Ensure the response is entirely in ${language === 'es' ? 'Spanish' : 'English'}.
+
+                Artistic Style Guide:
+                ${styleGuide}
+
+                Prompt Variations:`,
+                styleGuideMarkdown: `
+# Unveiling Your Vision: A Definitive Style Guide for Vivid Storytelling Imagery
+
+## I. Introduction: The Essence of Your Artistic Vision
+
+This report serves as a definitive style guide, meticulously deconstructing the visual language inherent in the provided imagery. Its primary purpose is to formalize an intuitive artistic style into a structured, replicable framework, thereby empowering consistent creative output. This guide is not intended to restrict artistic expression but rather to provide a comprehensive compass for maintaining consistent quality and thematic resonance across future creations. By understanding the foundational elements of this unique aesthetic, every new piece can authentically feel as though it originates from the same enchanting universe.
+
+The initial impression conveyed by the collection of images is one of profound wonder, deep mystery, and an adventurous spirit. The visual narratives consistently evoke a sense of journey into enchanted realms, characterized by a style that feels both ancient and timeless. The "vivid imagery" highlighted in the user query is immediately apparent, defined by intensely saturated colors and dynamic, often ethereal, lighting. This aesthetic invites viewers into narratives of discovery, transformation, and exploration within a world teeming with hidden magic and natural grandeur.
+
+## II. Core Aesthetic Principles: Deconstructing the Visual Language
+
+This section systematically dissects the fundamental visual components that define the distinctive artistic style, progressing from broad atmospheric qualities to specific compositional details.
+
+### A. Color Palette & Mood Architecture
+
+The foundation of the visual style's color palette is deeply rooted in nature, specifically in verdant forests and twilight skies. Lush greens are pervasive, forming the consistent backdrop of almost every scene, providing a sense of natural abundance and depth. Complementing these greens are vibrant purples, which frequently appear as fields of lupine-like flowers, serving as a signature element that provides striking contrast and a distinct touch of fantasy. Ethereal blues manifest in various forms, including misty atmospheres, magical glows, and twilight skies, all contributing significantly to the overarching mystical ambiance.
+
+These dominant cool hues are strategically balanced by a selection of accent colors, primarily golden yellows, warm oranges, and glowing whites. These warm tones are predominantly associated with light sources and moments of revelation or significance. Golden yellows and warm oranges emanate from lanterns carried by figures, from the dramatic light of sunrises or sunsets painting the sky, and from various magical glows within the environment. Glowing whites often serve to highlight magical symbols or points of intense light, adding a sense of purity, power, and clarity to the scene. Other vibrant reds, pinks, and teal might indicate a capacity for highly saturated, almost psychedelic, fantastical environments that remain cohesive within the overall style.
+
+The emotional resonance derived from this color palette is profound, evoking a consistent sense of wonder, mystery, and tranquility. The interplay of cool and warm tones is crucial to this effect. The dominant cool tones of greens, purples, and blues establish a serene, mysterious, and often contemplative mood, reminiscent of ancient, untouched nature. The warm accents, conversely, introduce elements of hope, guidance, magic, and vital energy. This dynamic balance prevents the scenes from becoming solely melancholic or foreboding, allowing for a wide range of emotional narratives, from quiet introspection to grand adventure.
+
+A deeper examination of the color dynamics reveals a consistent principle that can be termed "Mystical Contrast." The images consistently feature a dominant cool palette, primarily greens, blues, and purples, juxtaposed with strong, localized warm light sources in gold and orange. Beyond merely creating visual contrast and drawing the eye to focal points, this dynamic establishes a profound visual language. The cool tones represent the pervasive, ancient, and often mysterious natural world itself, while the warm glows signify active magic, guidance, discovery, or a divine presence. This suggests a narrative where magic is an intrinsic, often benevolent, force woven into the fabric of nature, rather than an external imposition. This deliberate use of color empowers the visual narrative to telegraph narrative beats and emotional shifts. For instance, an increase in warm, magical light can indicate a moment of revelation, a character's growing power, or the presence of something extraordinary. Conversely, a scene dominated by cool tones, with minimal warm light, might suggest a period of uncertainty, a hidden threat, or a journey into the unknown. This deliberate use of color empowers the visual narrative to telegraph narrative beats and emotional shifts.
+
+**Table 1: Primary Color Palette & Mood Associations (Example Structure)**
+
+| Color Group | Specific Hues/Tones | Associated Elements | Emotional/Thematic Associations |
+| :--- | :--- | :--- | :--- |
+| **Dominant Cools** | Forest Green, Emerald, Teal | Foliage, Ancient Trees, Water | Serenity, Growth, Mystery, Life, Tranquility |
+| | Vibrant Purple, Lavender, Indigo | Lupine-like Flowers, Twilight Sky, Mist | Enchantment, Fantasy, Depth, Spirituality, Melancholy |
+| | Ethereal Blue, Aqua, Cyan | Mist, Magical Glows, Water, Night Sky | Mysticism, Calm, Purity, Otherworldliness, Clarity |
+| **Accent Warms** | Golden Yellow, Amber, Fiery Orange | Lanterns, Sunsets/Sunrises, Magical Orbs | Guidance, Warmth, Revelation, Vitality, Hope, Discovery |
+| | Glowing White, Bright Silver | Magical Symbols, Intense Light Points | Purity, Power, Clarity, Divine Presence, Illumination |
+| **Vibrant Accents** | Deep Red, Hot Pink, Bright Teal | Fantastical Flora/Fauna | Abundance, Exoticism, Dynamic Energy, Heightened Magic |
+
+### B. Lighting & Atmospheric Effects
+
+Light is a primary narrative and compositional element within this artistic style. Light sources are diverse, encompassing natural phenomena, magical emanations, and practical tools. Natural light often manifests as dramatic sunbeams filtering through dense canopies, creating a sacred and ethereal glow, or as grand sunsets and sunrises that paint the sky with intense hues. Magical glows emanate from various sources, including mystical symbols, luminous orbs, and even certain flora. Practical light sources, most notably the lantern, serve as a consistent motif of guidance and discovery, often held by the central figures.
+
+The quality of light is highly deliberate and varied. Ethereal, volumetric light rays cutting through mist or foliage are a hallmark of the style, creating a profound sense of depth and implying a divine or magical presence. Diffused glows around magical elements soften the scene and enhance the mystical aura, contributing to the overall dreamlike quality. While often soft and pervasive, there are also moments of sharp contrast, particularly where a bright light source meets deep shadows. This contrast adds drama and helps define forms, such as the strong rim lighting on figures or the bright sun against dark mountains.
+
+Atmospheric elements are integral to the immersive quality of the imagery. Mist and fog are frequently employed to create depth, soften backgrounds, and enhance the sense of mystery and enchantment, making the environment feel ancient and alive. Subtle sparkling particles or motes of dust, often visible within the light beams, further emphasize the magical and ethereal quality of the air itself.
+
+Beyond mere illumination, light functions as a narrative compass and an emotional amplifier. The direction and quality of light often indicate the path forward, or highlight a key character or object. Light can also signify a moment of revelation or guidance. This suggests that light is an active participant in the story, not merely a passive visual element. Furthermore, the interplay of light and shadow is a powerful emotional amplifier; soft, pervasive light often evokes tranquility and hope, while stark contrasts can signal tension or a dramatic turning point in the narrative. Therefore, when crafting new visual stories, consideration should be given to how light can actively advance the plot or underscore character emotions. This approach transforms light into a dynamic storytelling tool, extending beyond its visual function.
+
+### C. Composition & Framing
+
+The compositions consistently direct the viewer's eye, establishing clear focal points. Central figures, particularly the protagonist or a guiding entity, are often placed centrally or along strong visual paths, drawing immediate attention. Key objects, such as lanterns or magical orbs, are almost always illuminated and strategically positioned to draw the gaze. In some instances, the light sources themselves become the primary focal point, radiating energy and pulling the viewer's gaze inwards.
+
+A strong sense of depth and perspective is achieved through the deliberate layering of elements. Foreground elements, such as vibrant flowers, gnarled roots, or ancient rocks, anchor the scene and provide immediate immersion, making the viewer feel present within the environment. The midground typically contains the main action or characters, while the background extends into vast landscapes, distant mountains, or dense forests, creating a sense of expansive, explorable worlds. Atmospheric perspective, characterized by mist and fading colors in the distance, further enhances this perception of depth and vastness.
+
+The motif of a journey is visually reinforced through the recurring use of winding paths, flowing streams, or light rays that lead the eye deeper into the scene. These leading lines create a narrative pull, inviting the viewer to imagine the story unfolding along these routes. Even in scenes without an explicit path, the arrangement of trees or the direction of light often creates an implied direction of movement, guiding the viewer's exploration of the image.
+
+Framing elements are frequently employed to enhance focus and immersion. Trees, lush foliage, and natural archways are used to frame the central subject or scene, drawing the viewer's focus inwards and enhancing the feeling of being within a hidden, ancient world.
+
+This consistent compositional approach reveals an "Inviting Immersion" strategy. The foreground elements act as a subtle invitation, pulling the viewer into the scene as if they are about to step onto the path themselves. The leading lines then guide them on a symbolic journey, fostering a sense of active participation rather than passive observation. The deep background promises more to discover, reinforcing the idea of an expansive, living world. This technique transforms a static image into a dynamic narrative prompt. When composing new scenes, therefore, conscious effort should be made to make the viewer feel as though they are *entering* the story. This can be achieved by using foreground elements to establish proximity, leading lines to suggest narrative progression, and expansive backgrounds to hint at the wider world beyond the immediate frame.
+
+## III. Recurring Motifs & Narrative Archetypes
+
+This section identifies the consistent characters, objects, and environmental features that serve as visual shorthand and carry significant symbolic weight within the artistic style.
+
+### A. Characters & Figures
+
+A recurring archetype within the imagery is "The Seeker" or "Protagonist," typically a youthful, often solitary figure embarking on a journey of discovery. These figures are frequently seen from behind or in profile, equipped with a lantern that symbolizes their quest for knowledge or guidance. Their posture often conveys contemplation, curiosity, or determination, embodying the viewer's entry point into the magical world.
+
+Complementing the Seeker is "The Guide" or "Mentor," represented by an older, often bearded figure or a larger, mysterious cloaked silhouette. These figures embody guidance, wisdom, or a powerful, perhaps ancient, presence. Their appearance on the path often suggests a pivotal moment of instruction or revelation, adding layers of depth and lore to the unfolding narrative.
+
+Beyond explicit characters, the style frequently incorporates "Mysterious Presences" – ambiguous, silhouetted, or ethereal beings that contribute to the sense of the unknown and intrigue. These figures hint at other inhabitants of this magical world, some appearing benign, others more enigmatic, enriching the world's hidden complexities.
+
+The consistent portrayal of a "Seeker" with a lantern (symbolizing inner light or truth) and the presence of "Guides" implies a deeper, archetypal narrative: the "Journey of Self-Discovery." The external quest, such as walking a winding path or finding a specific place, often mirrors an internal transformation. The encounters depicted are not merely physical meetings but symbolic moments of learning or overcoming personal challenges. The frequent depiction of solitude often emphasizes introspection and the personal nature of this journey. Therefore, when crafting new character arcs, consideration should be given to how their external journey reflects their internal growth. The environment and the encounters they face can be designed to contribute to their self-realization, with the lantern serving as a literal light source or a metaphor for courage, wisdom, or hope. This elevates the visual narrative from a simple adventure to a profound exploration of the human, or fantastical, condition.
+
+### B. Symbolic Objects & Elements
+
+The lantern is arguably the most prominent recurring motif within the style. It consistently emits a warm, inviting light, serving as a beacon in the mystical environments. Symbolically, it represents the light of knowledge, hope, or courage that guides the protagonist through the unknown. It can also signify inner illumination or a truth being sought.
+
+Magical symbols, typically circular, star-like, or spiraling patterns, appear frequently, often glowing or subtly integrated into the environment. These symbols evoke ancient magic, celestial influence, or hidden knowledge. Their presence reinforces the fantastical nature of the world and suggests a deeper, unseen order.
+
+Water features are a consistent element, often depicted as clear, reflective pools, flowing streams, and cascading waterfalls. Water symbolizes purity, life, reflection, and the flow of time or energy. Reflective pools, in particular, offer opportunities for visual metaphor. Waterfalls add dynamic energy and a sense of natural grandeur, highlighting the abundance and vitality of the environment.
+
+Beyond the omnipresent purple lupines, there are hints of other unique flora and fauna. These include glowing botanical elements, and diverse, colorful mushrooms. A rich array of fantastical birds, small sprites, and other hidden creatures might indicate a vibrant, diverse ecosystem. This suggests a world teeming with life, both familiar and magical, contributing to the sense of enchantment.
+
+A significant observation regarding these elements is "The Interconnectedness of Magic and Nature." Magical symbols frequently appear *within* natural settings, and natural elements, such as water or specific flowers, often possess a magical glow. This implies that magic is not an external force imposed upon nature but rather an intrinsic, organic part of it. The glowing plants, the symbols in the sky above mountains, and the magical ripples in a natural pool all suggest that the very fabric of this world is imbued with magic. Nature is not merely a backdrop; it is the source and manifestation of the magic itself. This deepens the world-building, making the magic feel more ancient, pervasive, and believable within its own context. This approach also allows for narratives where characters discover inherent magical properties in the environment, rather than relying solely on external magical artifacts or spells.
+
+**Table 2: Key Visual Motifs & Their Symbolic Significance (Example Structure)**
+
+| Motif | Primary Visual Representation | Core Symbolic Meaning | Narrative Application |
+| :--- | :--- | :--- | :--- |
+| **The Lantern** | Glowing, Ornate, Hand-held | Guidance, Hope, Truth, Inner Light | Marks a turning point, reveals a secret, illuminates a path, symbolizes courage. |
+| **Purple Flowers** | Lush fields, often glowing | Mystery, Enchantment, Abundance, Tranquility | Indicates a magical area, sets a dreamlike mood, signifies a place of peace. |
+| **Magical Symbols** | Geometric, Celestial, Spiraling, Glowing | Ancient Knowledge, Cosmic Order, Hidden Power | Guides a character, signifies a magical event, reveals a secret, marks sacred sites. |
+| **Water Features** | Reflective, Flowing, Cascading, Clear | Purity, Reflection, Life Force, Renewal | Represents introspection, a source of power, a place of healing, or a passage. |
+| **Cloaked Figures** | Silhouetted, Mysterious, Often Tall | Guidance, Wisdom, Unknown Presence, Protector | Offers advice, poses a challenge, guards a secret, represents ancient lore. |
+
+### C. Natural & Fantastical Landscapes
+
+Enchanted forests are the predominant setting, characterized by dense, vibrant foliage, towering ancient trees with gnarled roots, and often a sense of hidden pathways or clearings. The signature element is the light filtering through the canopy, creating a sacred and ethereal glow, or as grand sunsets and sunrises that paint the sky with intense hues. These are not merely woods; they are living, breathing entities imbued with magic, possessing a palpable sense of history and mystery.
+
+Water is an integral component of these landscapes, adding movement, sound, and opportunities for reflection and visual depth. Elaborate water systems with multiple waterfalls and serene pools highlight the abundance and purity of the environment. The clear, often glowing, water bodies contribute significantly to the magical ambiance.
+
+When the environment opens up, majestic mountains often form a grand, imposing backdrop, suggesting vastness and ancient power. The skies above these landscapes are equally dramatic, featuring vibrant sunrises or sunsets, twinkling stars, and frequently celestial magical symbols, reinforcing the cosmic scale of the world. These elements elevate the natural settings to a mythic grandeur.
+
+The environments are rich with intricate detail, from the ubiquitous purple flowers to glowing flora and diverse, often fantastical, animal life. This density of life contributes to the immersive quality of the world.
+
+The highly detailed, vibrant, and dynamic nature of these environments, featuring elements like light rays, mist, and moving water, suggests a "Living, Breathing World" principle. The environments are not static backdrops but active participants in the narrative through their atmosphere, the way light interacts with them, and the subtle hints of hidden life. The density of detail, the vibrant colors, and the atmospheric effects combine to create a sense that these places exist beyond the frame, possessing their own ecosystems, history, and secrets. When designing new landscapes, therefore, consideration should be given to how the environment itself can tell a story or influence the mood. This approach makes the stories more immersive and believable, even within a fantastical context.
+
+## IV. Narrative & Emotional Resonance: Crafting Stories from Imagery
+
+This section explores the underlying narrative potential and profound emotional impact inherent in the visual style, demonstrating how the imagery inherently tells stories.
+
+### A. Overarching Themes
+
+Several overarching themes consistently emerge from the visual analysis, forming the bedrock of the narrative potential within this style. The most prominent is the theme of **Journey and Discovery**, visually reinforced by the winding paths, characters moving through expansive landscapes, and the ubiquitous presence of guiding lights. This suggests a continuous exploration, both external and internal.
+
+The pervasive presence of **Magic and Wonder** is evident in the ethereal lighting, glowing elements, mystical symbols, and the fantastical nature of creatures and landscapes. This theme establishes a world where the extraordinary is commonplace, inviting awe and enchantment.
+
+**Solitude and Contemplation** are frequently conveyed through the depiction of solitary figures in vast, serene environments. This suggests moments of introspection, quiet revelation, or the profound weight of a personal quest undertaken alone.
+
+The theme of **Guidance and Mentorship** is clearly implied by the presence of older figures or guiding lights that interact with the protagonist. This suggests a transfer of knowledge, a helping hand on a difficult journey, or a pivotal encounter that shapes the path forward.
+
+Finally, the seamless blend of natural beauty with magical elements points to the **Interconnectedness of Nature and Spirit**. This theme suggests a world where the spiritual and natural realms are deeply intertwined, with magic flowing organically through the environment.
+
+The recurring themes and archetypes strongly align with a "Mythic Journey" framework, akin to Joseph Campbell's Monomyth. The Seeker embodies the archetypal hero, the Guide represents the mentor, the enchanted forest serves as the special world, and the light or symbols represent the call to adventure or the ultimate boon. This is not merely a collection of individual elements but a cohesive system that combines to form a universally resonant narrative pattern. When developing new stories, consciously leveraging this mythic framework can provide a powerful structural backbone. This framework can guide the development of narrative stages, ensuring narratives resonate deeply with audiences.
+
+### B. Emotional Impact
+
+The visual style consistently elicits a range of powerful emotions. **Awe and Wonder** are frequently evoked by the grand landscapes, vibrant colors, and magical elements, creating a sense of breathtaking beauty and the sublime. A pervasive sense of **Mystery and Intrigue** is generated through the use of mist, silhouetted figures, and hidden pathways, inviting curiosity and a desire to uncover the unknown.
+
+Despite the mystery, there is often an underlying feeling of **Hope and Serenity**, conveyed by the warm, guiding lights and the tranquil natural settings, which imbue scenes with a sense of peace and optimism. The solitary figures and serene environments also encourage **Contemplation and Introspection**, prompting viewers to reflect on their own journeys and discoveries.
+
+The emotional impact is not static; it can be manipulated through visual progression, allowing for dynamic storytelling. A visual narrative can begin with a sense of quiet mystery, transition to intrigue and potential danger, then move to a moment of revelation and guidance. This arc could culminate in a grand, awe-inspiring discovery. The visual elements – lighting, color palette, character interaction, and environmental details – serve as the levers for this emotional arc. Therefore, when planning a series of images or a visual narrative, mapping out the desired emotional arc is crucial. This deliberate emotional pacing, driven by visual cues, will make the stories far more impactful and cohesive.
+
+### C. Storytelling Archetypes
+
+The inherent visual elements lend themselves naturally to several classic storytelling archetypes:
+
+* **The Quest Narrative:** This is the most obvious fit, where a protagonist embarks on a journey to find something (a place, an object, a truth) or achieve a specific goal. The winding paths and distant horizons consistently reinforce this narrative structure.
+* **The Coming-of-Age Story:** Often featuring a youthful seeker, this archetype focuses on a character discovering their place in a magical world, unlocking their own potential, or undergoing a significant personal transformation through their journey.
+* **The Encounter with the Unknown:** Stories centered around mysterious figures, ancient magic, or hidden realms that challenge or transform the protagonist are well-suited to this style. The pervasive sense of mystery and the presence of enigmatic beings facilitate such narratives.
+* **The Revelation/Discovery Narrative:** This archetype focuses on moments of profound understanding or enlightenment, often triggered by a guiding light, the uncovering of a magical symbol, or a symbolic encounter that changes the protagonist's perspective.
+
+## V. Practical Application: Guidelines for Consistent Creation
+
+This section translates the detailed analysis into actionable steps, providing concrete guidelines for maintaining stylistic integrity across new creative endeavors.
+
+### A. The Visual Checklist: Essential Elements for Stylistic Consistency
+
+To ensure consistent adherence to the established artistic style, the following elements should be consciously incorporated into new creations:
+
+* **Core Palette Adherence:** Maintain the dominance of lush greens, vibrant purples, and ethereal blues, with strategic and impactful warm accents of golden yellows, oranges, and glowing whites.
+* **Dynamic Lighting:** Prioritize the use of ethereal light rays filtering through canopies, distinct magical glows from objects or symbols, and strong, purposeful light sources such as lanterns or celestial bodies.
+* **Atmospheric Depth:** Integrate elements like mist, fog, and subtle sparkling particles to enhance depth, mystery, and the overall magical quality of the air.
+* **Layered Composition:** Utilize foreground elements to draw the viewer in, clearly define the midground for primary action, and create expansive backgrounds to suggest a vast, explorable world.
+* **Signature Motifs:** Consistently include recurring visual motifs such as lanterns, magical symbols (circular, star-like, spiraling), and the distinctive fields of purple flowers where appropriate to reinforce the established world.
+* **Character Archetypes:** Employ the visual archetypes of the Seeker/Protagonist, the Guide/Mentor, or Mysterious Presences to convey narrative roles and emotional states effectively.
+* **Enchanted Nature:** Depict environments as lush, vibrant, and often ancient natural settings, emphasizing dense foliage, towering trees, and prominent water features like reflective pools and cascading waterfalls.
+
+### B. Scene Building & Environment Design: A Step-by-Step Approach
+
+Constructing new scenes within this style can be approached systematically:
+
+1.  **Establish the Core Mood & Time of Day:** Begin by determining the desired emotional atmosphere and time of day for the scene (e.g., twilight mystery, dawn hope, vibrant midday magic). This initial decision will dictate the overall lighting scheme and color temperature.
+2.  **Define the Landscape Type:** Select the primary environment (e.g., a dense, ancient forest; a majestic mountain pass; a hidden grotto; a serene lakeside). Consider the scale and dominant geographical features that will define the scene.
+3.  **Integrate Signature Flora & Water:** Strategically place lush greens, the prominent purple flowers, and reflective water bodies (streams, pools, waterfalls) to establish the characteristic natural vibrancy and magical essence.
+4.  **Introduce Light Sources:** Determine the nature of the light (natural sunlight, magical emanations, or practical sources like lanterns). Plan how this light interacts with the environment, creating volumetric rays, glowing elements, or dramatic shadows.
+5.  **Add Atmospheric Elements:** Layer mist, fog, or subtle sparkling particles to enhance depth, soften backgrounds, and amplify the mystical ambiance, making the air itself feel alive with magic.
+6.  **Plan the Pathway/Leading Lines:** Design elements that guide the viewer's eye through the scene, such as winding paths, flowing water, or converging light rays. These elements suggest movement or narrative progression, inviting the viewer deeper into the story.
+
+### C. Character & Prop Integration: Seamless Fit within the Established Style
+
+Integrating new characters and props requires careful consideration to ensure they fit seamlessly within the established aesthetic:
+
+* **Character Design:** Maintain the ethereal, often cloaked aesthetic for figures. For protagonists, lean towards youthful, contemplative expressions that convey curiosity or determination. For guide figures, emphasize wisdom, calm authority, and a sense of ancient knowledge.
+* **Prop Design:** Ensure that new props, such as magical artifacts, weapons, or additional light sources, align with the ornate, often glowing aesthetic of existing elements like the lantern. They should feel organic to the world, appearing as if they belong to this enchanted realm, rather than being out of place.
+* **Interaction with Light:** Crucially, all new characters and props must interact convincingly with the signature lighting of the style. This means considering how they are illuminated by magical glows, how they cast dramatic shadows, or how light reflects off their surfaces, thereby integrating them visually and thematically into the scene.
+
+### D. Expanding the Universe: Ideas for Maintaining Stylistic Integrity
+
+The established style provides a robust foundation for expanding the visual universe while maintaining consistency:
+
+* **New Biomes with Stylistic Consistency:** Explore other fantastical environments beyond dense forests, such as crystalline caves, floating islands, or vibrant desert oases. The core principles of vibrant color, dramatic and ethereal lighting, and an overall mystical atmosphere should be applied to these new settings.
+* **New Creatures & Inhabitants:** Introduce new fantastical beasts or sentient races. Their design should align with the overall aesthetic, perhaps featuring glowing eyes, ethereal forms, or an organic integration with natural elements.
+* **Advanced Magic Systems:** The existing magical symbols and glows can be developed into a more defined system. Different colors or forms could signify different types of magic, schools of thought, or elemental affiliations, adding depth to the world's lore.
+* **Architectural Elements:** If introducing structures, consider how they would exist in this world. They could be ancient ruins overgrown with magical flora, structures carved directly from living trees, or ethereal constructs that blend seamlessly with the natural landscape.
+
+**Table 3: Consistency Checklist for New Creations (Example Structure)**
+
+| Category | Checklist Question | Self-Assessment (Yes/No/Partial) | Notes for Improvement |
+| :--- | :--- | :--- | :--- |
+| **Color** | Are dominant cool tones (greens, purples, blues) balanced with strategic warm accents (golds, oranges)? | | |
+| **Lighting** | Does light serve a narrative purpose (guía, revelation, mood)? Are ethereal rays and glows prominent? | | |
+| **Atmosphere** | Is there a sense of depth created by mist, fog, or sparkling particles? | | |
+| **Composition** | Are there clear foreground, midground, and background elements? Do leading lines guide the viewer's eye? | | |
+| **Motifs** | Are signature motifs (lanterns, magical symbols, purple flowers) present or subtly implied? | | |
+| **Characters** | Do characters fit the Seeker/Guide archetypes? Do they interact meaningfully with the environment? | | |
+| **Environment** | Is the natural environment lush, vibrant, and imbued with a sense of magic and ancientness? | | |
+| **Narrative** | Does the image suggest a journey, discovery, or a moment of profound meaning? | | |
+| **Emotional Impact** | Does the image evoke awe, mystery, hope, or contemplation? | | |
+
+## VI. Conclusion: Embracing Your Unique Artistic Voice
+
+The analysis presented in this report culminates in a definitive understanding of the unique artistic vision. It is a style characterized by a world of enchanted nature, where lush, ancient forests and majestic mountains are guided by mystical light. This world is populated by archetypal figures embarking on journeys of discovery and transformation, all rendered with a vivid, ethereal palette that balances cool serenity with warm, guiding energy. The interplay of light, color, and composition consistently creates immersive environments that are not merely backdrops but living, breathing participants in the narrative.
+
+This style guide is designed as a foundational tool, not a limitation. It provides the structural framework and detailed insights necessary to consistently manifest this compelling vision. The true magic, however, lies in the continued creativity and exploration within this richly defined aesthetic. By embracing these principles, the capacity to produce even more compelling stories using this distinct and vivid imagery is significantly enhanced, allowing for a consistent, powerful artistic voice to emerge and captivate audiences.
+                `
+            },
+            es: {
+                pageTitle: "Análisis de Guía de Estilo de Imagen",
+                mainHeading: "Analizador de Guía de Estilo de Imagen",
+                mainDescription: "Sube tus imágenes para generar una guía de estilo artístico personalizada.",
+                uploadSectionHeading: "Sube Tus Imágenes",
+                uploadSectionDescription: "Selecciona hasta 5 imágenes (JPEG, PNG, GIF) para analizar su estilo artístico colectivo.",
+                generateAnalysisButton: "Generar Análisis de Guía de Estilo",
+                uploadMaxError: "Selecciona un máximo de 5 imágenes.",
+                uploadMinError: "Sube al menos una imagen para generar el análisis.",
+                apiError: "Error: No se pudo obtener una respuesta válida de la API.",
+                fetchError: "Error: {message}. Por favor, inténtalo de nuevo.",
+                customStyleGuideHeading: "Tu Análisis Personalizado de la Guía de Estilo",
+                suggestStrategyHeading: "Sugerir Estrategia de Generación de Imágenes ✨",
+                suggestStrategyDescription: "Recibe recomendaciones de herramientas de IA para la generación de imágenes y técnicas de prompt basadas en tu estilo.",
+                getSuggestionsButton: "Obtener Sugerencias",
+                generatePromptVariationsHeading: "Generar Variaciones de Prompt ✨",
+                generatePromptVariationsDescription: "Introduce un concepto principal y obtén múltiples variaciones de prompt adaptadas a tu estilo.",
+                promptConceptPlaceholder: "ej., Un viajero solitario en un bosque mágico",
+                generateVariationsButton: "Generar Variaciones",
+                missingInputError: "Por favor, genera el análisis de la guía de estilo e introduce un concepto.",
+                footerText: "Impulsado por la API de Gemini para análisis de imágenes y generación de contenido.",
+                individualAnalysisPrompt: (language) => `Analiza esta imagen por su estilo artístico. Enfócate en:
+                - Colores dominantes y de acento presentes.
+                - Tipos y calidad de la luz (ej., volumétrica, brillante, directa, difusa).
+                - Objetos clave o motivos recurrentes (ej., linternas, símbolos, flora/fauna específica).
+                - Composición general (ej., profundidad, líneas de guía, encuadre).
+                - Tono emocional o atmósfera evocada.
+                Sé conciso (máximo 200 palabras) y proporciona el análisis como texto plano en ${language === 'es' ? 'Spanish' : 'English'}.`,
+                masterAnalysisPrompt: (language, individualAnalyses, styleGuideMarkdown) => `Eres un experto analista de arte. Tu tarea es generar un análisis exhaustivo de la guía de estilo artístico basándote en la 'Plantilla de Guía de Estilo de Referencia' proporcionada y en las observaciones de 'Nuevos Análisis de Imágenes'.
+
+                Plantilla de Guía de Estilo de Referencia (Estructura y secciones para la generación de contenido, no copies textualmente las tablas de ejemplo, sino comprende su propósito para la estructura del contenido):
+                ${styleGuideMarkdown}
+
+                Nuevos Análisis de Imágenes:
+                ${individualAnalyses.join('\n')}
+
+                Instrucciones:
+                Genera un nuevo y completo análisis de la guía de estilo artístico.
+                1. Adhiérete estrictamente a la estructura y los encabezados de sección (ej., 'I. Introducción', 'II. Principios Estéticos Fundamentales', 'A. Paleta de Colores y Arquitectura del Ambiente', etc.) definidos en la 'Plantilla de Guía de Estilo de Referencia'. NO crees nuevas secciones, no reordenes las existentes ni cambies los niveles de los encabezados.
+                2. Integra las ideas de los 'Nuevos Análisis de Imágenes' en las secciones apropiadas de la guía de estilo. Por ejemplo, si un nuevo análisis de imagen menciona un color o efecto de iluminación específico, incorpóralo en las secciones 'Paleta de Colores' o 'Iluminación', mezclándolo con los principios existentes.
+                3. Sintetiza la información: No te limites a enumerar los nuevos análisis de imágenes. En su lugar, utilízalos para actualizar, reforzar o modificar ligeramente las descripciones dentro de cada sección de la plantilla, haciendo que el análisis sea coherente y específico para las imágenes subidas.
+                4. Mantén el tono y el nivel de detalle de la 'Plantilla de Guía de Estilo de Referencia' (detallado, analítico, energético, no caricaturesco, imágenes vívidas).
+                5. Si la plantilla incluye secciones como 'Tabla 1: Paleta de Colores Principal y Asociaciones de Ambiente' o 'Tabla 2: Motivos Visuales Clave y Su Significado Simbólico' o 'Tabla 3: Lista de Verificación de Consistencia para Nuevas Creaciones', crea tablas markdown reales con datos relevantes derivados del análisis de las nuevas imágenes. Rellena estas tablas con detalles específicos de tu análisis.
+                6. Asegúrate de que la salida esté directamente en formato Markdown, utilizando la sintaxis markdown apropiada para encabezados, párrafos, listas y tablas. Asegúrate de que la respuesta esté completamente en ${language === 'es' ? 'Spanish' : 'English'}. Do NOT include any HTML, <script> tags, or conversational text outside the markdown content.
+
+                Generated Style Guide Analysis:`,
+                suggestStrategyPrompt: (language, styleGuide) => `Basado en la siguiente guía de estilo artístico, sugiere herramientas de IA para la generación de imágenes adecuadas (ej., Midjourney, Stable Diffusion, DALL-E) y estrategias generales de prompt para producir consistentemente imágenes en este estilo. Enfócate en palabras clave, técnicas de iluminación y elementos compositivos que deberían enfatizarse en los prompts. Proporciona una respuesta concisa (aprox. 5-7 oraciones). Asegúrate de que la respuesta esté completamente en ${language === 'es' ? 'Spanish' : 'English'}.
+
+                Artistic Style Guide:
+                ${styleGuide}
+
+                Suggested Image Generation Strategy:`,
+                generatePromptVariationsPrompt: (language, styleGuide, concept) => `Basado en la siguiente guía de estilo artístico, genera 3 variaciones de prompt distintas (cada una de 1-2 oraciones) para una herramienta de IA de generación de imágenes. Cada variación debe incorporar el concepto principal: "${concept}" y enfatizar diferentes aspectos de la guía de estilo (ej., un motivo específico, un efecto de iluminación o un tono emocional). Presenta cada variación claramente. Asegúrate de que la respuesta esté completamente en ${language === 'es' ? 'Spanish' : 'English'}.
+
+                Artistic Style Guide:
+                ${styleGuide}
+
+                Prompt Variations:`,
+                styleGuideMarkdown: `
+# Análisis de Guía de Estilo de Imagen: Una Guía de Estilo Definitiva para Imágenes Narrativas Vívidas
+
+## I. Introducción: La Esencia de Tu Visión Artística
+
+Este informe sirve como una guía de estilo definitiva, deconstruyendo meticulosamente el lenguaje visual inherente en las imágenes proporcionadas. Su propósito principal es formalizar un estilo artístico intuitivo en un marco estructurado y replicable, potenciando así una producción creativa consistente. Esta guía no pretende restringir la expresión artística, sino proporcionar una brújula integral para mantener una calidad y resonancia temática consistentes en futuras creaciones. Al comprender los elementos fundamentales de esta estética única, cada nueva pieza puede sentirse auténticamente como si se originara del mismo universo encantador.
+
+La impresión inicial transmitida por la colección de imágenes es de asombro profundo, misterio y un espíritu aventurero. Las narrativas visuales evocan consistentemente una sensación de viaje a reinos encantados, caracterizados por un estilo que se siente a la vez antiguo y atemporal. La "imaginería vívida" destacada en la consulta del usuario es inmediatamente aparente, definida por colores intensamente saturados y una iluminación dinámica, a menudo etérea. Esta estética invita a los espectadores a narrativas de descubrimiento, transformación y exploración dentro de un mundo repleto de magia oculta y grandeza natural.
+
+## II. Principios Estéticos Fundamentales: Deconstruyendo el Lenguaje Visual
+
+Esta sección disecciona sistemáticamente los componentes visuales fundamentales que definen el estilo artístico distintivo, progresando desde cualidades atmosféricas amplias hasta detalles compositivos específicos.
+
+### A. Paleta de Colores y Arquitectura del Ambiente
+
+La base de la paleta de colores del estilo visual está profundamente arraigada en la naturaleza, específicamente en bosques verdes y cielos crepusculares. Los verdes exuberantes son omnipresentes, formando el telón de fondo constante de casi todas las escenas, proporcionando una sensación de abundancia natural y profundidad. Complementando estos verdes hay púrpuras vibrantes, que con frecuencia aparecen como campos de flores similares a altramuces, sirviendo como un elemento distintivo que proporciona un contraste sorprendente y un toque de fantasía. Los azules etéreos se manifiestan en diversas formas, incluyendo atmósferas nebulosas, brillos mágicos y cielos crepusculares, todo contribuyendo significativamente al ambiente místico general.
+
+Estos tonos fríos dominantes se equilibran estratégicamente con una selección de colores de acento, principalmente amarillos dorados, naranjas cálidos y blancos brillantes. Estos tonos cálidos se asocian predominantemente con fuentes de luz y momentos de revelación o significado. Los amarillos dorados y naranjas cálidos emanan de linternas llevadas por figuras, de la luz dramática de amaneceres o atardeceres que pintan el cielo, y de varios brillos mágicos dentro del ambiente. Los blancos brillantes a menudo sirven para resaltar símbolos mágicos o puntos de luz intensa, añadiendo una sensación de pureza, poder y claridad a la escena. Otros rojos vibrantes, rosas y turquesas podrían indicar una capacidad para ambientes fantásticos altamente saturados, casi psicodélicos, que permanecen cohesivos dentro del estilo general.
+
+La resonancia emocional derivada de esta paleta de colores es profunda, evocando una constante sensación de asombro, misterio y tranquilidad. La interacción de tonos fríos y cálidos es crucial para este efecto. Los tonos fríos dominantes de verdes, púrpuras y azules establecen un ambiente sereno, misterioso y a menudo contemplativo, que recuerda a la naturaleza antigua e intacta. Los acentos cálidos, por el contrario, introducen elementos de esperanza, guía, magia y energía vital. Este equilibrio dinámico evita que las escenas se vuelvan únicamente melancólicas o premonitorias, permitiendo una amplia gama de narrativas emocionales, desde la introspección tranquila hasta la gran aventura.
+
+Un examen más profundo de la dinámica del color revela un principio consistente que puede denominarse "Contraste Místico". Las imágenes presentan constantemente una paleta fría dominante, principalmente verdes, azules y púrpuras, yuxtapuesta con fuertes y localizadas fuentes de luz cálida en oro y naranja. Más allá de simplemente crear contraste visual y atraer la vista a los puntos focales, esta dinámica establece un lenguaje visual profundo. Los tonos fríos representan el mundo natural omnipresente, antiguo y a menudo misterioso, mientras que los brillos cálidos significan magia activa, guía, descubrimiento o una presencia divina. Esto sugiere una narrativa donde la magia es una fuerza intrínseca, a menudo benevolente, tejida en el tejido de la naturaleza, en lugar de una imposición externa. Este uso deliberado del color permite a la narrativa visual transmitir ritmos narrativos y cambios emocionales. Por ejemplo, un aumento en la luz cálida y mágica puede indicar un momento de revelación, el crecimiento del poder de un personaje o la presencia de algo extraordinario. Por el contrario, una escena dominada por tonos fríos, con una luz cálida mínima, podría sugerir un período de incertidumbre, una amenaza oculta o un viaje hacia lo desconocido. Este uso deliberado del color permite a la narrativa visual transmitir ritmos narrativos y cambios emocionales.
+
+**Tabla 1: Paleta de Colores Principal y Asociaciones de Ambiente (Estructura de Ejemplo)**
+
+| Grupo de Color | Tonos Específicos | Elementos Asociados | Asociaciones Emocionales/Temáticas |
+| :--- | :--- | :--- | :--- |
+| **Fríos Dominantes** | Verde Bosque, Esmeralda, Turquesa | Follaje, Árboles Antiguos, Agua | Serenidad, Crecimiento, Misterio, Vida, Tranquilidad |
+| | Púrpura Vibrante, Lavanda, Índigo | Flores tipo Altramuz, Cielo Crepuscular, Niebla | Encantamiento, Fantasía, Profundidad, Espiritualidad, Melancolía |
+| | Azul Etéreo, Aguamarina, Cian | Niebla, Brillos Mágicos, Agua, Cielo Nocturno | Misticismo, Calma, Pureza, Otro mundo, Claridad |
+| **Acentos Cálidos** | Amarillo Dorado, Ámbar, Naranja Fuego | Linternas, Amaneceres/Atardeceres, Orbes Mágicos | Guía, Calidez, Revelación, Vitalidad, Esperanza, Descubrimiento |
+| | Blanco Brillante, Plata Brillante | Símbolos Mágicos, Puntos de Luz Intensa | Pureza, Poder, Claridad, Presencia Divina, Iluminación |
+| **Acentos Vibrantes** | Rojo Intenso, Rosa Fuerte, Turquesa Brillante | Flora/Fauna Fantástica | Abundancia, Exotismo, Energía Dinámica, Magia Intensificada |
+
+### B. Iluminación y Efectos Atmosféricos
+
+La luz es un elemento narrativo y compositivo principal dentro de este estilo artístico. Las fuentes de luz son diversas, abarcando fenómenos naturales, emanaciones mágicas y herramientas prácticas. La luz natural a menudo se manifiesta como dramáticos rayos de sol que se filtran a través de densos doseles, creando un brillo sagrado y etéreo, o como grandes amaneceres y atardeceres que pintan el cielo con tonos intensos. Los brillos mágicos emanan de diversas fuentes, incluyendo símbolos místicos, orbes luminosos e incluso cierta flora. Las fuentes de luz prácticas, especialmente la linterna, sirven como un motivo constante de guía y descubrimiento, a menudo sostenidas por las figuras centrales.
+
+La calidad de la luz es muy deliberada y variada. Los rayos de luz etéreos y volumétricos que atraviesan la niebla o el follaje son un sello distintivo del estilo, creando una profunda sensación de profundidad e implicando una presencia divina o mágica. Los brillos difusos alrededor de los elementos mágicos suavizan la escena y realzan el aura mística, contribuyendo a la calidad onírica general. Aunque a menudo suave y penetrante, también hay momentos de fuerte contraste, particularmente donde una fuente de luz brillante se encuentra con sombras profundas. Este contraste añade dramatismo y ayuda a definir las formas, como la fuerte iluminación de contorno en las figuras o el sol brillante contra montañas oscuras.
+
+Los elementos atmosféricos son parte integral de la calidad inmersiva de la imaginería. La niebla y la bruma se emplean con frecuencia para crear profundidad, suavizar los fondos y realzar la sensación de misterio y encanto, haciendo que el entorno se sienta antiguo y vivo. Sutiles partículas brillantes o motas de polvo, a menudo visibles dentro de los haces de luz, enfatizan aún más la calidad mágica y etérea del aire mismo.
+
+Más allá de la mera iluminación, la luz funciona como una brújula narrativa y un amplificador emocional. La dirección y calidad de la luz a menudo indican el camino a seguir, o resaltan un personaje u objeto clave. La luz también puede significar un momento de revelación o guía. Esto sugiere que la luz es un participante activo en la historia, no simplemente un elemento visual pasivo. Además, la interacción de luz y sombra es un poderoso amplificador emocional; la luz suave y penetrante a menudo evoca tranquilidad y esperanza, mientras que los contrastes marcados pueden señalar tensión o un punto de inflexión dramático en la narrativa. Por lo tanto, al crear nuevas historias visuales, se debe considerar cómo la luz puede avanzar activamente la trama o enfatizar las emociones de los personajes. Este enfoque transforma la luz en una herramienta narrativa dinámica, que va más allá de su función visual.
+
+### C. Composición y Encuadre
+
+Las composiciones dirigen consistentemente la mirada del espectador, estableciendo puntos focales claros. Las figuras centrales, particularmente el protagonista o una entidad guía, a menudo se colocan centralmente o a lo largo de fuertes caminos visuales, atrayendo la atención inmediata. Los objetos clave, como linternas u orbes mágicos, casi siempre están iluminados y posicionados estratégicamente para atraer la mirada. En algunos casos, las propias fuentes de luz se convierten en el punto focal principal, irradiando energía y atrayendo la mirada del espectador hacia adentro.
+
+Una fuerte sensación de profundidad y perspectiva se logra mediante la estratificación deliberada de elementos. Los elementos del primer plano, como flores vibrantes, raíces retorcidas o rocas antiguas, anclan la escena y proporcionan una inmersión inmediata, haciendo que el espectador se sienta presente dentro del entorno. El plano medio generalmente contiene la acción principal o los personajes, mientras que el fondo se extiende hacia vastos paisajes, montañas distantes o densos bosques, creando una sensación de mundos expansivos y explorables. La perspectiva atmosférica, caracterizada por la niebla y los colores que se desvanecen en la distancia, realza aún más esta percepción de profundidad y vastedad.
+
+El motivo de un viaje se refuerza visualmente mediante el uso recurrente de caminos sinuosos, arroyos que fluyen o rayos de luz que guían la mirada más profundamente en la escena. Estas líneas de guía crean un atractivo narrativo, invitando al espectador a imaginar la historia desarrollándose a lo largo de estas rutas. Incluso en escenas sin un camino explícito, la disposición de los árboles o la dirección de la luz a menudo crea una dirección implícita de movimiento, guiando la exploración de la imagen por parte del espectador.
+
+Los elementos de encuadre se emplean con frecuencia para mejorar el enfoque y la inmersión. Árboles, follaje exuberante y arcos naturales se utilizan para encuadrar el sujeto o la escena central, atrayendo la atención del espectador hacia el interior y realzando la sensación de estar dentro de un mundo oculto y antiguo.
+
+Este enfoque compositivo consistente revela una estrategia de "Inmersión Atractiva". Los elementos del primer plano actúan como una invitación sutil, atrayendo al espectador a la escena como si estuvieran a punto de pisar el camino ellos mismos. Las líneas de guía los guían luego en un viaje simbólico, fomentando una sensación de participación activa en lugar de observación pasiva. El fondo profundo promete más por descubrir, reforzando la idea de un mundo expansivo y vivo. Esta técnica transforma una imagen estática en un prompt narrativo dinámico. Al componer nuevas escenas, por lo tanto, se debe hacer un esfuerzo consciente para que el espectador sienta que está *entrando* en la historia. Esto se puede lograr utilizando elementos del primer plano para establecer proximidad, líneas de guía para sugerir la progresión narrativa y fondos expansivos para insinuar el mundo más allá del encuadre inmediato.
+
+## III. Motivos Recurrentes y Arquetipos Narrativos
+
+Esta sección identifica los personajes, objetos y características ambientales consistentes que sirven como atajos visuales y tienen un peso simbólico significativo dentro del estilo artístico.
+
+### A. Personajes y Figuras
+
+Un arquetipo recurrente dentro de la imaginería es "El Buscador" o "Protagonista", típicamente una figura joven, a menudo solitaria, que emprende un viaje de descubrimiento. Estas figuras a menudo se ven de espaldas o de perfil, equipadas con una linterna que simboliza su búsqueda de conocimiento o guía. Su postura a menudo transmite contemplación, curiosidad o determinación, encarnando el punto de entrada del espectador al mundo mágico.
+
+Complementando al Buscador está "El Guía" o "Mentor", representado por una figura mayor, a menudo barbuda, o una silueta encapuchada más grande y misteriosa. Estas figuras encarnan la guía, la sabiduría o una presencia poderosa, quizás antigua. Su aparición en el camino a menudo sugiere un momento crucial de instrucción o revelación, añadiendo capas de profundidad y tradición a la narrativa que se desarrolla.
+
+Más allá de los personajes explícitos, el estilo incorpora con frecuencia "Presencias Misteriosas", seres ambiguos, silueteados o etéreos que contribuyen a la sensación de lo desconocido y la intriga. Estas figuras insinúan otros habitantes de este mundo mágico, algunos que parecen benignos, otros más enigmáticos, enriqueciendo las complejidades ocultas del mundo.
+
+La representación consistente de un "Buscador" con una linterna (que simboliza la luz interior o la verdad) y la presencia de "Guías" implica una narrativa arquetípica más profunda: el "Viaje de Autodescubrimiento". La búsqueda externa, como caminar por un camino sinuoso o encontrar un lugar específico, a menudo refleja una transformación interna. Los encuentros representados no son meramente reuniones físicas, sino momentos simbólicos de aprendizaje o superación de desafíos personales. La frecuente representación de la soledad a menudo enfatiza la introspección y la naturaleza personal de este viaje. Por lo tanto, al crear nuevos arcos de personajes, se debe considerar cómo su viaje externo refleja su crecimiento interno. El entorno y los encuentros que enfrentan pueden diseñarse para contribuir a su autorrealización, con la linterna sirviendo como una fuente de luz literal o una metáfora del coraje, la sabiduría o la esperanza. Esto eleva la narrativa visual de una simple aventura a una profunda exploración de la condición humana o fantástica.
+
+### B. Objetos y Elementos Simbólicos
+
+La linterna es quizás el motivo recurrente más prominente dentro del estilo. Emite constantemente una luz cálida y acogedora, sirviendo como un faro en los ambientes místicos. Simbólicamente, representa la luz del conocimiento, la esperanza o el coraje que guía al protagonista a través de lo desconocido. También puede significar iluminación interior o una verdad que se busca.
+
+Los símbolos mágicos, típicamente patrones circulares, estelares o en espiral, aparecen con frecuencia, a menudo brillando o sutilmente integrados en el entorno. Estos símbolos evocan magia antigua, influencia celestial o conocimiento oculto. Su presencia refuerza la naturaleza fantástica del mundo y sugiere un orden más profundo e invisible.
+
+Los elementos acuáticos son un componente consistente, a menudo representados como piscinas claras y reflectantes, arroyos que fluyen y cascadas. El agua simboliza la pureza, la vida, la reflexión y el flujo del tiempo o la energía. Las piscinas reflectantes, en particular, ofrecen oportunidades para la metáfora visual. Las cascadas añaden energía dinámica y una sensación de grandeza natural, destacando la abundancia y vitalidad del entorno.
+
+Más allá de los altramuces púrpuras omnipresentes, hay indicios de otra flora y fauna únicas. Esto incluye elementos botánicos brillantes y diversos hongos coloridos. Una rica variedad de aves fantásticas, pequeños duendes y otras criaturas ocultas podrían indicar un ecosistema vibrante y diverso. Esto sugiere un mundo lleno de vida, tanto familiar como mágica, contribuyendo a la sensación de encanto.
+
+Una observación significativa con respecto a estos elementos es la "Interconexión de la Magia y la Naturaleza". Los símbolos mágicos aparecen con frecuencia *dentro* de entornos naturales, y los elementos naturales, como el agua o flores específicas, a menudo poseen un brillo mágico. Esto implica que la magia no es una fuerza externa impuesta a la naturaleza, sino una parte intrínseca y orgánica de ella. Las plantas brillantes, los símbolos en el cielo sobre las montañas y las ondas mágicas en una piscina natural sugieren que el tejido mismo de este mundo está imbuido de magia. La naturaleza no es simplemente un telón de fondo; es la fuente y la manifestación de la magia misma. Esto profundiza la construcción del mundo, haciendo que la magia se sienta más antigua, omnipresente y creíble dentro de su propio contexto. Este enfoque también permite narrativas donde los personajes descubren propiedades mágicas inherentes en el entorno, en lugar de depender únicamente de artefactos mágicos o hechizos externos.
+
+**Tabla 2: Motivos Visuales Clave y Su Significado Simbólico (Estructura de Ejemplo)**
+
+| Motivo | Representación Visual Primaria | Significado Simbólico Central | Aplicación Narrativa |
+| :--- | :--- | :--- | :--- |
+| **La Linterna** | Brillante, Ornamental, Sostenida en mano | Guía, Esperanza, Verdad, Luz Interior | Marca un punto de inflexión, revela un secreto, ilumina un camino, simboliza el coraje. |
+| **Flores Púrpuras** | Campos exuberantes, a menudo brillantes | Misterio, Encanto, Abundancia, Tranquilidad | Indica un área mágica, establece un estado de ánimo onírico, significa un lugar de paz. |
+| **Símbolos Mágicos** | Geométricos, Celestes, en Espiral, Brillantes | Conocimiento Antiguo, Orden Cósmico, Poder Oculto | Guía a un personaje, significa un evento mágico, revela un secreto, marca sitios sagrados. |
+| **Elementos Acuáticos** | Reflectantes, Fluyentes, en Cascada, Claros | Pureza, Reflexión, Fuerza Vital, Renovación | Representa introspección, una fuente de poder, un lugar de curación o un pasaje. |
+| **Figuras Encapuchadas** | Silueteadas, Misteriosas, A menudo Altas | Guía, Sabiduría, Presencia Desconocida, Protector | Ofrece consejos, plantea un desafío, guarda un secreto, representa la tradición antigua. |
+
+### C. Paisajes Naturales y Fantásticos
+
+Los bosques encantados son el escenario predominante, caracterizados por un follaje denso y vibrante, imponentes árboles antiguos con raíces retorcidas, y a menudo una sensación de caminos ocultos o claros. El elemento distintivo es la luz que se filtra a través del dosel, creando un brillo sagrado y etéreo, o como grandes amaneceres y atardeceres que pintan el cielo con tonos intensos. Estas son no solo bosques; son entidades vivas y que respiran, imbuidas de magia, que poseen una palpable sensación de historia y misterio.
+
+El agua es un componente integral de estos paisajes, añadiendo movimiento, sonido y oportunidades para la reflexión y la profundidad visual. Los elaborados sistemas de agua con múltiples cascadas y piscinas serenas resaltan la abundancia y la pureza del entorno. Los cuerpos de agua claros, a menudo brillantes, contribuyen significativamente al ambiente mágico.
+
+Cuando el entorno se abre, majestuosas montañas a menudo forman un telón de fondo grandioso e imponente, sugiriendo inmensidad y poder antiguo. Los cielos sobre estos paisajes son igualmente dramáticos, con amaneceres o atardeceres vibrantes, estrellas parpadeantes y, con frecuencia, símbolos mágicos celestiales, lo que refuerza la escala cósmica del mundo. Estos elementos elevan los entornos naturales a una grandeza mítica.
+
+Los entornos son ricos en detalles intrincados, desde las omnipresentes flores púrpuras hasta la flora brillante y la diversa, a menudo fantástica, vida animal. Esta densidad de vida contribuye a la calidad inmersiva del mundo.
+
+La naturaleza altamente detallada, vibrante y dinámica de estos entornos, que presenta elementos como rayos de luz, niebla y agua en movimiento, sugiere un principio de "Mundo Vivo y que Respira". Los entornos no son telones de fondo estáticos, sino participantes activos en la narrativa a través de su atmósfera, la forma en que la luz interactúa con ellos y los sutiles indicios de vida oculta. La densidad de los detalles, los colores vibrantes y los efectos atmosféricos se combinan para crear la sensación de que estos lugares existen más allá del encuadre, poseyendo sus propios ecosistemas, historia y secretos. Por lo tanto, al diseñar nuevos paisajes, se debe considerar cómo el entorno en sí mismo puede contar una historia o influir en el estado de ánimo. Este enfoque hace que las historias sean más inmersivas y creíbles, incluso dentro de un contexto fantástico.
+
+## IV. Resonancia Narrativa y Emocional: Creando Historias a partir de Imágenes
+
+Esta sección explora el potencial narrativo subyacente y el profundo impacto emocional inherente al estilo visual, demostrando cómo las imágenes cuentan historias de forma inherente.
+
+### A. Temas Generales
+
+Varios temas generales emergen consistentemente del análisis visual, formando la base del potencial narrativo dentro de este estilo. El más prominente es el tema del **Viaje y Descubrimiento**, reforzado visualmente por los caminos sinuosos, los personajes que se mueven por paisajes expansivos y la omnipresente presencia de luces guía. Esto sugiere una exploración continua, tanto externa como interna.
+
+La presencia omnipresente de **Magia y Asombro** es evidente en la iluminación etérea, los elementos brillantes, los símbolos místicos y la naturaleza fantástica de las criaturas y los paisajes. Este tema establece un mundo donde lo extraordinario es común, invitando al asombro y al encanto.
+
+La **Soledad y la Contemplación** se transmiten con frecuencia a través de la representación de figuras solitarias en entornos vastos y serenos. Esto sugiere momentos de introspección, revelación silenciosa o el profundo peso de una búsqueda personal emprendida en solitario.
+
+El tema de la **Guía y la Tutoría** está claramente implícito por la presencia de figuras mayores o luces guía que interactúan con el protagonista. Esto sugiere una transferencia de conocimiento, una mano amiga en un viaje difícil o un encuentro crucial que da forma al camino a seguir.
+
+Finalmente, la perfecta combinación de la belleza natural con elementos mágicos apunta a la **Interconexión de la Naturaleza y el Espíritu**. Este tema sugiere un mundo donde los reinos espiritual y natural están profundamente entrelazados, con la magia fluyendo orgánicamente a través del entorno.
+
+Los temas y arquetipos recurrentes se alinean fuertemente con un marco de "Viaje Mítico", similar al Monomito de Joseph Campbell. El Buscador encarna al héroe arquetípico, el Guía representa al mentor, el bosque encantado sirve como el mundo especial, y la luz o los símbolos representan la llamada a la aventura o el don final. Esto no es simplemente una colección de elementos individuales, sino un sistema cohesivo que se combina para formar un patrón narrativo universalmente resonante. Al desarrollar nuevas historias, aprovechar conscientemente este marco mítico puede proporcionar una poderosa columna vertebral estructural. Este marco puede guiar el desarrollo de las etapas narrativas, asegurando que las narrativas resuenen profundamente con las audiencias.
+
+### B. Impacto Emocional
+
+El estilo visual evoca constantemente una serie de emociones poderosas. El **Asombro y la Maravilla** son frecuentemente evocados por los grandes paisajes, los colores vibrantes y los elementos mágicos, creando una sensación de belleza impresionante y lo sublime. Una sensación omnipresente de **Misterio e Intriga** se genera a través del uso de niebla, figuras silueteadas y caminos ocultos, invitando a la curiosidad y al deseo de descubrir lo desconocido.
+
+A pesar del misterio, a menudo hay una sensación subyacente de **Esperanza y Serenidad**, transmitida por las luces cálidas y guía y los entornos naturales tranquilos, que infunden a las escenas una sensación de paz y optimismo. Las figuras solitarias y los entornos serenos también fomentan la **Contemplación e Introspección**, lo que impulsa a los espectadores a reflexionar sobre sus propios viajes y descubrimientos.
+
+El impacto emocional no es estático; puede manipularse a través de la progresión visual, lo que permite una narración dinámica. Una narrativa visual puede comenzar con una sensación de misterio silencioso, pasar a la intriga y el peligro potencial, y luego pasar a un momento de revelación y guía. Este arco podría culminar en un gran descubrimiento asombroso. Los elementos visuales (iluminación, paleta de colores, interacción de personajes y detalles ambientales) sirven como palancas para este arco emocional. Por lo tanto, al planificar una serie de imágenes o una narrativa visual, es crucial trazar el arco emocional deseado. Este ritmo emocional deliberado, impulsado por señales visuales, hará que las historias sean mucho más impactantes y cohesivas.
+
+### C. Arquetipos Narrativos
+
+Los elementos visuales inherentes se prestan naturalmente a varios arquetipos clásicos de la narración de cuentos:
+
+* **La Narrativa de la Búsqueda:** Este es el ajuste más obvio, donde un protagonista se embarca en un viaje para encontrar algo (un lugar, un objeto, una verdad) o lograr un objetivo específico. Los caminos sinuosos y los horizontes distantes refuerzan consistentemente esta estructura narrativa.
+* **La Historia de Madurez:** A menudo presenta a un buscador joven, este arquetipo se centra en un personaje que descubre su lugar en un mundo mágico, desbloqueando su propio potencial o experimentando una transformación personal significativa a través de su viaje.
+* **El Encuentro con lo Desconocido:** Las historias centradas en figuras misteriosas, magia antigua o reinos ocultos que desafían o transforman al protagonista son muy adecuadas para este estilo. La sensación omnipresente de misterio y la presencia de seres enigmáticos facilitan tales narrativas.
+* **La Narrativa de Revelación/Descubrimiento:** Este arquetipo se centra en momentos de profunda comprensión o iluminación, a menudo desencadenados por una luz guía, el descubrimiento de un símbolo mágico o un encuentro simbólico que cambia la perspectiva del protagonista.
+
+## V. Aplicación Práctica: Directrices para la Creación Consistente
+
+Esta sección traduce el análisis detallado en pasos accionables, proporcionando pautas concretas para mantener la integridad estilística en nuevas creaciones.
+
+### A. La Lista de Verificación Visual: Elementos Esenciales para la Coherencia Estilística
+
+Para asegurar una adhesión constante al estilo artístico establecido, los siguientes elementos deben incorporarse conscientemente en las nuevas creaciones:
+
+* **Adherencia a la Paleta Central:** Mantener el predominio de verdes exuberantes, púrpuras vibrantes y azules etéreos, con acentos cálidos estratégicos e impactantes de amarillos dorados, naranjas y blancos brillantes.
+* **Iluminación Dinámica:** Priorizar el uso de rayos de luz etéreos que se filtran a través de los doseles, brillos mágicos distintivos de objetos o símbolos, y fuentes de luz fuertes y con propósito, como linternas o cuerpos celestes.
+* **Profundidad Atmosférica:** Integrar elementos como niebla, bruma y sutiles partículas brillantes para realzar la profundidad, el misterio y la calidad mágica general del aire.
+* **Composición en Capas:** Utilizar elementos de primer plano para atraer al espectador, definir claramente el plano medio para la acción principal y crear fondos expansivos para sugerir un mundo vasto y explorable.
+* **Motivos Distintivos:** Incluir consistentemente motivos visuales recurrentes como linternas, símbolos mágicos (circulares, estelares, en espiral) y los distintivos campos de flores púrpuras cuando sea apropiado para reforzar el mundo establecido.
+* **Arquetipos de Personajes:** Emplear los arquetipos visuales del Buscador/Protagonista, el Guía/Mentor o Presencias Misteriosas para transmitir eficazmente los roles narrativos y los estados emocionales.
+* **Naturaleza Encantada:** Representar los entornos como escenarios naturales exuberantes, vibrantes y a menudo antiguos, enfatizando el follaje denso, los árboles imponentes y los elementos acuáticos prominentes, como piscinas reflectantes y cascadas.
+
+### B. Construcción de Escenas y Diseño de Entornos: Un Enfoque Paso a Paso
+
+La construcción de nuevas escenas dentro de este estilo puede abordarse sistemáticamente:
+
+1.  **Establecer el Estado de Ánimo y la Hora del Día:** Comenzar determinando la atmósfera emocional deseada y la hora del día para la escena (ej., misterio crepuscular, esperanza del amanecer, magia vibrante del mediodía). Esta decisión inicial dictará el esquema de iluminación general y la temperatura de color.
+2.  **Definir el Tipo de Paisaje:** Seleccionar el entorno principal (ej., un bosque denso y antiguo; un majestuoso paso de montaña; una gruta oculta; un sereno lago). Considerar la escala y las características geográficas dominantes que definirán la escena.
+3.  **Integrar Flora y Agua Distintivas:** Colocar estratégicamente verdes exuberantes, las prominentes flores púrpuras y cuerpos de agua reflectantes (arroyos, piscinas, cascadas) para establecer la vibración natural característica y la esencia mágica.
+4.  **Introducir Fuentes de Luz:** Determinar la naturaleza de la luz (luz solar natural, emanaciones mágicas o fuentes prácticas como linternas). Planificar cómo esta luz interactúa con el entorno, creando rayos volumétricos, elementos brillantes o sombras dramáticas.
+5.  **Añadir Elementos Atmosféricos:** Capa de niebla, bruma o sutiles partículas brillantes para realzar la profundidad, suavizar los fondos y amplificar el ambiente místico, haciendo que el aire mismo se sienta vivo con magia.
+6.  **Planificar el Camino/Líneas de Guía:** Diseñar elementos que guíen la mirada del espectador a través de la escena, como caminos sinuosos, agua que fluye o rayos de luz convergentes. Estos elementos sugieren movimiento o progresión narrativa, invitando al espectador a adentrarse en la historia.
+
+### C. Integración de Personajes y Accesorios: Ajuste Perfecto dentro del Estilo Establecido
+
+La integración de nuevos personajes y accesorios requiere una consideración cuidadosa para asegurar que encajen perfectamente dentro de la estética establecida:
+
+* **Diseño de Personajes:** Mantener la estética etérea, a menudo encapuchada, para las figuras. Para los protagonistas, inclinarse hacia expresiones juveniles y contemplativas que transmitan curiosidad o determinación. Para las figuras guía, enfatizar la sabiduría, la autoridad tranquila y una sensación de conocimiento antiguo.
+* **Diseño de Accesorios:** Asegurarse de que los nuevos accesorios, como artefactos mágicos, armas o fuentes de luz adicionales, se alineen con la estética ornamentada y a menudo brillante de los elementos existentes, como la linterna. Deben sentirse orgánicos al mundo, pareciendo pertenecer a este reino encantado, en lugar de estar fuera de lugar.
+* **Interacción con la Luz:** Fundamentalmente, todos los nuevos personajes y accesorios deben interactuar de manera convincente con la iluminación distintiva del estilo. Esto significa considerar cómo son iluminados por los brillos mágicos, cómo proyectan sombras dramáticas o cómo la luz se refleja en sus superficies, integrándolos visual y temáticamente en la escena.
+
+### D. Expandiendo el Universo: Ideas para Mantener la Integridad Estilística
+
+El estilo establecido proporciona una base sólida para expandir el universo visual manteniendo la coherencia:
+
+* **Nuevos Biomas con Coherencia Estilística:** Explorar otros entornos fantásticos más allá de los bosques densos, como cuevas cristalinas, islas flotantes u oasis desérticos vibrantes. Los principios centrales de color vibrante, iluminación dramática y etérea, y una atmósfera mística general deben aplicarse a estos nuevos entornos.
+* **Nuevas Criaturas y Habitantes:** Introducir nuevas bestias fantásticas o razas sensibles. Su diseño debe alinearse con la estética general, quizás presentando ojos brillantes, formas etéreas o una integración orgánica con elementos naturales.
+* **Sistemas Mágicos Avanzados:** Los símbolos mágicos y los brillos existentes pueden desarrollarse en un sistema más definido. Diferentes colores o formas podrían significar diferentes tipos de magia, escuelas de pensamiento o afiliaciones elementales, añadiendo profundidad a la tradición del mundo.
+* **Elementos Arquitectónicos:** Si se introducen estructuras, considerar cómo existirían en este mundo. Podrían ser ruinas antiguas cubiertas de flora mágica, estructuras talladas directamente de árboles vivos o construcciones etéreas que se mezclan perfectamente con el paisaje natural.
+
+**Tabla 3: Lista de Verificación de Consistencia para Nuevas Creaciones (Estructura de Ejemplo)**
+
+| Categoría | Pregunta de Verificación | Autoevaluación (Sí/No/Parcial) | Notas de Mejora |
+| :--- | :--- | :--- | :--- |
+| **Color** | ¿Se equilibran los tonos fríos dominantes (verdes, púrpuras, azules) con acentos cálidos estratégicos (dorados, naranjas)? | | |
+| **Iluminación** | ¿La luz tiene un propósito narrativo (guía, revelación, estado de ánimo)? ¿Son prominentes los rayos y brillos etéreos? | | |
+| **Atmósfera** | ¿Existe una sensación de profundidad creada por la niebla, la bruma o las partículas brillantes? | | |
+| **Composición** | ¿Hay elementos claros en primer plano, plano medio y fondo? ¿Las líneas de guía dirigen la mirada del espectador? | | |
+| **Motivos** | ¿Están presentes o sutilmente implicados los motivos distintivos (linternas, símbolos mágicos, flores púrpuras)? | | |
+| **Personajes** | ¿Los personajes encajan en los arquetipos de Buscador/Guía? ¿Interactúan significativamente con el entorno? | | |
+| **Entorno** | ¿Es el entorno natural exuberante, vibrante y está imbuido de una sensación de magia y antigüedad? | | |
+| **Narrativa** | ¿La imagen sugiere un viaje, un descubrimiento o un momento de profundo significado? | | |
+| **Impacto Emocional** | ¿La imagen evoca asombro, misterio, esperanza o contemplación? | | |
+
+## VI. Conclusión: Abrazando Tu Voz Artística Única
+
+El análisis presentado en este informe culmina en una comprensión definitiva de la visión artística única. Es un estilo caracterizado por un mundo de naturaleza encantada, donde los bosques exuberantes y antiguos y las majestuosas montañas están guiados por una luz mística. Este mundo está poblado por figuras arquetípicas que se embarcan en viajes de descubrimiento y transformación, todo ello representado con una paleta vívida y etérea que equilibra la serenidad fría con una energía cálida y guía. La interacción de luz, color y composición constantemente crea entornos inmersivos que no son simplemente telones de fondo, sino participantes vivos y activos en la narrativa.
+
+Esta guía de estilo está diseñada como una herramienta fundamental, no como una limitación. Proporciona el marco estructural y los conocimientos detallados necesarios para manifestar consistentemente esta visión convincente. La verdadera magia, sin embargo, reside en la creatividad y la exploración continuas dentro de esta estética ricamente definida. Al adoptar estos principios, la capacidad de producir historias aún más convincentes utilizando esta imaginería distintiva y vívida se mejora significativamente, permitiendo que una voz artística consistente y poderosa emerja y cautive a las audiencias.
+                `
+            }
+        };
+
+        // Function to apply localized text
+        function applyLocalization() {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (i18n[currentLanguage] && i18n[currentLanguage][key]) {
+                    element.textContent = i18n[currentLanguage][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                if (i18n[currentLanguage] && i18n[currentLanguage][key]) {
+                    element.placeholder = i18n[currentLanguage][key];
+                }
+            });
+        }
+
+        // Detect browser language and set currentLanguage
+        const browserLanguage = navigator.language || navigator.userLanguage;
+        if (browserLanguage.startsWith('es')) {
+            currentLanguage = 'es';
+        }
+        applyLocalization(); // Apply localization on load
+
+        // Markdown template for guiding the LLM structure (dynamic based on language)
+        const getStyleGuideTemplate = () => {
+            return i18n[currentLanguage].styleGuideMarkdown;
+        };
+
+
+        imageUploadInput.addEventListener('change', (event) => {
+            uploadedFilesData = []; // Clear previous uploads
+            imagePreviews.innerHTML = ''; // Clear previous previews
+            uploadMessage.classList.add('hidden');
+
+            const files = event.target.files;
+            if (files.length === 0) {
+                return;
+            }
+
+            if (files.length > 5) {
+                uploadMessage.textContent = i18n[currentLanguage].uploadMaxError;
+                uploadMessage.classList.remove('hidden');
+                imageUploadInput.value = ''; // Clear selected files
+                return;
+            }
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const base64Data = e.target.result.split(',')[1];
+                    const mimeType = file.type;
+                    uploadedFilesData.push({ file, base64: base64Data, mimeType });
+
+                    // Display preview
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = 'relative w-full h-32 md:h-40 bg-[#0A192F] rounded-md overflow-hidden shadow-inner';
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = file.name;
+                    img.className = 'w-full h-full object-cover';
+                    imgContainer.appendChild(img);
+                    imagePreviews.appendChild(imgContainer);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        async function callGeminiAPI(prompt, outputElement, spinnerElement, imageData = null) {
+            outputElement.textContent = '';
+            spinnerElement.classList.remove('hidden');
+
+            let chatHistory = [];
+            let payload;
+
+            if (imageData) {
+                payload = {
+                    contents: [
+                        {
+                            role: "user",
+                            parts: [
+                                { text: prompt },
+                                {
+                                    inlineData: {
+                                        mimeType: imageData.mimeType,
+                                        data: imageData.data
+                                    }
+                                }
+                            ]
+                        }
+                    ],
+                };
+            } else {
+                chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                payload = { contents: chatHistory };
+            }
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    return text; // Return the text instead of directly setting innerText
+                } else {
+                    outputElement.textContent = i18n[currentLanguage].apiError;
+                    console.error('API response structure unexpected:', result);
+                    return null;
+                }
+            } catch (error) {
+                outputElement.textContent = i18n[currentLanguage].fetchError.replace('{message}', error.message);
+                console.error('Fetch error:', error);
+                return null;
+            } finally {
+                spinnerElement.classList.add('hidden');
+            }
+        }
+
+
+        generateAnalysisBtn.addEventListener('click', async () => {
+            if (uploadedFilesData.length === 0) {
+                uploadMessage.textContent = i18n[currentLanguage].uploadMinError;
+                uploadMessage.classList.remove('hidden');
+                return;
+            }
+
+            generateAnalysisBtn.disabled = true;
+            analysisSpinner.classList.remove('hidden');
+            generatedAnalysisSection.classList.add('hidden');
+            generatedAnalysisContent.innerHTML = '';
+            uploadMessage.classList.add('hidden');
+
+            let individualAnalyses = [];
+            
+            try {
+                // Phase 1: Analyze Each Image Individually
+                for (let i = 0; i < uploadedFilesData.length; i++) {
+                    const { base64, mimeType } = uploadedFilesData[i];
+                    const prompt = i18n[currentLanguage].individualAnalysisPrompt(currentLanguage);
+                    
+                    const analysisText = await callGeminiAPI(prompt, uploadMessage, analysisSpinner, { mimeType, data: base64 });
+                    if (analysisText) { 
+                        individualAnalyses.push(`Image ${i + 1} Analysis:\n${analysisText}\n`);
+                    } else {
+                        individualAnalyses.push(`Image ${i + 1} Analysis: ${i18n[currentLanguage].apiError}.`);
+                    }
+                }
+
+                // Phase 2: Synthesize Global Style Guide
+                const styleGuideTemplateContent = getStyleGuideTemplate(); // Get language-specific template
+                const masterPrompt = i18n[currentLanguage].masterAnalysisPrompt(currentLanguage, individualAnalyses, styleGuideTemplateContent);
+
+                const markdownContent = await callGeminiAPI(masterPrompt, uploadMessage, analysisSpinner);
+
+                if (markdownContent) {
+                    generatedAnalysisContent.innerHTML = marked.parse(markdownContent); 
+                    generatedAnalysisSection.classList.remove('hidden');
+                } else {
+                    generatedAnalysisContent.textContent = i18n[currentLanguage].apiError;
+                }
+
+            } catch (error) {
+                generatedAnalysisContent.textContent = i18n[currentLanguage].fetchError.replace('{message}', error.message);
+                console.error('Analysis generation error:', error);
+            } finally {
+                generateAnalysisBtn.disabled = false;
+                analysisSpinner.classList.add('hidden');
+            }
+        });
+
+        suggestGenStrategyBtn.addEventListener('click', async () => {
+            const currentStyleGuide = generatedAnalysisContent.textContent; // Get the generated markdown
+            if (!currentStyleGuide) {
+                genStrategyOutput.textContent = i18n[currentLanguage].missingInputError;
+                return;
+            }
+            const prompt = i18n[currentLanguage].suggestStrategyPrompt(currentLanguage, currentStyleGuide);
+            const outputText = await callGeminiAPI(prompt, genStrategyOutput, genStrategySpinner);
+            if (outputText) {
+                genStrategyOutput.textContent = outputText;
+            }
+        });
+
+        generatePromptVariationsBtn.addEventListener('click', async () => {
+            const currentStyleGuide = generatedAnalysisContent.textContent;
+            const concept = promptConceptInput.value.trim();
+            if (!currentStyleGuide || !concept) {
+                promptVariationsOutput.textContent = i18n[currentLanguage].missingInputError;
+                return;
+            }
+            const prompt = i18n[currentLanguage].generatePromptVariationsPrompt(currentLanguage, currentStyleGuide, concept);
+            const outputText = await callGeminiAPI(prompt, promptVariationsOutput, promptVariationsSpinner);
+            if (outputText) {
+                promptVariationsOutput.textContent = outputText;
+            }
+        });
+
+        // Simple Markdown Parser (very basic, for headings, paragraphs, lists, and tables)
+        const marked = {
+            parse: function(markdown) {
+                let html = markdown
+                    .replace(/^###### (.*$)/gm, '<h6>$1</h6>')
+                    .replace(/^##### (.*$)/gm, '<h5>$1</h5>')
+                    .replace(/^#### (.*$)/gm, '<h4>$1</h4>')
+                    .replace(/^### (.*$)/gm, '<h3>$1</h3>')
+                    .replace(/^## (.*$)/gm, '<h2>$1</h2>')
+                    .replace(/^# (.*$)/gm, '<h1>$1</h1>');
+
+                // Convert tables
+                html = html.replace(/\|(.+)\|(?:\r?\n|\r)\|\s*(-+)\s*\|(?:\r?\n|\r)((?:\|.*\|(?:\r?\n|\r))*)/g, function(match, headerRow, separatorRow, bodyRows) {
+                    let tableHtml = '<table><thead><tr>';
+                    headerRow.split('|').forEach(header => {
+                        const trimmedHeader = header.trim();
+                        if (trimmedHeader) {
+                            tableHtml += `<th>${trimmedHeader}</th>`;
+                        }
+                    });
+                    tableHtml += '</tr></thead><tbody>';
+
+                    bodyRows.trim().split(/\r?\n|\r/).forEach(row => {
+                        let trimmedRow = row.trim();
+                        if (trimmedRow.startsWith('|')) trimmedRow = trimmedRow.substring(1);
+                        if (trimmedRow.endsWith('|')) trimmedRow = trimmedRow.slice(0, -1);
+                        
+                        if (trimmedRow) {
+                            tableHtml += '<tr>';
+                            trimmedRow.split('|').forEach(cell => {
+                                const trimmedCell = cell.trim();
+                                tableHtml += `<td>${trimmedCell}</td>`;
+                            });
+                            tableHtml += '</tr>';
+                        }
+                    });
+                    tableHtml += '</tbody></table>';
+                    return tableHtml;
+                });
+
+
+                // Convert lists
+                html = html.replace(/^\s*[-*+] (.*)$/gm, '<li>$1</li>');
+                html = html.replace(/<li>.*<\/li>(\n<li>.*<\/li>)*/gs, '<ul>$&</ul>');
+                html = html.replace(/^\s*\d+\. (.*)$/gm, '<li>$1</li>');
+                html = html.replace(/<li>.*<\/li>(\n<li>.*<\/li>)*/gs, '<ol>$&</ol>');
+
+                // Convert paragraphs (must be last for block elements)
+                html = html.replace(/^(?!<h|<ul|<ol|<table|<li|<th|<tr|<td)(.*)$/gm, function(match, p1) {
+                    if (p1.trim() === '') return ''; // Ignore empty lines that are not part of other blocks
+                    return `<p>${p1.trim()}</p>`;
+                });
+                
+                // Convert strong
+                html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+                // Clean up any empty p tags that might be created by list/heading replacements
+                html = html.replace(/<p>\s*<\/p>/g, '');
+
+                return html;
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+{
+  "projectTypes": {
+    "gallery": {
+      "title": "Digital Art Collection",
+      "description": "A series of abstract digital paintings exploring color theory and emotional expression through generative techniques.",
+      "icon": "🎨",
+      "projects": [
+        {
+          "id": "digital-landscape",
+          "title": "Digital Landscape",
+          "description": "A surreal digital landscape created using procedural generation and digital painting techniques.",
+          "content": "Combining procedural generation with hand-painted elements, this piece creates an otherworldly landscape that feels both familiar and alien.",
+          "date": "2024-02-20",
+          "featured": false,
+          "tags": [
+            "digital painting",
+            "landscape"
+          ],
+          "images": [
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "image-1750991069255-519028324.webp",
+              "description": "test. naked chrystal man in water\n"
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "IMG_6735.JPG",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "3FF94281-A693-4371-B6FD-9ABE9F73A82F.JPEG",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "8C07E8E1-9BB1-4C06-B260-97B91D31FD4B.JPEG",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "50E9F0F1-97D4-4CCF-BE96-79F2167F8288.jpg",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "577DCB87-ACF0-4F97-A65A-82D1DDAAACAF.JPEG",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "AC953C6E-B042-4006-94FB-7816620D568C.jpg",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "Arcana2.JPEG",
+              "description": ""
+            },
+            {
+              "src": "http://localhost:3000/undefined",
+              "alt": "C2D41478-4C28-4AEE-B598-AD0E1B91F725.JPEG",
+              "description": ""
+            }
+          ]
+        }
+      ]
+    },
+    "blog": {
+      "title": "Creative Writing & Thoughts",
+      "description": "Exploring ideas at the intersection of technology, art, and human experience through writing.",
+      "icon": "✍️",
+      "posts": [
+        {
+          "id": "ai-creativity",
+          "title": "The Future of AI in Creative Expression",
+          "description": "Exploring how artificial intelligence is reshaping the creative landscape and what it means for human artists.",
+          "content": "# The Future of AI in Creative Expression\n\nArtificial intelligence is rapidly transforming how we think about creativity and artistic expression. From generative art to AI-assisted writing, the boundaries between human and machine creativity are becoming increasingly blurred.\n\n## The Collaborative Potential\n\nRather than viewing AI as a replacement for human creativity, I believe we're entering an era of unprecedented collaboration. AI can handle the technical aspects of creation, allowing humans to focus on the conceptual and emotional elements that make art truly meaningful.",
+          "author": "Creative Developer",
+          "date": "2024-03-15",
+          "readTime": "5 min read",
+          "category": "Technology",
+          "tags": [
+            "AI",
+            "creativity",
+            "technology",
+            "art"
+          ],
+          "featured": true,
+          "coverImage": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTA5ODY1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5BSSBDcmVhdGl2aXR5PC90ZXh0Pjwvc3ZnPg==",
+          "slug": "ai-creativity"
+        },
+        {
+          "id": "generative-art-process",
+          "title": "My Process for Creating Generative Art",
+          "description": "A deep dive into my creative process for developing generative art pieces, from concept to final output.",
+          "content": "# My Process for Creating Generative Art\n\nGenerative art combines programming with artistic vision in fascinating ways. Here's how I approach creating these pieces.\n\n## 1. Conceptual Foundation\n\nEvery piece starts with a clear concept. I ask myself: What emotion or idea do I want to convey? What visual elements would best represent this?",
+          "author": "Creative Developer",
+          "date": "2024-02-28",
+          "readTime": "4 min read",
+          "category": "Art",
+          "tags": [
+            "generative art",
+            "process",
+            "creativity",
+            "programming"
+          ],
+          "featured": false,
+          "coverImage": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTA5ODY1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5HZW5lcmF0aXZlIEFydDwvdGV4dD48L3N2Zz4=",
+          "slug": "generative-art-process"
+        }
+      ]
+    },
+    "demo": {
+      "title": "Interactive Web Applications",
+      "description": "Interactive web applications and demos showcasing modern web technologies and creative coding.",
+      "icon": "🚀",
+      "projects": [
+        {
+          "id": "data-viz-dashboard",
+          "title": "Interactive Data Visualization Dashboard",
+          "description": "A responsive dashboard for visualizing complex datasets with real-time updates and interactive charts.",
+          "content": "This dashboard demonstrates modern web development techniques including D3.js for data visualization, React for component-based architecture, and WebSocket for real-time data updates.",
+          "technologies": [
+            "React",
+            "D3.js",
+            "Node.js",
+            "WebSocket"
+          ],
+          "liveUrl": "https://demo.example.com",
+          "githubUrl": "https://github.com/example/dashboard",
+          "tags": [
+            "web development",
+            "data visualization",
+            "interactive"
+          ],
+          "date": "2024-01-10",
+          "featured": true
+        },
+        {
+          "id": "creative-coding-demo",
+          "title": "Creative Coding Experiments",
+          "description": "A collection of creative coding experiments using WebGL and modern JavaScript.",
+          "content": "Exploring the intersection of art and code through interactive WebGL experiments.",
+          "technologies": [
+            "WebGL",
+            "Three.js",
+            "JavaScript",
+            "Web Audio API"
+          ],
+          "liveUrl": "https://demo.example.com/creative",
+          "githubUrl": "https://github.com/example/creative-coding",
+          "tags": [
+            "creative coding",
+            "WebGL",
+            "interactive",
+            "art"
+          ],
+          "date": "2024-02-15",
+          "featured": false
+        }
+      ]
+    },
+    "stories": {
+      "title": "Creative Writing Samples",
+      "description": "Explore my creative writing samples across different genres and styles.",
+      "icon": "📚",
+      "projects": [
+        {
+          "id": "digital-dreams",
+          "title": "Digital Dreams",
+          "description": "A speculative fiction short story exploring consciousness in the digital age.",
+          "content": "# Digital Dreams\n\n*by Creative Developer*\n\nSarah stared at the screen, watching lines of code scroll past like digital rain. It was 3 AM, and the glow of her monitor was the only light in the apartment. She had been debugging this neural network for hours, but something felt different tonight.",
+          "genre": "Speculative Fiction",
+          "wordCount": 2500,
+          "tags": [
+            "speculative fiction",
+            "AI",
+            "consciousness",
+            "technology"
+          ],
+          "date": "2024-03-01",
+          "featured": true
+        },
+        {
+          "id": "the-algorithm",
+          "title": "The Algorithm",
+          "description": "A cyberpunk short story about a programmer who discovers a mysterious algorithm that predicts human behavior.",
+          "content": "# The Algorithm\n\n*by Creative Developer*\n\nMarcus had been working on the recommendation system for months, but this algorithm was different. It didn't just predict what users would like—it predicted what they would *do*.",
+          "genre": "Cyberpunk",
+          "wordCount": 3200,
+          "tags": [
+            "cyberpunk",
+            "technology",
+            "free will",
+            "surveillance"
+          ],
+          "date": "2024-02-15",
+          "featured": false
+        }
+      ]
+    },
+    "brand": {
+      "title": "Brand Identity & Design",
+      "description": "Discover the visual identity and branding elements of my projects and collaborations.",
+      "icon": "🎨",
+      "projects": [
+        {
+          "id": "tech-startup-brand",
+          "title": "Tech Startup Brand Identity",
+          "description": "Complete brand identity design for a cutting-edge technology startup, including logo, color palette, and visual guidelines.",
+          "content": "A comprehensive brand identity project for a startup focused on sustainable technology solutions.",
+          "client": "EcoTech Solutions",
+          "services": [
+            "Logo Design",
+            "Brand Guidelines",
+            "Visual Identity"
+          ],
+          "tags": [
+            "branding",
+            "logo design",
+            "startup",
+            "sustainability"
+          ],
+          "date": "2024-01-20",
+          "featured": true
+        },
+        {
+          "id": "creative-agency-rebrand",
+          "title": "Creative Agency Rebrand",
+          "description": "Rebranding project for an established creative agency looking to modernize their visual identity.",
+          "content": "A strategic rebranding project that modernized the agency's visual identity while maintaining their established reputation.",
+          "client": "Creative Studio XYZ",
+          "services": [
+            "Rebranding",
+            "Visual Identity",
+            "Brand Strategy"
+          ],
+          "tags": [
+            "rebranding",
+            "agency",
+            "visual identity",
+            "strategy"
+          ],
+          "date": "2024-02-10",
+          "featured": false
+        }
+      ]
+    },
+    "github": {
+      "title": "GitHub Repositories",
+      "description": "Explore my open-source projects and contributions on GitHub.",
+      "icon": "💻",
+      "projects": [
+        {
+          "id": "generative-art-library",
+          "title": "Generative Art Library",
+          "description": "An open-source JavaScript library for creating generative art and procedural graphics.",
+          "content": "A comprehensive library for artists and developers interested in generative art and procedural graphics.",
+          "technologies": [
+            "JavaScript",
+            "Canvas API",
+            "SVG",
+            "WebGL"
+          ],
+          "githubUrl": "https://github.com/example/generative-art-lib",
+          "stars": 150,
+          "forks": 25,
+          "tags": [
+            "open source",
+            "generative art",
+            "JavaScript",
+            "library"
+          ],
+          "date": "2024-01-05",
+          "featured": true
+        },
+        {
+          "id": "data-viz-components",
+          "title": "Data Visualization Components",
+          "description": "A collection of reusable React components for creating interactive data visualizations.",
+          "content": "A React component library focused on making data visualization accessible and beautiful.",
+          "technologies": [
+            "React",
+            "TypeScript",
+            "D3.js",
+            "SVG"
+          ],
+          "githubUrl": "https://github.com/example/data-viz-components",
+          "stars": 89,
+          "forks": 12,
+          "tags": [
+            "React",
+            "data visualization",
+            "TypeScript",
+            "components"
+          ],
+          "date": "2024-02-01",
+          "featured": false
+        }
+      ]
+    }
+  }
+}
