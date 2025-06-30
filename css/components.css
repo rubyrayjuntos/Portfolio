@@ -2624,4 +2624,59 @@ main {
         width: 64px;
         height: 64px;
     }
+}
+
+/* Fix for markdown content overflow in project detail */
+.markdown-body {
+  overflow-x: auto;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.markdown-body pre,
+.markdown-body code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-width: 100%;
+  overflow-x: auto;
+  display: block;
+  background: #181a2b;
+  border-radius: 6px;
+  padding: 1em;
+}
+
+/* Markdown content styles for headings, spacing, and lists */
+.markdown-body h1 {
+  font-size: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+.markdown-body h2 {
+  font-size: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+.markdown-body h3 {
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+.markdown-body p,
+.markdown-body ul,
+.markdown-body ol {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2rem;
+}
+.markdown-body li {
+  margin-bottom: 0.5rem;
+}
+.markdown-body strong {
+  font-weight: 600;
 } 

@@ -603,7 +603,9 @@ class PortfolioManager {
 
         // Render markdown content
         let markdownHTML = '';
-        if (window.markdownParser && typeof window.markdownParser.parse === 'function') {
+        if (window.marked && typeof window.marked.parse === 'function') {
+            markdownHTML = window.marked.parse(item.content || '');
+        } else if (window.markdownParser && typeof window.markdownParser.parse === 'function') {
             markdownHTML = window.markdownParser.parse(item.content || '');
         } else {
             markdownHTML = `<p>${item.content || ''}</p>`;
