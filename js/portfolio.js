@@ -322,7 +322,9 @@ class PortfolioManager {
                 return '<div class="placeholder-image">🎨</div>';
             
             case 'github':
-                return '<div class="placeholder-image">💻</div>';
+                return item.images && item.images.length > 0
+                    ? `<img src="${item.images[0].src}" alt="${item.title}">`
+                    : '<div class="placeholder-image">💻</div>';
             
             default:
                 return '<div class="placeholder-image">📁</div>';
@@ -585,6 +587,28 @@ class PortfolioManager {
     }
 
     renderGithubDetail(item) {
+        // Render image thumbnails if available
+        let imagesHTML = '';
+        if (item.images && item.images.length > 0) {
+            imagesHTML = `
+                <div class="github-thumbnails">
+                    ${item.images.map(image => `
+                        <div class="github-thumbnail" onclick="portfolio.openLightbox('${image.src}', '${image.alt || ''}', '${image.description || ''}')">
+                            <img src="${image.src}" alt="${image.alt || ''}">
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Render markdown content
+        let markdownHTML = '';
+        if (window.markdownParser && typeof window.markdownParser.parse === 'function') {
+            markdownHTML = window.markdownParser.parse(item.content || '');
+        } else {
+            markdownHTML = `<p>${item.content || ''}</p>`;
+        }
+
         return `
             <div class="github-detail">
                 <div class="github-info">
@@ -596,8 +620,9 @@ class PortfolioManager {
                     </div>
                 </div>
                 <div class="github-content">
-                    <div class="github-description">
-                        <p>${item.content}</p>
+                    ${imagesHTML}
+                    <div class="github-description markdown-body">
+                        ${markdownHTML}
                     </div>
                     ${item.technologies && item.technologies.length > 0 ? `
                         <div class="github-technologies">

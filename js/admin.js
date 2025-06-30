@@ -856,12 +856,25 @@ class PortfolioAdmin {
         
         return Array.from(preview.querySelectorAll('.image-item'))
             .map(item => {
-                const img = item.querySelector('img');
-                const title = item.dataset.title || item.querySelector('.image-overlay input')?.value || img?.alt || 'Image';
+                // Try to get stored image data first
+                let imageData = null;
+                if (item.dataset.imageData) {
+                    try {
+                        imageData = JSON.parse(item.dataset.imageData);
+                    } catch (e) {
+                        console.warn('Failed to parse image data:', e);
+                    }
+                }
+                
+                // Get title and description from overlay inputs or dataset
+                const title = item.dataset.title || item.querySelector('.image-overlay input')?.value || imageData?.alt || 'Image';
                 const description = item.dataset.description || item.querySelector('.image-overlay textarea')?.value || '';
                 
+                // Use stored image data if available, otherwise fall back to img src
+                const src = imageData?.src || imageData?.url || item.querySelector('img')?.src || '';
+                
                 return {
-                    src: img?.src || '',
+                    src: src,
                     alt: title,
                     description: description
                 };
