@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Upload Test</title>
+    <title>Image Upload Test - Admin Fix</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,13 +81,39 @@
             font-family: monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .test-buttons button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #007bff;
+            background: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-buttons button:hover {
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="test-container">
-        <h1>Image Upload Test</h1>
+        <h1>Image Upload Test - Admin Fix</h1>
         <p>This page tests the image upload functionality to help debug issues with the admin panel.</p>
+        
+        <div class="test-buttons">
+            <button onclick="testDirectUpload()">Test Direct Upload</button>
+            <button onclick="testAdminUpload()">Test Admin Upload</button>
+            <button onclick="clearPreview()">Clear Preview</button>
+            <button onclick="clearDebug()">Clear Debug</button>
+        </div>
         
         <div class="upload-area" id="upload-area">
             <p>Click to select images or drag and drop</p>
@@ -98,12 +124,8 @@
         <div id="debug-info" class="debug-info"></div>
         
         <div class="image-preview" id="image-preview"></div>
-        
-        <button onclick="testImageOptimizer()">Test ImageOptimizer</button>
-        <button onclick="clearPreview()">Clear Preview</button>
     </div>
 
-    <script src="/js/utils.js"></script>
     <script>
         let debugInfo = [];
         
@@ -112,6 +134,9 @@
             const logEntry = `[${timestamp}] ${message}`;
             console.log(logEntry, data);
             debugInfo.push(logEntry);
+            if (data) {
+                debugInfo.push(`  Data: ${JSON.stringify(data, null, 2)}`);
+            }
             updateDebugInfo();
         }
         
@@ -166,22 +191,41 @@
                 try {
                     log(`Starting upload for: ${file.name}`);
                     
-                    // Check if imageOptimizer is available
-                    if (typeof imageOptimizer === 'undefined') {
-                        throw new Error('ImageOptimizer not available');
-                    }
-                    
                     // Show loading state
                     addImagePreview('', file.name, true);
                     
-                    // Upload image
-                    const result = await imageOptimizer.uploadImage(file);
+                    // Upload image using the same method as admin
+                    const formData = new FormData();
+                    formData.append('image', file);
                     
-                    log(`Upload successful for: ${file.name}`, result);
+                    log('Sending upload request to /api/upload/image');
+                    const response = await fetch('/api/upload/image', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: formData
+                    });
+
+                    log(`Response status: ${response.status}`);
+                    
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        log(`Upload failed: ${response.status} - ${errorText}`, { status: response.status, error: errorText });
+                        throw new Error(`Upload failed: ${response.status} - ${errorText}`);
+                    }
+
+                    const result = await response.json();
+                    log(`Upload successful:`, result);
                     
                     // Remove loading and add result
                     removeLoadingItem(file.name);
-                    addImagePreview(result.optimized.src, file.name, false, result);
+                    
+                    // Use the same format as admin
+                    const imageUrl = result.file ? result.file.url : result.url;
+                    addImagePreview(imageUrl, file.name, false, {
+                        src: imageUrl,
+                        alt: file.name,
+                        description: ''
+                    });
                     
                     showStatus(`Successfully uploaded: ${file.name}`, 'success');
                     
@@ -228,27 +272,30 @@
         
         function clearPreview() {
             document.getElementById('image-preview').innerHTML = '';
-            debugInfo = [];
-            updateDebugInfo();
+            log('Preview cleared');
         }
         
-        function testImageOptimizer() {
-            log('Testing ImageOptimizer availability...');
-            
-            if (typeof imageOptimizer === 'undefined') {
-                showStatus('ImageOptimizer is not available', 'error');
-                return;
-            }
-            
-            showStatus('ImageOptimizer is available', 'success');
-            log('ImageOptimizer methods:', Object.getOwnPropertyNames(Object.getPrototypeOf(imageOptimizer)));
+        function clearDebug() {
+            debugInfo = [];
+            updateDebugInfo();
+            log('Debug info cleared');
+        }
+        
+        function testDirectUpload() {
+            log('Testing direct upload functionality...');
+            showStatus('Direct upload test initiated', 'success');
+        }
+        
+        function testAdminUpload() {
+            log('Testing admin upload functionality...');
+            showStatus('Admin upload test initiated', 'success');
         }
         
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             log('Test page loaded');
             setupUpload();
-            testImageOptimizer();
+            log('Upload functionality initialized');
         });
     </script>
 </body>

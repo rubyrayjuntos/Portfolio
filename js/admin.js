@@ -143,42 +143,70 @@ class PortfolioAdmin {
     }
 
     setupImageUpload() {
-        const uploadAreas = document.querySelectorAll('.upload-area');
+        console.log('Setting up image upload functionality...');
         
-        uploadAreas.forEach(area => {
-            // Drag and drop
-            area.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                area.classList.add('dragover');
-            });
-
-            area.addEventListener('dragleave', () => {
-                area.classList.remove('dragover');
-            });
-
-            area.addEventListener('drop', (e) => {
-                e.preventDefault();
-                area.classList.remove('dragover');
-                const files = Array.from(e.dataTransfer.files);
-                this.handleImageFiles(files, area);
-            });
-
-            // Click to upload
-            area.addEventListener('click', () => {
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.multiple = true;
-                input.accept = 'image/*';
-                input.onchange = (e) => {
-                    const files = Array.from(e.target.files);
-                    this.handleImageFiles(files, area);
-                };
-                input.click();
-            });
+        // Use event delegation to handle dynamically created upload areas
+        document.addEventListener('dragover', (e) => {
+            e.preventDefault();
         });
+
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+        });
+
+        // Handle click events on upload areas
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.upload-area')) {
+                const uploadArea = e.target.closest('.upload-area');
+                this.handleUploadAreaClick(uploadArea);
+            }
+        });
+
+        // Handle drag and drop events on upload areas
+        document.addEventListener('dragover', (e) => {
+            const uploadArea = e.target.closest('.upload-area');
+            if (uploadArea) {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            }
+        });
+
+        document.addEventListener('dragleave', (e) => {
+            const uploadArea = e.target.closest('.upload-area');
+            if (uploadArea) {
+                uploadArea.classList.remove('dragover');
+            }
+        });
+
+        document.addEventListener('drop', (e) => {
+            const uploadArea = e.target.closest('.upload-area');
+            if (uploadArea) {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                const files = Array.from(e.dataTransfer.files);
+                this.handleImageFiles(files, uploadArea);
+            }
+        });
+
+        console.log('Image upload functionality setup complete');
+    }
+
+    handleUploadAreaClick(uploadArea) {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = 'image/*';
+        input.onchange = (e) => {
+            const files = Array.from(e.target.files);
+            this.handleImageFiles(files, uploadArea);
+        };
+        input.click();
     }
 
     async handleImageFiles(files, uploadSection) {
+        console.log('Handling image files:', files.length, 'files');
+        console.log('Upload section:', uploadSection);
+        
         const imageFiles = files.filter(file => file.type.startsWith('image/'));
         
         if (imageFiles.length === 0) {
@@ -186,57 +214,88 @@ class PortfolioAdmin {
             return;
         }
 
+        console.log('Processing', imageFiles.length, 'valid image files');
+
         for (const file of imageFiles) {
             try {
+                console.log('Uploading file:', file.name, 'Size:', file.size, 'Type:', file.type);
+                
                 // Show loading state
                 const loadingItem = this.addImagePreview('', file.name, true, uploadSection);
+                console.log('Loading item created:', loadingItem);
                 
                 // Upload image
                 const formData = new FormData();
                 formData.append('image', file);
                 
+                console.log('Sending upload request...');
                 const response = await fetch('/api/upload/image', {
                     method: 'POST',
                     credentials: 'include',
                     body: formData
                 });
 
+                console.log('Upload response status:', response.status);
+                
                 if (!response.ok) {
-                    throw new Error('Upload failed');
+                    const errorText = await response.text();
+                    console.error('Upload failed with status:', response.status, 'Error:', errorText);
+                    throw new Error(`Upload failed: ${response.status} - ${errorText}`);
                 }
 
                 const result = await response.json();
+                console.log('Upload result:', result);
                 
                 // Remove loading item and add uploaded image
                 if (loadingItem && loadingItem.parentNode) {
                     loadingItem.remove();
+                    console.log('Loading item removed');
                 }
                 
                 // Fix: Use the correct response format from server
                 const imageUrl = result.file ? result.file.url : result.url;
+                console.log('Image URL:', imageUrl);
+                
                 const imageData = {
                     src: imageUrl,
                     alt: file.name,
                     description: ''
                 };
                 
-                this.addImagePreview(imageUrl, file.name, false, uploadSection, imageData);
+                const previewItem = this.addImagePreview(imageUrl, file.name, false, uploadSection, imageData);
+                console.log('Preview item created:', previewItem);
                 
                 this.showStatus(`Image "${file.name}" uploaded successfully`, 'success');
                 
             } catch (error) {
                 console.error('Image upload error:', error);
                 this.showStatus(`Failed to upload "${file.name}": ${error.message}`, 'error');
+                
+                // Remove loading item if it exists
+                const loadingItems = document.querySelectorAll('.image-loading');
+                loadingItems.forEach(item => {
+                    if (item.textContent.includes(file.name)) {
+                        item.parentElement.remove();
+                    }
+                });
             }
         }
     }
 
     addImagePreview(src, name, isLoading = false, container, imageData = null) {
+        console.log('Adding image preview:', { src, name, isLoading, container: container?.className });
+        
         // Find the image-upload-section parent to add preview to
         const uploadSection = container.closest('.image-upload-section');
-        if (!uploadSection) return null;
+        if (!uploadSection) {
+            console.error('Could not find image-upload-section parent');
+            return null;
+        }
+        
+        console.log('Found upload section:', uploadSection);
         
         const preview = uploadSection.nextElementSibling || this.createImagePreviewContainer(uploadSection);
+        console.log('Using preview container:', preview);
         
         const imageItem = document.createElement('div');
         imageItem.className = 'image-item';
@@ -248,6 +307,7 @@ class PortfolioAdmin {
                     <p>Uploading ${name}...</p>
                 </div>
             `;
+            console.log('Created loading item for:', name);
         } else {
             imageItem.innerHTML = `
                 <img src="${src}" alt="${name}" />
@@ -261,9 +321,11 @@ class PortfolioAdmin {
             if (imageData) {
                 imageItem.dataset.imageData = JSON.stringify(imageData);
             }
+            console.log('Created image preview item for:', name, 'with src:', src);
         }
         
         preview.appendChild(imageItem);
+        console.log('Added image item to preview container');
         return imageItem;
     }
 
@@ -590,6 +652,23 @@ class PortfolioAdmin {
 
         // Add type-specific fields
         switch (typeKey) {
+            case 'gallery':
+                formHTML += `
+                    <div class="form-group">
+                        <label for="project-medium">Medium</label>
+                        <input type="text" id="project-medium" value="${projectData.medium || ''}" placeholder="e.g., Digital Art, Photography, Mixed Media">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-dimensions">Dimensions</label>
+                        <input type="text" id="project-dimensions" value="${projectData.dimensions || ''}" placeholder="e.g., 1920x1080, 3000x2000">
+                    </div>
+                    <div class="form-group">
+                        <label for="project-year">Year Created</label>
+                        <input type="number" id="project-year" value="${projectData.year || new Date().getFullYear()}">
+                    </div>
+                `;
+                break;
+
             case 'blog':
                 formHTML += `
                     <div class="form-group">
@@ -697,6 +776,8 @@ class PortfolioAdmin {
     }
 
     setupFormEventListeners() {
+        console.log('Setting up form event listeners...');
+        
         // Populate existing tags
         this.populateExistingTags();
         
@@ -708,9 +789,12 @@ class PortfolioAdmin {
             const type = this.projectTypes[this.currentProjectType];
             const items = type.projects || type.posts || [];
             if (this.currentProject < items.length && items[this.currentProject].images) {
+                console.log('Populating existing images for project:', items[this.currentProject].title);
                 this.populateExistingImages(items[this.currentProject].images);
             }
         }
+        
+        console.log('Form event listeners setup complete');
     }
 
     populateExistingTags() {
@@ -742,10 +826,18 @@ class PortfolioAdmin {
     }
 
     populateExistingImages(images) {
+        console.log('Populating existing images:', images);
+        
         const uploadArea = document.querySelector('.upload-area');
-        if (!uploadArea) return;
+        if (!uploadArea) {
+            console.error('Could not find upload area for existing images');
+            return;
+        }
 
-        images.forEach(image => {
+        console.log('Found upload area, adding', images.length, 'existing images');
+        
+        images.forEach((image, index) => {
+            console.log('Adding existing image', index + 1, ':', image);
             this.addImagePreview(image.src, image.alt || 'Image', false, uploadArea, {
                 src: image.src,
                 alt: image.alt || '',
@@ -806,6 +898,12 @@ class PortfolioAdmin {
         const typeKey = this.currentProjectType;
 
         switch (typeKey) {
+            case 'gallery':
+                formData.medium = document.getElementById('project-medium')?.value || '';
+                formData.dimensions = document.getElementById('project-dimensions')?.value || '';
+                formData.year = parseInt(document.getElementById('project-year')?.value) || new Date().getFullYear();
+                break;
+
             case 'blog':
                 formData.author = document.getElementById('project-author').value;
                 formData.category = document.getElementById('project-category').value;
