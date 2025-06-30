@@ -4,7 +4,67 @@
       "title": "Digital Art Collection",
       "description": "A series of abstract digital paintings exploring color theory and emotional expression through generative techniques.",
       "icon": "🎨",
-      "projects": []
+      "projects": [
+        {
+          "id": "lazy-leon-homepage",
+          "title": "Lazy Leon Homepage Redesigns",
+          "description": "I created a fictional website for a fictional company specializing in digital photo archiving services. This gallery shows different homepage ideas from very different UI/UX perspectives.",
+          "content": "1. Playful Storybook Homepage\nProject ID: lazy-leon-storybook\nTitle: Lazy Léon Storybook Adventure\nDescription: A whimsical, interactive homepage that feels like a children’s storybook, inviting users to explore with animated characters and playful navigation.\nContent:\nApply to admin.js\n2. Minimalist Modern Homepage\nProject ID: lazy-leon-minimal\nTitle: Lazy Léon Minimalist Redesign\nDescription: A clean, modern homepage with lots of white space, bold typography, and a focus on accessibility and fast navigation.\nContent:\nApply to admin.js\n3. Immersive 3D Homepage\nProject ID: lazy-leon-3d\nTitle: Lazy Léon 3D Interactive World\nDescription: An immersive homepage using 3D graphics and parallax effects, allowing users to interact with elements as they scroll or move their mouse.\nContent:\nApply to admin.js\n4. Mobile-First App-Style Homepage\nProject ID: lazy-leon-mobile\nTitle: Lazy Léon Mobile App Experience\nDescription: A mobile-first homepage that feels like a native app, with swipeable cards, bottom navigation, and touch-friendly interactions.\nContent:\nApply to admin.js\n5. Educational Dashboard Homepage\nProject ID: lazy-leon-dashboard\nTitle: Lazy Léon Learning Dashboard\nDescription: A homepage designed as an educational dashboard, showing progress, featured activities, and quick links for kids and parents.\nContent:\nApply to admin.js\n6. Art Gallery Homepage\nProject ID: lazy-leon-gallery\nTitle: Lazy Léon Art Gallery\nDescription: A homepage that feels like an art exhibition, showcasing Lazy Léon illustrations and user-submitted artwork in a curated, gallery-style layout.\nContent:\n",
+          "date": "2025-06-30",
+          "featured": false,
+          "tags": [],
+          "images": [
+            {
+              "src": "/uploads/image-1751276294683-128983107.jpg",
+              "alt": "FB34490F-4CDC-4712-BA69-F7C480A85839.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276294702-915336038.jpg",
+              "alt": "FF5D4DAC-86AC-4118-AA3A-2F38A7622F99.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276294756-964319530.jpg",
+              "alt": "2FA777DC-2C92-4BCF-80E5-A884EC240021.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276294933-92588795.jpg",
+              "alt": "9C0BE677-3FAB-41C8-AF01-D77AF948A69C.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276295038-462867686.jpg",
+              "alt": "2054238D-E7B4-4E8B-9E5D-0E636D0798E4.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276295119-733857474.jpg",
+              "alt": "AA302F3D-0CD9-442C-B807-B5B401DEC559.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276295171-887184843.jpg",
+              "alt": "BDD49A15-BDFA-40C9-A1ED-1FD26729B47F.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276295248-181475253.jpg",
+              "alt": "CC3124C6-F08D-4DFC-A9A2-423322D30D84.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751276295287-647950048.jpg",
+              "alt": "E474C188-8731-43DA-80A9-2A13A5EEEC6F.jpg",
+              "description": ""
+            }
+          ],
+          "medium": "",
+          "dimensions": "",
+          "year": 2025
+        }
+      ]
     },
     "blog": {
       "title": "Creative Writing & Thoughts",
