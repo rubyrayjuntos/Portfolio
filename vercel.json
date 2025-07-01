@@ -1,0 +1,60 @@
+{
+  "version": 2,
+  "name": "creative-portfolio",
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/admin",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/admin-login",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/terms",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/accessibility",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/resume",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/asteroids",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/offline",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  }
+} 

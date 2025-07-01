@@ -186,7 +186,12 @@ class PortfolioManager {
         const container = document.getElementById('portfolio-container');
         if (!container) return;
 
-        const types = Object.entries(this.projectTypes);
+        // Sort project types by order (featured field as integer)
+        const types = Object.entries(this.projectTypes).sort(([,a], [,b]) => {
+            const orderA = parseInt(a.featured) || 999;
+            const orderB = parseInt(b.featured) || 999;
+            return orderA - orderB;
+        });
         
         // Clear container safely
         container.innerHTML = '';
@@ -248,6 +253,13 @@ class PortfolioManager {
         } else {
             items = typeData.projects || [];
         }
+
+        // Sort items by order (featured field as integer)
+        items.sort((a, b) => {
+            const orderA = parseInt(a.featured) || 999;
+            const orderB = parseInt(b.featured) || 999;
+            return orderA - orderB;
+        });
 
         // Clear container safely
         container.innerHTML = '';

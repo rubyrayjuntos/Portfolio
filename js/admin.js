@@ -442,7 +442,14 @@ class PortfolioAdmin {
         grid.innerHTML = '';
         selector.innerHTML = '<option value="">Select Project Type</option>';
 
-        Object.entries(this.projectTypes).forEach(([key, type]) => {
+        // Sort project types by order (featured field as integer)
+        const sortedTypes = Object.entries(this.projectTypes).sort(([,a], [,b]) => {
+            const orderA = parseInt(a.featured) || 999;
+            const orderB = parseInt(b.featured) || 999;
+            return orderA - orderB;
+        });
+
+        sortedTypes.forEach(([key, type]) => {
             // Add to grid
             const card = this.createProjectTypeCard(key, type);
             grid.appendChild(card);
@@ -458,11 +465,11 @@ class PortfolioAdmin {
     createProjectTypeCard(key, type) {
         const card = document.createElement('div');
         card.className = 'project-type-card';
-        card.onclick = () => this.editProjectType(key);
-
+        
         const projectCount = type.projects ? type.projects.length : 0;
         const postCount = type.posts ? type.posts.length : 0;
         const totalCount = projectCount + postCount;
+        const order = parseInt(type.featured) || 999;
 
         card.innerHTML = `
             <div class="project-type-header">
@@ -471,6 +478,12 @@ class PortfolioAdmin {
                     <h3>${type.title}</h3>
                     <p>${type.description}</p>
                 </div>
+                <div class="project-type-order">
+                    <label>Order:</label>
+                    <input type="number" class="order-input" value="${order}" min="1" 
+                           onclick="event.stopPropagation()" 
+                           onchange="admin.updateProjectTypeOrder('${key}', this.value)">
+                </div>
             </div>
             <div class="project-type-stats">
                 <div class="stat-item">
@@ -478,9 +491,12 @@ class PortfolioAdmin {
                     <div class="stat-label">Total</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">${type.featured ? type.featured.length : 0}</div>
-                    <div class="stat-label">Featured</div>
+                    <div class="stat-number">${order}</div>
+                    <div class="stat-label">Order</div>
                 </div>
+            </div>
+            <div class="project-type-actions">
+                <button class="btn-edit" onclick="event.stopPropagation(); admin.editProjectType('${key}')">Edit</button>
             </div>
         `;
 
@@ -491,6 +507,32 @@ class PortfolioAdmin {
         this.currentProjectType = typeKey;
         this.showSection('projects');
         this.loadProjectsForType();
+    }
+
+    updateProjectTypeOrder(typeKey, newOrder) {
+        if (!this.projectTypes[typeKey]) return;
+        
+        const order = parseInt(newOrder) || 999;
+        this.projectTypes[typeKey].featured = order;
+        
+        this.saveProjectTypes();
+        this.renderProjectTypes();
+        this.showStatus(`Order updated for ${this.projectTypes[typeKey].title}`, 'success');
+    }
+
+    updateProjectOrder(typeKey, index, newOrder) {
+        const type = this.projectTypes[typeKey];
+        if (!type) return;
+        
+        const items = type.projects || type.posts || [];
+        if (index >= items.length) return;
+        
+        const order = parseInt(newOrder) || 999;
+        items[index].featured = order;
+        
+        this.saveProjectTypes();
+        this.loadProjectsForType();
+        this.showStatus(`Order updated for ${items[index].title}`, 'success');
     }
 
     createNewProjectType() {
@@ -532,15 +574,23 @@ class PortfolioAdmin {
 
         const items = type.projects || type.posts || [];
         
+        // Sort items by order (featured field as integer)
+        const sortedItems = items.sort((a, b) => {
+            const orderA = parseInt(a.featured) || 999;
+            const orderB = parseInt(b.featured) || 999;
+            return orderA - orderB;
+        });
+        
         projectList.innerHTML = '';
 
-        if (items.length === 0) {
+        if (sortedItems.length === 0) {
             projectList.innerHTML = '<p>No projects found. Click "Add Project" to create one.</p>';
             return;
         }
 
-        items.forEach((item, index) => {
-            const projectItem = this.createProjectItem(typeKey, item, index);
+        sortedItems.forEach((item, index) => {
+            const originalIndex = items.indexOf(item);
+            const projectItem = this.createProjectItem(typeKey, item, originalIndex);
             projectList.appendChild(projectItem);
         });
     }
@@ -549,10 +599,17 @@ class PortfolioAdmin {
         const div = document.createElement('div');
         div.className = 'project-item';
         
+        const order = parseInt(item.featured) || 999;
+        
         div.innerHTML = `
             <div class="project-info">
                 <h4>${item.title}</h4>
                 <p>${item.description || 'No description'}</p>
+            </div>
+            <div class="project-order">
+                <label>Order:</label>
+                <input type="number" class="order-input" value="${order}" min="1" 
+                       onchange="admin.updateProjectOrder('${typeKey}', ${index}, this.value)">
             </div>
             <div class="project-actions">
                 <button class="btn-edit" onclick="admin.editProject('${typeKey}', ${index})">Edit</button>
@@ -629,8 +686,10 @@ class PortfolioAdmin {
                     <input type="date" id="project-date" value="${projectData.date || new Date().toISOString().split('T')[0]}">
                 </div>
                 <div class="form-group">
-                    <label for="project-featured">Featured</label>
-                    <input type="checkbox" id="project-featured" ${projectData.featured ? 'checked' : ''}>
+                    <label for="project-featured">Display Order</label>
+                    <input type="number" id="project-featured" value="${parseInt(projectData.featured) || 999}" min="1" 
+                           placeholder="1 = first, 2 = second, etc.">
+                    <small class="form-hint">Lower numbers appear first. Use 1 for first position.</small>
                 </div>
                 <div class="form-group full-width">
                     <label for="project-tags">Tags</label>
@@ -890,7 +949,7 @@ class PortfolioAdmin {
             description: document.getElementById('project-description').value,
             content: document.getElementById('project-content').value,
             date: document.getElementById('project-date').value,
-            featured: document.getElementById('project-featured').checked,
+            featured: parseInt(document.getElementById('project-featured').value) || 999,
             tags: this.getTagsFromContainer('project-tags'),
             images: this.getImagesFromPreview()
         };

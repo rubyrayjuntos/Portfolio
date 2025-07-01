@@ -2679,4 +2679,66 @@ main {
 }
 .markdown-body strong {
   font-weight: 600;
+}
+
+/* Admin Order Input Styles */
+.order-input {
+    width: 60px;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.order-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(5, 155, 184, 0.2);
+}
+
+.project-type-order,
+.project-order {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.project-type-order label,
+.project-order label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.project-type-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.project-type-actions .btn-edit {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.project-type-actions .btn-edit:hover {
+    background: #059bb8;
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    display: block;
 } 
