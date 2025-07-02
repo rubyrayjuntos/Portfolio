@@ -358,6 +358,7 @@ nav {
     position: relative;
     overflow: hidden;
     padding-top: 80px;
+    margin-bottom: 1.5rem !important;
 }
 
 .hero::before {
@@ -435,6 +436,8 @@ nav {
 /* Portfolio Section - Updated for Type-Specific Structure */
 .portfolio {
     padding: 6rem 0;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .section-header {
@@ -2741,4 +2744,49 @@ main {
     color: var(--text-muted);
     margin-top: 4px;
     display: block;
+}
+
+/* Work Placeholder */
+.work-placeholder {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.work-placeholder h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.work-placeholder p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.work-placeholder .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.work-placeholder .btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.work-placeholder .btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* Optionally, reduce container padding if needed */
+.portfolio .container {
+    padding-top: 0 !important;
 } 

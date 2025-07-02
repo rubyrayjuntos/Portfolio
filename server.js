@@ -194,8 +194,8 @@ app.get('/privacy', (req, res) => {
 });
 
 app.get('/admin', requireAuth, (req, res) => {
-    console.log('✅ Serving simple-admin.html to authenticated user');
-    res.sendFile(path.join(__dirname, 'simple-admin.html'));
+    console.log('✅ Serving admin.html to authenticated user');
+    res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
 app.get('/admin.html', (req, res) => {

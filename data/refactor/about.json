@@ -1,0 +1,15 @@
+{
+  "name": "Ray Swan",
+  "headline": "I design with emotion, code, and color.",
+  "bio": "I'm a multidisciplinary creative focused on weaving emotional resonance through digital tools. I build interactive experiences, speculative fiction, and modular identities.",
+  "avatar": "/images/ray.jpg",
+  "contact": {
+    "email": "hello@yourportfolio.com",
+    "social": {
+      "twitter": "https://twitter.com/yourhandle",
+      "github": "https://github.com/rubyrayjuntos",
+      "linkedin": "https://linkedin.com/in/raycswan"
+    }
+  },
+  "availability": true
+}

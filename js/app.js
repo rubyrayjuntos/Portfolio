@@ -746,23 +746,26 @@ function toggleAccordionSection(sectionId) {
     
     // Special handling for portfolio section
     if (sectionId === 'portfolio') {
-        // Let the portfolio manager handle its own navigation
-        // The portfolio section will be expanded, but deep navigation will still work
-        if (window.portfolioManager) {
-            // If we're in a deep navigation state, let the portfolio manager handle it
-            const path = window.location.pathname;
-            if (path !== '/' && path !== '') {
-                const pathParts = path.split('/').filter(part => part);
-                if (pathParts.length >= 1) {
-                    // Let the portfolio manager handle the navigation
-                    setTimeout(() => {
-                        if (pathParts.length === 1) {
-                            window.portfolioManager.showProjectList(pathParts[0]);
-                        } else if (pathParts.length === 2) {
-                            window.portfolioManager.showProjectDetail(pathParts[0], pathParts[1]);
-                        }
-                    }, 100);
-                }
+        // The portfolio section is now simplified - redirect to home where project types are
+        toggleAccordionSection('home');
+        return;
+    }
+    
+    // Special handling for home section - ensure portfolio manager is initialized
+    if (sectionId === 'home') {
+        // If we're in a deep navigation state, let the portfolio manager handle it
+        const path = window.location.pathname;
+        if (path !== '/' && path !== '') {
+            const pathParts = path.split('/').filter(part => part);
+            if (pathParts.length >= 1 && window.portfolioManager) {
+                // Let the portfolio manager handle the navigation
+                setTimeout(() => {
+                    if (pathParts.length === 1) {
+                        window.portfolioManager.showProjectList(pathParts[0]);
+                    } else if (pathParts.length === 2) {
+                        window.portfolioManager.showProjectDetail(pathParts[0], pathParts[1]);
+                    }
+                }, 100);
             }
         }
     }
@@ -779,16 +782,16 @@ function handleHashChange() {
     
     // If there's a hash, it's likely for deep portfolio navigation
     if (hash && (hash === 'portfolio' || hash === 'work')) {
-        toggleAccordionSection('portfolio');
+        toggleAccordionSection('home'); // Redirect to home where project types are
         return;
     }
     
-    // If there's a path with portfolio navigation, expand portfolio section
+    // If there's a path with portfolio navigation, expand home section
     if (path !== '/' && path !== '') {
         const pathParts = path.split('/').filter(part => part);
         if (pathParts.length >= 1) {
-            // This is portfolio deep navigation
-            toggleAccordionSection('portfolio');
+            // This is portfolio deep navigation - go to home section
+            toggleAccordionSection('home');
             return;
         }
     }

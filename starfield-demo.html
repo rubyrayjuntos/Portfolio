@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Starfield Demo</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #0a0a23;
+    }
+    #starfield-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: #0a0a23;
+    }
+    #starfield-controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px #0008;
+    }
+    #starfield-controls label {
+      color: #fff;
+      font-size: 0.95rem;
+    }
+    #starfield-controls input[type=range] {
+      width: 80px;
+      vertical-align: middle;
+    }
+    #starfield-controls hr {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 0.7rem 0;
+    }
+    /* Shooting Star Animations (copied from main site) */
+    @keyframes shooting-star-1 {
+      0% { transform: translateX(-100px) translateY(50px) rotate(45deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(calc(100vw + 100px)) translateY(calc(-100vh + 50px)) rotate(45deg); opacity: 0; }
+    }
+    @keyframes shooting-star-2 {
+      0% { transform: translateX(calc(100vw + 100px)) translateY(100px) rotate(-30deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(-100px) translateY(calc(-100vh + 100px)) rotate(-30deg); opacity: 0; }
+    }
+    @keyframes shooting-star-3 {
+      0% { transform: translateX(50px) translateY(-100px) rotate(15deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(calc(100vw + 50px)) translateY(calc(100vh + 100px)) rotate(15deg); opacity: 0; }
+    }
+    @keyframes shooting-star-4 {
+      0% { transform: translateX(calc(100vw + 50px)) translateY(50px) rotate(-60deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(-50px) translateY(calc(-100vh + 50px)) rotate(-60deg); opacity: 0; }
+    }
+    .shooting-star-1, .shooting-star-2, .shooting-star-3, .shooting-star-4 {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: linear-gradient(90deg, white, transparent);
+      border-radius: 50%;
+      box-shadow: 0 0 10px 2px rgba(255,255,255,0.8);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .shooting-star-1 { animation: shooting-star-1 3s linear infinite; animation-delay: 0s; }
+    .shooting-star-2 { animation: shooting-star-2 4s linear infinite; animation-delay: 1.5s; }
+    .shooting-star-3 { animation: shooting-star-3 3.5s linear infinite; animation-delay: 3s; }
+    .shooting-star-4 { animation: shooting-star-4 4.5s linear infinite; animation-delay: 5s; }
+  </style>
+</head>
+<body>
+  <canvas id="starfield-bg"></canvas>
+  <!-- CSS-based shooting stars -->
+  <div class="shooting-star-1"></div>
+  <div class="shooting-star-2"></div>
+  <div class="shooting-star-3"></div>
+  <div class="shooting-star-4"></div>
+  <div id="starfield-controls">
+    <label>Density: <input type="range" id="star-density" min="50" max="500" value="180"></label><br>
+    <label>Speed: <input type="range" id="star-speed" min="1" max="100" value="20"></label><br>
+    <label>Color: <input type="color" id="star-color" value="#ffffff"></label><br>
+    <hr>
+    <label><input type="checkbox" id="show-planet" checked> Planet</label>
+    <input type="range" id="planet-opacity" min="0" max="1" step="0.01" value="1"><br>
+    <label><input type="checkbox" id="show-moon" checked> Moon</label>
+    <input type="range" id="moon-opacity" min="0" max="1" step="0.01" value="1"><br>
+    <label><input type="checkbox" id="show-comet" checked> Comet</label>
+    <input type="range" id="comet-opacity" min="0" max="1" step="0.01" value="1"><br>
+  </div>
+  <script>
+(function() {
+  const canvas = document.getElementById('starfield-bg');
+  const ctx = canvas.getContext('2d');
+  let w = window.innerWidth, h = window.innerHeight;
+
+  // Controls
+  const densitySlider = document.getElementById('star-density');
+  const speedSlider = document.getElementById('star-speed');
+  const colorPicker = document.getElementById('star-color');
+  const showPlanet = document.getElementById('show-planet');
+  const planetOpacity = document.getElementById('planet-opacity');
+  const showMoon = document.getElementById('show-moon');
+  const moonOpacity = document.getElementById('moon-opacity');
+  const showComet = document.getElementById('show-comet');
+  const cometOpacity = document.getElementById('comet-opacity');
+
+  function resize() {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Starfield
+  let numStars = +densitySlider.value;
+  let starSpeed = +speedSlider.value / 100;
+  let starColor = colorPicker.value;
+  let stars = [];
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.2 + 0.2,
+        speed: Math.random() * starSpeed + 0.05,
+        alpha: Math.random() * 0.5 + 0.5
+      });
+    }
+  }
+  createStars();
+
+  // Stellar objects
+  function drawPlanet() {
+    if (!showPlanet.checked) return;
+    ctx.save();
+    ctx.globalAlpha = +planetOpacity.value;
+    ctx.beginPath();
+    ctx.arc(w * 0.8, h * 0.8, 60, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgba(100,180,255,1)';
+    ctx.shadowColor = '#8cf';
+    ctx.shadowBlur = 40;
+    ctx.fill();
+    ctx.restore();
+  }
+  function drawMoon() {
+    if (!showMoon.checked) return;
+    ctx.save();
+    ctx.globalAlpha = +moonOpacity.value;
+    ctx.beginPath();
+    ctx.arc(w * 0.7, h * 0.2, 20, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgba(255,255,220,1)';
+    ctx.shadowColor = '#fff';
+    ctx.shadowBlur = 20;
+    ctx.fill();
+    ctx.restore();
+  }
+  function drawComet() {
+    if (!showComet.checked) return;
+    ctx.save();
+    ctx.globalAlpha = +cometOpacity.value;
+    // Comet head
+    ctx.beginPath();
+    ctx.arc(w * 0.3, h * 0.3, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = 'white';
+    ctx.shadowColor = '#fff';
+    ctx.shadowBlur = 30;
+    ctx.fill();
+    // Comet tail
+    let grad = ctx.createLinearGradient(w * 0.3, h * 0.3, w * 0.2, h * 0.25);
+    grad.addColorStop(0, 'rgba(255,255,255,0.7)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.beginPath();
+    ctx.moveTo(w * 0.3, h * 0.3);
+    ctx.lineTo(w * 0.2, h * 0.25);
+    ctx.lineWidth = 12;
+    ctx.strokeStyle = grad;
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Listen for control changes
+  densitySlider.addEventListener('input', () => {
+    numStars = +densitySlider.value;
+    createStars();
+  });
+  speedSlider.addEventListener('input', () => {
+    starSpeed = +speedSlider.value / 100;
+    createStars();
+  });
+  colorPicker.addEventListener('input', () => {
+    starColor = colorPicker.value;
+  });
+
+  // Animate
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Draw stars
+    for (const s of stars) {
+      ctx.save();
+      ctx.globalAlpha = s.alpha;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, 2 * Math.PI);
+      ctx.fillStyle = starColor;
+      ctx.shadowColor = starColor;
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+
+      // Move star
+      s.x -= s.speed;
+      if (s.x < 0) s.x = w;
+    }
+
+    // Draw stellar objects
+    drawPlanet();
+    drawMoon();
+    drawComet();
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+  </script>
+</body>
+</html> 

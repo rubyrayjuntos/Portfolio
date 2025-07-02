@@ -1,0 +1,29 @@
+[
+  {
+    "category": "Digital Art",
+    "skills": [
+      { "name": "Generative Art", "level": 82 },
+      { "name": "Digital Painting", "level": 75 },
+      { "name": "3D Modeling", "level": 68 },
+      { "name": "Animation", "level": 60 }
+    ]
+  },
+  {
+    "category": "Development",
+    "skills": [
+      { "name": "JavaScript / React", "level": 90 },
+      { "name": "Python / ML", "level": 78 },
+      { "name": "WebGL / Three.js", "level": 65 },
+      { "name": "D3.js", "level": 60 }
+    ]
+  },
+  {
+    "category": "Design",
+    "skills": [
+      { "name": "Brand Identity", "level": 88 },
+      { "name": "UI/UX", "level": 84 },
+      { "name": "Typography", "level": 70 },
+      { "name": "Color Theory", "level": 85 }
+    ]
+  }
+]

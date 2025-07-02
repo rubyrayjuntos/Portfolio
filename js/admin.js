@@ -123,6 +123,20 @@ class PortfolioAdmin {
         document.addEventListener('keypress', (e) => {
             if (e.target.classList.contains('tag-input') && e.key === 'Enter') {
                 e.preventDefault();
+                e.stopPropagation(); // Prevent form submission
+                const value = e.target.value.trim();
+                if (value) {
+                    this.addTag(e.target.parentElement, value);
+                    e.target.value = '';
+                }
+            }
+        });
+
+        // Also handle keydown for better control
+        document.addEventListener('keydown', (e) => {
+            if (e.target.classList.contains('tag-input') && e.key === 'Enter') {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent form submission
                 const value = e.target.value.trim();
                 if (value) {
                     this.addTag(e.target.parentElement, value);
@@ -205,135 +219,126 @@ class PortfolioAdmin {
 
     async handleImageFiles(files, uploadSection) {
         console.log('Handling image files:', files.length, 'files');
-        console.log('Upload section:', uploadSection);
         
-        const imageFiles = files.filter(file => file.type.startsWith('image/'));
-        
-        if (imageFiles.length === 0) {
-            this.showStatus('No valid image files selected', 'warning');
-            return;
+        // Find or create the preview container
+        let previewContainer = uploadSection.nextElementSibling;
+        if (!previewContainer || !previewContainer.classList.contains('image-preview-container')) {
+            previewContainer = this.createImagePreviewContainer(uploadSection);
         }
-
-        console.log('Processing', imageFiles.length, 'valid image files');
-
-        for (const file of imageFiles) {
+        
+        for (const file of files) {
+            console.log('Processing file:', file.name, file.type, file.size);
+            
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                console.warn('Skipping non-image file:', file.name);
+                continue;
+            }
+            
+            // Validate file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                console.warn('File too large:', file.name, file.size);
+                continue;
+            }
+            
+            // Create temporary preview
+            const tempSrc = URL.createObjectURL(file);
+            this.addImagePreview(tempSrc, file.name, true, previewContainer);
+            
             try {
-                console.log('Uploading file:', file.name, 'Size:', file.size, 'Type:', file.type);
-                
-                // Show loading state
-                const loadingItem = this.addImagePreview('', file.name, true, uploadSection);
-                console.log('Loading item created:', loadingItem);
-                
-                // Upload image
+                // Upload the file
                 const formData = new FormData();
                 formData.append('image', file);
                 
-                console.log('Sending upload request...');
-                const response = await fetch('/api/upload/image', {
+                const response = await fetch('/api/upload', {
                     method: 'POST',
-                    credentials: 'include',
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
-
-                console.log('Upload response status:', response.status);
                 
                 if (!response.ok) {
-                    const errorText = await response.text();
-                    console.error('Upload failed with status:', response.status, 'Error:', errorText);
-                    throw new Error(`Upload failed: ${response.status} - ${errorText}`);
+                    throw new Error(`Upload failed: ${response.status} ${response.statusText}`);
                 }
-
+                
                 const result = await response.json();
-                console.log('Upload result:', result);
+                console.log('Upload successful:', result);
                 
-                // Remove loading item and add uploaded image
-                if (loadingItem && loadingItem.parentNode) {
-                    loadingItem.remove();
-                    console.log('Loading item removed');
+                // Replace loading preview with actual image
+                const loadingItem = previewContainer.querySelector('.image-loading');
+                if (loadingItem) {
+                    loadingItem.parentElement.remove();
                 }
                 
-                // Fix: Use the correct response format from server
-                const imageUrl = result.file ? result.file.url : result.url;
-                console.log('Image URL:', imageUrl);
-                
-                const imageData = {
-                    src: imageUrl,
+                // Add the actual image preview
+                this.addImagePreview(result.url, file.name, false, previewContainer, {
+                    src: result.url,
                     alt: file.name,
                     description: ''
-                };
+                });
                 
-                const previewItem = this.addImagePreview(imageUrl, file.name, false, uploadSection, imageData);
-                console.log('Preview item created:', previewItem);
-                
-                this.showStatus(`Image "${file.name}" uploaded successfully`, 'success');
+                // Clean up temporary URL
+                URL.revokeObjectURL(tempSrc);
                 
             } catch (error) {
-                console.error('Image upload error:', error);
-                this.showStatus(`Failed to upload "${file.name}": ${error.message}`, 'error');
+                console.error('Upload error:', error);
                 
-                // Remove loading item if it exists
-                const loadingItems = document.querySelectorAll('.image-loading');
-                loadingItems.forEach(item => {
-                    if (item.textContent.includes(file.name)) {
-                        item.parentElement.remove();
-                    }
-                });
+                // Remove loading preview and show error
+                const loadingItem = previewContainer.querySelector('.image-loading');
+                if (loadingItem) {
+                    loadingItem.parentElement.remove();
+                }
+                
+                // Add error message
+                const errorItem = document.createElement('div');
+                errorItem.className = 'image-preview-item';
+                errorItem.innerHTML = `
+                    <div class="image-loading" style="color: var(--error);">
+                        <div>Upload failed: ${file.name}</div>
+                    </div>
+                `;
+                previewContainer.appendChild(errorItem);
+                
+                // Clean up temporary URL
+                URL.revokeObjectURL(tempSrc);
             }
         }
     }
 
     addImagePreview(src, name, isLoading = false, container, imageData = null) {
-        console.log('Adding image preview:', { src, name, isLoading, container: container?.className });
-        
-        // Find the image-upload-section parent to add preview to
-        const uploadSection = container.closest('.image-upload-section');
-        if (!uploadSection) {
-            console.error('Could not find image-upload-section parent');
-            return null;
-        }
-        
-        console.log('Found upload section:', uploadSection);
-        
-        const preview = uploadSection.nextElementSibling || this.createImagePreviewContainer(uploadSection);
-        console.log('Using preview container:', preview);
+        console.log('Adding image preview:', { src, name, isLoading, imageData });
         
         const imageItem = document.createElement('div');
-        imageItem.className = 'image-item';
+        imageItem.className = 'image-preview-item';
         
         if (isLoading) {
             imageItem.innerHTML = `
                 <div class="image-loading">
-                    <div class="loading-spinner"></div>
-                    <p>Uploading ${name}...</p>
+                    <div>Uploading...</div>
                 </div>
             `;
-            console.log('Created loading item for:', name);
         } else {
             imageItem.innerHTML = `
-                <img src="${src}" alt="${name}" />
-                <button class="image-remove" onclick="admin.removeImage(this.parentElement)">&times;</button>
-                <div class="image-overlay">
-                    <input type="text" placeholder="Image title" value="${imageData?.alt || name}" onchange="this.parentElement.parentElement.dataset.title = this.value">
-                    <textarea placeholder="Image description" onchange="this.parentElement.parentElement.dataset.description = this.value">${imageData?.description || ''}</textarea>
-                </div>
+                <img src="${src}" alt="${name}" loading="lazy">
+                <button class="image-remove" onclick="admin.removeImage(this.parentElement)" title="Remove image">&times;</button>
+                <div class="image-name">${name}</div>
             `;
             
+            // Store image data for later retrieval
             if (imageData) {
                 imageItem.dataset.imageData = JSON.stringify(imageData);
             }
-            console.log('Created image preview item for:', name, 'with src:', src);
         }
         
-        preview.appendChild(imageItem);
-        console.log('Added image item to preview container');
-        return imageItem;
+        container.appendChild(imageItem);
+        
+        console.log('Image preview added successfully');
     }
 
     createImagePreviewContainer(uploadSection) {
-        const preview = document.createElement('div');
-        preview.className = 'image-preview';
-        uploadSection.parentNode.insertBefore(preview, uploadSection.nextSibling);
-        return preview;
+        const container = document.createElement('div');
+        container.className = 'image-preview-container';
+        uploadSection.parentNode.insertBefore(container, uploadSection.nextSibling);
+        return container;
     }
 
     removeImage(imageItem) {
@@ -887,22 +892,27 @@ class PortfolioAdmin {
     populateExistingImages(images) {
         console.log('Populating existing images:', images);
         
-        const uploadArea = document.querySelector('.upload-area');
-        if (!uploadArea) {
-            console.error('Could not find upload area for existing images');
+        const uploadSection = document.querySelector('.upload-area');
+        if (!uploadSection) {
+            console.error('Could not find upload area');
             return;
         }
-
-        console.log('Found upload area, adding', images.length, 'existing images');
         
-        images.forEach((image, index) => {
-            console.log('Adding existing image', index + 1, ':', image);
-            this.addImagePreview(image.src, image.alt || 'Image', false, uploadArea, {
-                src: image.src,
-                alt: image.alt || '',
-                description: image.description || ''
-            });
+        // Find or create the preview container
+        let previewContainer = uploadSection.parentElement.nextElementSibling;
+        if (!previewContainer || !previewContainer.classList.contains('image-preview-container')) {
+            previewContainer = this.createImagePreviewContainer(uploadSection.parentElement);
+        }
+        
+        // Clear existing previews
+        previewContainer.innerHTML = '';
+        
+        // Add existing images
+        images.forEach(image => {
+            this.addImagePreview(image.src, image.alt || 'Image', false, previewContainer, image);
         });
+        
+        console.log('Existing images populated successfully');
     }
 
     async saveProject() {
@@ -1008,35 +1018,40 @@ class PortfolioAdmin {
     }
 
     getImagesFromPreview() {
-        const preview = document.querySelector('.image-preview');
-        if (!preview) return [];
+        const previewContainer = document.querySelector('.image-preview-container');
+        if (!previewContainer) {
+            return [];
+        }
         
-        return Array.from(preview.querySelectorAll('.image-item'))
-            .map(item => {
-                // Try to get stored image data first
-                let imageData = null;
+        const imageItems = previewContainer.querySelectorAll('.image-preview-item');
+        const images = [];
+        
+        imageItems.forEach(item => {
+            const img = item.querySelector('img');
+            if (img) {
+                const imageData = {
+                    src: img.src,
+                    alt: img.alt || '',
+                    description: ''
+                };
+                
+                // Try to get stored image data
                 if (item.dataset.imageData) {
                     try {
-                        imageData = JSON.parse(item.dataset.imageData);
+                        const storedData = JSON.parse(item.dataset.imageData);
+                        imageData.alt = storedData.alt || imageData.alt;
+                        imageData.description = storedData.description || '';
                     } catch (e) {
-                        console.warn('Failed to parse image data:', e);
+                        console.warn('Failed to parse stored image data:', e);
                     }
                 }
                 
-                // Get title and description from overlay inputs or dataset
-                const title = item.dataset.title || item.querySelector('.image-overlay input')?.value || imageData?.alt || 'Image';
-                const description = item.dataset.description || item.querySelector('.image-overlay textarea')?.value || '';
-                
-                // Use stored image data if available, otherwise fall back to img src
-                const src = imageData?.src || imageData?.url || item.querySelector('img')?.src || '';
-                
-                return {
-                    src: src,
-                    alt: title,
-                    description: description
-                };
-            })
-            .filter(img => img.src);
+                images.push(imageData);
+            }
+        });
+        
+        console.log('Extracted images from preview:', images);
+        return images;
     }
 
     async deleteProject(typeKey, index) {

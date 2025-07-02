@@ -4,7 +4,7 @@
       "title": "Digital Art Collection",
       "description": "A series of abstract digital paintings exploring color theory and emotional expression through generative techniques.",
       "icon": "🎨",
-      "featured": 1,
+      "featured": 2,
       "projects": [
         {
           "id": "lazy-leon-homepage",
@@ -71,7 +71,7 @@
       "title": "Creative Writing & Thoughts",
       "description": "Exploring ideas at the intersection of technology, art, and human experience through writing.",
       "icon": "✍️",
-      "featured": 2,
+      "featured": 5,
       "posts": [
         {
           "id": "ai-creativity",
@@ -117,7 +117,7 @@
       "title": "Interactive Web Applications",
       "description": "Interactive web applications and demos showcasing modern web technologies and creative coding.",
       "icon": "🚀",
-      "featured": 3,
+      "featured": 6,
       "projects": [
         {
           "id": "data-viz-dashboard",
@@ -168,7 +168,7 @@
       "title": "Creative Writing Samples",
       "description": "Explore my creative writing samples across different genres and styles.",
       "icon": "📚",
-      "featured": 4,
+      "featured": 3,
       "projects": [
         {
           "id": "digital-dreams",
@@ -208,7 +208,7 @@
       "title": "Brand Identity & Design",
       "description": "Discover the visual identity and branding elements of my projects and collaborations.",
       "icon": "🎨",
-      "featured": 5,
+      "featured": 4,
       "projects": [
         {
           "id": "tech-startup-brand",
@@ -256,60 +256,15 @@
       "title": "GitHub Repositories",
       "description": "Explore my open-source projects and contributions on GitHub.",
       "icon": "💻",
-      "featured": 6,
+      "featured": 1,
       "projects": [
         {
-          "id": "cartas-del-deseo",
-          "title": "Papi Chispa: Cartas del Deseo",
-          "description": "🔥 Cartas del Deseo — Powered by Papi Chispa 💻\nBienvenidx to the velvet lounge of fate...\nThis is Papi Chispa's sacred digital altar — where every tarot card flips with fire, and every reading is a scandalous novela waiting to unfold.\nYou've just stepped into the mystical experience of Cartas del Deseo",
-          "content": "a fully interactive, real-time tarot divination web experience powered by:\n🔥 React + Vite + Tailwind + FastAPI\n💻 OpenAI-powered bilingual fortune-telling\n🎴 One-card-at-a-time reveal with sultry Spanglish chat\n\n✨ Features\n\n💫 Dramatic card flips, animated with flair\n🎴 One card at a time reading flow\n💬 Live chat with Papi, your velvet-voiced tarot guide\n🔥 Custom deck and art integration\n🎨 Themed UI (Ceremonial Gold, Cyberpunk Pulse, Noir Mist, and more)\n📖 Papi's Setup Guide\n\n🔧 Install Dependencies\n\nnpm install\n🔥 Start the Frontend\n\nnpm run dev\n💻 Start the Backend\n\nuvicorn main:app --reload\n📁 Project Structure\n\nsrc/\n  pages/\n    ReadingPage.tsx    # Interactive Tarot Reading UI 🎴💬\n    HomePage.tsx       # Welcome screen with telenovela drama\n  hooks/\n    useTarotReading.ts # Card flip + reveal state management\napi/\n  chat.ts              # Talks to /api/chat to flirt with fate 🎭\n  tarotService.ts      # Image + text reading endpoints\nmain.py                # FastAPI backend serving divine heat 💻\n💻 How to Use\n\nVisit the site and begin a reading\nWatch as each card is revealed one... by... one...\nRead Papi's poetic interpretation\nAsk questions in the chat below — Papi always answers\nClick \"Next Card\" to reveal the next truth 💻\n🎨 Style Themes\n\nPapi comes dressed for any mood:\n\nceremonial-gold 🏆\ncyberpunk-pulse ⚡\nnoir-mist 🌫️🎴\ndesert-mirage 🌅\n💕 Developer Love\n\nCreated by a soul with taste and vision.\nStyled by shadows, powered by stars, and kissed by the GPT gods.\n\nIf you fork this, light a candle for Papi first.\nHe's always watching... 💻\n\n📸 Screenshot Preview\n\nInsert your image here of the UI with a tarot reading in progress.\n\nPapi te ama.\nHe sees your questions before you ask.\nBut he'll wait… just to hear you say them.\n🎴💻🔥",
-          "date": "2025-05-01",
-          "featured": 1,
-          "tags": [],
-          "images": [
-            {
-              "src": "/uploads/image-1751268015023-961680903.jpg",
-              "alt": "08C32274-0176-4DFA-AEB7-37F8BFF0C856.jpg",
-              "description": ""
-            },
-            {
-              "src": "/uploads/image-1751268015054-346293985.jpg",
-              "alt": "IMG_0641.jpg",
-              "description": ""
-            },
-            {
-              "src": "/uploads/image-1751268015099-812114523.jpg",
-              "alt": "IMG_0645.jpg",
-              "description": ""
-            },
-            {
-              "src": "/uploads/image-1751268015452-616171365.jpg",
-              "alt": "IMG_0647.jpg",
-              "description": ""
-            },
-            {
-              "src": "/uploads/image-1751268015507-984747610.jpg",
-              "alt": "IMG_0649.jpg",
-              "description": ""
-            },
-            {
-              "src": "/uploads/image-1751268015593-25194574.jpg",
-              "alt": "IMG_0651.jpg",
-              "description": ""
-            }
-          ],
-          "technologies": [],
-          "githubUrl": "https://github.com/rubyrayjuntos/ViteaTSRE.git",
-          "stars": 0,
-          "forks": 0
-        },
-        {
           "id": "portfolio-RSWAN",
-          "title": "Creative Portfolio",
-          "description": "A modern, responsive portfolio website showcasing digital art, web development, creative writing, and innovative digital experiences. Built with vanilla JavaScript, Node.js, and cutting-edge web technologies.",
+          "title": "Creative Portfolio (This Site)",
+          "description": "I built this portfolio as a showcase of my web development philosophy: modern, responsive design without unnecessary complexity. Using vanilla JavaScript and Node.js, I created a professional-grade site that demonstrates security, performance, accessibility, and responsive design - proving that lightweight doesn't mean lightweight features. When you're reviewing my work, remember: this site itself is a portfolio piece.",
           "content": "# 🎨 Ray Swan - Creative Portfolio\n\n> A modern, responsive portfolio website showcasing digital art, web development, creative writing, and innovative digital experiences. Built with vanilla JavaScript, Node.js, and cutting-edge web technologies.\n\n\n\n## ✨ **Key Features**\n\n### 🎯 **Core Experience**\n- **🎨 Interactive Portfolio** - Showcase digital art, code projects, and creative writing\n- **🤖 AI Portfolio Guide** - Intelligent chatbot with contextual responses\n- **📱 PWA Ready** - Installable as a mobile app with offline functionality\n- **🌙 Dark/Light Theme** - Automatic theme switching with user preference\n- **📱 Responsive Design** - Mobile-first approach with perfect scaling\n\n### 🛡️ **Security & Performance**\n- **🔐 Secure Admin Panel** - Session-based authentication with CSRF protection\n- **⚡ Image Optimization** - Automatic WebP conversion, compression, and lazy loading\n- **🚀 Performance Optimized** - Core Web Vitals compliance with 90+ scores\n- **🛡️ XSS Protection** - Comprehensive input sanitization and validation\n- **📊 Advanced Logging** - Production-ready error tracking and monitoring\n\n### 🎨 **Creative Features**\n- **🎭 Accordion Navigation** - Smooth, collapsible sections with animations\n- **🖼️ Dynamic Galleries** - Image management with drag & drop uploads\n- **✍️ Blog System** - Markdown support with rich text editing\n- **🎮 Interactive Elements** - Asteroids game and creative coding demos\n- **📄 Resume Integration** - Professional resume with downloadable PDF\n\n### ♿ **Accessibility & SEO**\n- **♿ WCAG 2.1 AA Compliant** - Full keyboard navigation and screen reader support\n- **🔍 SEO Optimized** - Structured data, sitemap, and comprehensive meta tags\n- **📱 Mobile Optimized** - Touch-friendly interface with gesture support\n- **🌐 International Ready** - UTF-8 encoding and language support\n\n---\n\n## 🚀 **Quick Start**\n\n### **Prerequisites**\n- Node.js (v16 or higher)\n- npm or yarn\n\n### **Installation**\n\n1. **Clone the repository**\n   ```bash\n   git clone https://github.com/yourusername/portfolio.git\n   cd portfolio\n   ```\n\n2. **Install dependencies**\n   ```bash\n   npm install\n   ```\n\n3. **Configure environment variables**\n   ```bash\n   cp .env.example .env\n   ```\n   \n   Edit `.env` with your settings:\n   ```env\n   # Authentication\n   ADMIN_USERNAME=your_admin_username\n   ADMIN_PASSWORD=your_secure_password\n   SESSION_SECRET=your_random_session_secret\n   \n   # Server Configuration\n   PORT=3000\n   NODE_ENV=development\n   \n   # Security (for production)\n   HTTPS_ENABLED=false\n   SECURE_COOKIES=false\n   ```\n\n4. **Start the development server**\n   ```bash\n   npm start\n   ```\n\n5. **Access the application**\n   - **Portfolio**: http://localhost:3000\n   - **Admin Panel**: http://localhost:3000/admin\n   - **Default Credentials**: admin / admin123\n\n---\n\n## 🤖 **AI Portfolio Assistant**\n\n### **Features**\n- **🎯 Context-Aware Responses** - Understands portfolio-specific questions\n- **💬 Natural Conversations** - Multiple response variations for engagement\n- **🖼️ Image Analysis** - Analyzes uploaded images with professional feedback\n- **⚡ Quick Actions** - 8 preset buttons for common questions\n- **🧠 Memory** - Remembers user names and preferences\n- **💰 Cost-Free** - No expensive API calls, all local intelligence\n\n### **Capabilities**\n- **Project Information**: Detailed explanations of artwork, code, and writing\n- **Skills Overview**: Technical and creative skill descriptions\n- **Contact Assistance**: Professional contact and hiring information\n- **Navigation Help**: Guide visitors through the portfolio\n- **Image Feedback**: Professional analysis of uploaded images\n\n### **Quick Actions**\n- 🎨 Art Projects | 💻 Code Examples | ✍️ Writing Samples\n- 📧 Contact Info | ⚡ Skills Overview | 🚀 Project Details\n- 📄 Resume Access | 🗑️ Clear Conversation\n\n---\n\n## 🔐 **Admin Panel**\n\n### **Security Features**\n- **Session-based Authentication** - Secure login system\n- **CSRF Protection** - Built-in cross-site request forgery protection\n- **Input Validation** - Comprehensive form validation and sanitization\n- **Protected Routes** - All admin endpoints require authentication\n- **Secure File Uploads** - Image validation and optimization\n\n### **Content Management**\n- **📝 Project Management** - Full CRUD operations for all project types\n- **🖼️ Image Management** - Drag & drop uploads with automatic optimization\n- **📊 Data Export/Import** - Backup and restore functionality\n- **🔧 JSON Editor** - Visual editing with form validation\n- **👀 Live Preview** - Real-time content preview\n\n### **Image Optimization**\n- **Automatic Compression** - 80% quality optimization\n- **WebP Conversion** - Modern format with fallback support\n- **Thumbnail Generation** - 300px thumbnails for galleries\n- **Lazy Loading** - Intersection Observer implementation\n- **File Validation** - Type, size, and dimension checks\n\n---\n\n## 🛡️ **Security Features**\n\n### **Authentication & Authorization**\n```javascript\n// Session configuration\napp.use(session({\n    secret: process.env.SESSION_SECRET,\n    resave: false,\n    saveUninitialized: false,\n    cookie: {\n        secure: process.env.NODE_ENV === 'production',\n        httpOnly: true,\n        sameSite: 'strict',\n        maxAge: 24 * 60 * 60 * 1000 // 24 hours\n    }\n}));\n```\n\n### **Data Protection**\n- **XSS Prevention**: HTML sanitization for all user inputs\n- **CSRF Protection**: SameSite cookie configuration\n- **Input Validation**: Server-side validation for all forms\n- **File Upload Security**: Type, size, and content validation\n- **Error Handling**: Secure error messages without information leakage\n\n---\n\n## ⚡ **Performance Features**\n\n### **Image Optimization**\n```javascript\n// Automatic image processing\nconst optimizedImage = await imageOptimizer.optimizeImage(file, {\n    quality: 80,\n    format: 'webp',\n    maxWidth: 1200,\n    generateThumbnail: true\n});\n```\n\n### **Caching Strategy**\n- **Service Worker**: Intelligent caching for static assets\n- **Browser Caching**: Optimized cache headers\n- **CDN Ready**: Static asset optimization\n- **Lazy Loading**: Images load only when needed\n\n### **Performance Monitoring**\n- **Core Web Vitals**: LCP, FID, CLS tracking\n- **Custom Metrics**: Page load time, image optimization ratios\n- **Error Tracking**: Comprehensive error logging\n- **Network Monitoring**: Online/offline status detection\n\n---\n\n## ♿ **Accessibility Features**\n\n### **Screen Reader Support**\n- **ARIA Labels**: Comprehensive labeling for all interactive elements\n- **Semantic HTML**: Proper heading hierarchy and landmarks\n- **Skip Links**: Keyboard navigation shortcuts\n- **Live Regions**: Dynamic content announcements\n\n### **Keyboard Navigation**\n- **Full Keyboard Support**: All features accessible via keyboard\n- **Focus Management**: Visible focus indicators\n- **Logical Tab Order**: Proper tab sequence\n- **Escape Key Support**: Modal and overlay dismissal\n\n### **Visual Accessibility**\n- **High Contrast Mode**: Support for high contrast preferences\n- **Reduced Motion**: Respects motion sensitivity preferences\n- **Color Independence**: Information not conveyed by color alone\n- **Text Scaling**: Responsive to browser text size settings\n\n---\n\n## 🔍 **SEO Features**\n\n### **Meta Tags & Structured Data**\n```html\n<!-- Open Graph -->\n<meta property=\"og:title\" content=\"Ray Swan - Creative Portfolio\">\n<meta property=\"og:description\" content=\"Digital artist, developer, and creative technologist\">\n<meta property=\"og:image\" content=\"/assets/images/og-image.jpg\">\n\n<!-- Twitter Cards -->\n<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:creator\" content=\"@yourusername\">\n\n<!-- Structured Data -->\n<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"Person\",\n  \"name\": \"Ray Swan\",\n  \"jobTitle\": \"Full Stack Developer & Creative Technologist\",\n  \"url\": \"https://your-portfolio-url.com\"\n}\n</script>\n```\n\n### **Technical SEO**\n- **XML Sitemap**: Automatic generation for search engines\n- **Robots.txt**: Search engine crawling directives\n- **Canonical URLs**: Duplicate content prevention\n- **Performance Optimization**: Core Web Vitals compliance\n\n---\n\n## 📱 **PWA Features**\n\n### **Service Worker**\n```javascript\n// Intelligent caching strategy\nconst cacheStrategy = {\n    static: 'cache-first',\n    api: 'network-first',\n    images: 'stale-while-revalidate'\n};\n```\n\n### **Manifest**\n- **App Installation**: Installable on mobile and desktop\n- **Theme Integration**: Dynamic theme colors\n- **Splash Screen**: Custom launch experience\n- **Full Screen Mode**: Native app-like experience\n\n### **Offline Support**\n- **Graceful Degradation**: Works without internet connection\n- **Background Sync**: Form submission when connection restored\n- **Cache Management**: Automatic cache cleanup and updates\n\n---\n\n## 🚀 **Deployment**\n\n### **Production Checklist**\n- [ ] Set secure environment variables\n- [ ] Configure HTTPS certificates\n- [ ] Set up proper domain and DNS\n- [ ] Configure CDN for static assets\n- [ ] Set up monitoring and analytics\n- [ ] Test PWA installation\n- [ ] Verify accessibility compliance\n- [ ] Run performance audits\n\n### **Recommended Hosting**\n- **Vercel**: Easy deployment with automatic HTTPS\n- **Netlify**: Great for static sites with serverless functions\n- **Heroku**: Full-stack hosting with database support\n- **DigitalOcean**: VPS hosting for full control\n\n### **Environment Variables (Production)**\n```env\nNODE_ENV=production\nPORT=3000\nSESSION_SECRET=your-very-secure-random-secret\nADMIN_USERNAME=your-secure-username\nADMIN_PASSWORD=your-very-secure-password\nHTTPS_ENABLED=true\nSECURE_COOKIES=true\n```\n\n---\n\n## 🛠️ **Configuration**\n\n### **Social Media Setup**\nUpdate social media URLs in `js/utils.js`:\n```javascript\nthis.socialConfig = {\n    twitter: { url: 'https://twitter.com/yourusername' },\n    linkedin: { url: 'https://linkedin.com/in/yourusername' },\n    github: { url: 'https://github.com/yourusername' },\n    instagram: { url: 'https://instagram.com/yourusername' },\n    youtube: { url: 'https://youtube.com/@yourusername' }\n};\n```\n\n### **Content Management**\nAll portfolio content is managed through JSON files:\n- **projects.json**: Unified project data with 6 types\n- **blog-posts.json**: Blog articles with markdown support\n- **contacts.json**: Contact form submissions\n\n### **Customization**\n- **Colors**: Update CSS variables in `css/main.css`\n- **Fonts**: Modify font imports and variables\n- **Animations**: Customize in `css/animations.css`\n- **Content**: Edit JSON files in `data/` directory\n\n---\n\n## 🐛 **Troubleshooting**\n\n### **Common Issues**\n\n**Admin Panel Not Loading**\n```bash\n# Check server status\nnpm start\n\n# Verify credentials (default: admin/admin123)\n# Check browser console for errors\n```\n\n**Image Upload Fails**\n```bash\n# Ensure file is under 5MB\n# Check file format (JPEG, PNG, WebP, AVIF)\n# Verify browser supports File API\n```\n\n**Performance Issues**\n```bash\n# Check image sizes and optimization\n# Verify service worker is registered\n# Monitor network tab for slow requests\n```\n\n### **Debug Mode**\n```bash\n# Enable debug logging\nNODE_ENV=development npm start\n\n# Check browser console for detailed detailed logs\n# Monitor server logs for backend issues\n```\n\n---\n\n## 🤝 **Contributing**\n\nWe welcome contributions! Please follow these steps:\n\n1. **Fork the repository**\n2. **Create a feature branch**\n   ```bash\n   git checkout -b feature/amazing-feature\n   ```\n3. **Make your changes**\n4. **Test thoroughly**\n5. **Submit a pull request**\n\n### **Development Guidelines**\n- Follow existing code style and conventions\n- Add appropriate error handling\n- Include accessibility considerations\n- Test on multiple devices and browsers\n- Update documentation as needed\n\n---\n\n## 📄 **License**\n\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n\n## 🆘 **Support**\n\nFor support and questions:\n- 📧 **Email**: hello@yourportfolio.com\n- 💼 **LinkedIn**: [linkedin.com/in/yourusername](https://linkedin.com/in/yourusername)\n- 🐙 **GitHub**: [github.com/yourusername](https://github.com/yourusername)\n- 📝 **Issues**: Create an issue in the repository\n\n---\n\n## 🔄 **Changelog**\n\n### **v2.1.0** - AI Assistant & Enhanced UX\n- ✅ **AI Portfolio Guide**: Intelligent chatbot with local responses\n- ✅ **Enhanced Quick Actions**: 8 interactive buttons for common queries\n- ✅ **Image Analysis**: Professional feedback on uploaded images\n- ✅ **User Memory**: Remembers names and preferences\n- ✅ **Rich Text Formatting**: Links, emojis, and formatting support\n\n### **v2.0.0** - Security & Performance\n- ✅ **Authentication System**: Secure admin panel with session management\n- ✅ **Image Optimization**: WebP conversion, compression, lazy loading\n- ✅ **XSS Protection**: Comprehensive input sanitization\n- ✅ **Performance Monitoring**: Core Web Vitals tracking\n- ✅ **PWA Enhancement**: Improved service worker and offline support\n\n### **v1.3.0** - Portfolio Enhancement\n- ✅ **Resume Integration**: Professional resume page with PDF download\n- ✅ **Legal Pages**: Privacy policy, terms of service, accessibility\n- ✅ **Footer Redesign**: Comprehensive footer with social links\n- ✅ **Enhanced Navigation**: Improved accordion system\n- ✅ **Mobile Optimization**: Better touch interactions\n\n### **v1.2.0** - Core Features\n- ✅ **Accordion Navigation**: Smooth collapsible sections\n- ✅ **Dark/Light Theme**: User preference toggle\n- ✅ **Admin Panel**: Content management system\n- ✅ **Responsive Design**: Mobile-first approach\n\n### **v1.1.0** - Foundation\n- ✅ **Basic Portfolio**: Project showcase functionality\n- ✅ **JSON Data**: Content management system\n- ✅ **Modern Styling**: CSS Grid and Flexbox\n- ✅ **Performance**: Optimized loading and caching\n\n---\n\n## 🌟 **Showcase Features**\n\n### **Technical Excellence**\n- **Vanilla JavaScript**: No framework dependencies\n- **Modern CSS**: Grid, Flexbox, Custom Properties\n- **Node.js Backend**: Express.js with security middleware\n- **PWA Standards**: Service worker and manifest\n- **Performance**: 90+ Lighthouse scores\n\n### **Creative Innovation**\n- **AI Integration**: Local intelligence without API costs\n- **Interactive Elements**: Games, animations, micro-interactions\n- **Dynamic Content**: Real-time updates and live preview\n- **Accessibility**: WCAG 2.1 AA compliance\n- **SEO Optimization**: Comprehensive meta tags and structured data\n\n### **Professional Quality**\n- **Security**: Production-ready authentication and protection\n- **Scalability**: Modular architecture for easy expansion\n- **Maintainability**: Clean code with comprehensive documentation\n- **User Experience**: Intuitive design with smooth interactions\n- **Cross-Platform**: Works perfectly on all devices\n\n---\n\n**Built with ❤️ by Ray Swan**\n\n*This portfolio showcases the intersection of technology and creativity, demonstrating both technical expertise and artistic vision.*",
           "date": "2025-06-30",
-          "featured": 2,
+          "featured": 1,
           "tags": [],
           "images": [
             {
@@ -345,6 +300,51 @@
           ],
           "technologies": [],
           "githubUrl": "",
+          "stars": 0,
+          "forks": 0
+        },
+        {
+          "id": "cartas-del-deseo",
+          "title": "Papi Chispa: Cartas del Deseo",
+          "description": "I created Cartas del Deseo as a love letter to Latin heritage and my passion for interactive storytelling. This bilingual tarot experience combines React, FastAPI, and OpenAI to create something truly unique - a web app that feels like stepping into a mystical telenovela. Every card flip is animated, every reading is personalized, and Papi Chispa (my AI fortune teller) responds in sultry Spanglish. It's not just a tarot app - it's a cultural experience that showcases my ability to blend technology with storytelling and create spontaneous emotional connections through code.",
+          "content": "# �� Cartas del Deseo - Interactive Tarot Experience\n\n> A bilingual, AI-powered tarot reading web application that combines React, FastAPI, and OpenAI to create a mystical, culturally-rich user experience.\n\n## ✨ **What Makes This Special**\n\n### 🎭 **Cultural Fusion**\n- **Bilingual Experience**: Seamless English/Spanish integration\n- **Cultural Authenticity**: Inspired by Latin American mysticism and telenovela drama\n- **Personal Touch**: Created as a tribute to my heritage and love of storytelling\n\n### 🤖 **Technical Innovation**\n- **AI-Powered Readings**: OpenAI integration for personalized fortune-telling\n- **Real-time Interaction**: Live chat with Papi Chispa, your velvet-voiced guide\n- **Progressive Reveals**: One-card-at-a-time reading flow for dramatic tension\n- **Multiple Themes**: Ceremonial Gold, Cyberpunk Pulse, Noir Mist, Desert Mirage\n\n### 🎨 **User Experience**\n- **Dramatic Animations**: Smooth card flips and transitions\n- **Responsive Design**: Works beautifully on desktop and mobile\n- **PWA Ready**: Installable as a mobile app\n- **Accessibility**: Screen reader friendly with proper ARIA labels\n\n## ��️ **Technical Stack**\n\n### **Frontend**\n- **React 18** with TypeScript for type safety\n- **Vite** for lightning-fast development\n- **Tailwind CSS** for rapid styling\n- **Framer Motion** for smooth animations\n\n### **Backend**\n- **FastAPI** (Python) for high-performance API\n- **OpenAI API** for intelligent fortune-telling\n- **WebSocket** for real-time chat functionality\n\n### **Deployment**\n- **Vercel** for frontend hosting\n- **Railway** for Python backend\n- **Cloudflare** for CDN and performance\n\n## �� **Key Features**\n\n### **Interactive Tarot Reading**\n- 78-card traditional deck with custom artwork\n- AI-generated interpretations in English and Spanish\n- Progressive card reveals for dramatic effect\n- Save and share reading sessions\n\n### **Papi Chispa AI Assistant**\n- Bilingual responses with cultural authenticity\n- Context-aware conversations\n- Multiple personality modes\n- Real-time chat interface\n\n### **Visual Themes**\n- **Ceremonial Gold**: Luxurious, traditional aesthetic\n- **Cyberpunk Pulse**: Futuristic, neon-inspired design\n- **Noir Mist**: Dark, mysterious atmosphere\n- **Desert Mirage**: Warm, earthy tones\n\n## 📱 **Mobile Experience**\n\n### **PWA Features**\n- Installable on home screen\n- Offline functionality for saved readings\n- Push notifications for daily cards\n- Native app-like performance\n\n### **Touch Optimized**\n- Swipe gestures for card navigation\n- Touch-friendly chat interface\n- Responsive design for all screen sizes\n\n## 🔮 **The Papi Chispa Experience**\n\nPapi Chispa isn't just an AI - he's a character I created to embody the warmth, wisdom, and dramatic flair of Latin American culture. He responds with:\n\n- **Cultural References**: Telenovela quotes, traditional sayings\n- **Bilingual Charm**: Seamless code-switching between languages\n- **Personal Touch**: Remembers user preferences and reading history\n- **Emotional Intelligence**: Adapts his tone to the user's mood\n\n## �� **Why This Project Matters**\n\nThis isn't just another tarot app. It's a demonstration of:\n\n- **Cultural Integration**: How technology can honor and celebrate heritage\n- **AI Ethics**: Responsible use of AI for creative, cultural expression\n- **User Experience**: Creating emotional connections through thoughtful design\n- **Technical Excellence**: Modern web technologies serving creative vision\n\n## 🌟 **What I Learned**\n\n- **AI Integration**: Working with OpenAI's API for creative applications\n- **Cultural Sensitivity**: Ensuring authentic representation in technology\n- **Real-time Features**: WebSocket implementation for live chat\n- **PWA Development**: Creating app-like experiences on the web\n- **Bilingual UX**: Designing interfaces that work in multiple languages\n\n## 🔮 **Future Enhancements**\n\n- **Voice Integration**: Papi Chispa speaking his readings\n- **Social Features**: Sharing readings with friends\n- **Custom Decks**: User-uploaded artwork and themes\n- **Analytics**: Understanding user engagement patterns\n- **Mobile App**: Native iOS/Android versions\n\n---\n\n*\"Papi te ama. He sees your questions before you ask. But he'll wait… just to hear you say them.\"* 🎴��🔥\n\n**Built with ❤️ by Ray Swan**",
+          "date": "2025-05-01",
+          "featured": 2,
+          "tags": [],
+          "images": [
+            {
+              "src": "/uploads/image-1751268015023-961680903.jpg",
+              "alt": "08C32274-0176-4DFA-AEB7-37F8BFF0C856.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751268015054-346293985.jpg",
+              "alt": "IMG_0641.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751268015099-812114523.jpg",
+              "alt": "IMG_0645.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751268015452-616171365.jpg",
+              "alt": "IMG_0647.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751268015507-984747610.jpg",
+              "alt": "IMG_0649.jpg",
+              "description": ""
+            },
+            {
+              "src": "/uploads/image-1751268015593-25194574.jpg",
+              "alt": "IMG_0651.jpg",
+              "description": ""
+            }
+          ],
+          "technologies": [],
+          "githubUrl": "https://github.com/rubyrayjuntos/ViteaTSRE.git",
           "stars": 0,
           "forks": 0
         },

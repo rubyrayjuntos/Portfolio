@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Test</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+    
+    .background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .content {
+      position: relative;
+      z-index: 1;
+      color: white;
+    }
+    
+    /* Theme styles */
+    .theme-default {
+      background: linear-gradient(135deg, #101225 0%, #1a1e2a 100%);
+    }
+    
+    .theme-modern-skyscraper {
+      background: linear-gradient(135deg, #0a1a2e 0%, #16213e 30%, #1a2847 60%, #2d4a73 100%);
+    }
+  </style>
+</head>
+<body class="theme-default">
+  <canvas id="background-canvas" class="background-canvas"></canvas>
+  <button class="theme-toggle" id="theme-toggle">Theme: Cyberpunk</button>
+  
+  <div class="content">
+    <h1>Theme Test Page</h1>
+    <p>Click the button to switch themes and check the console for debugging info.</p>
+    <p>Current theme: <span id="current-theme">default</span></p>
+  </div>
+
+  <script>
+    const themes = ['default', 'modern-skyscraper'];
+    let currentThemeIndex = 0;
+    let backgroundScene = null;
+
+    function switchTheme() {
+      console.log('=== THEME SWITCH ===');
+      console.log('Switching from:', themes[currentThemeIndex]);
+      
+      // Remove current theme
+      document.body.classList.remove(`theme-${themes[currentThemeIndex]}`);
+      
+      // Clean up background
+      if (backgroundScene) {
+        backgroundScene.cleanup();
+        backgroundScene = null;
+      }
+      
+      // Next theme
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      console.log('Switching to:', themes[currentThemeIndex]);
+      
+      // Apply theme
+      if (themes[currentThemeIndex] !== 'default') {
+        document.body.classList.add(`theme-${themes[currentThemeIndex]}`);
+      }
+      
+      // Update display
+      document.getElementById('current-theme').textContent = themes[currentThemeIndex];
+      
+      // Initialize background
+      initBackground();
+      
+      // Update button
+      const themeNames = {
+        'default': 'Cyberpunk',
+        'modern-skyscraper': 'Modern Skyscraper'
+      };
+      
+      const buttonText = `Theme: ${themeNames[themes[currentThemeIndex]]}`;
+      console.log('Button text:', buttonText);
+      document.getElementById('theme-toggle').textContent = buttonText;
+    }
+
+    function initBackground() {
+      const canvas = document.getElementById('background-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Resize canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      const currentTheme = themes[currentThemeIndex];
+      console.log('Initializing background for:', currentTheme);
+      
+      if (currentTheme === 'default') {
+        console.log('Creating starfield...');
+        backgroundScene = new StarfieldBackground(canvas, ctx);
+      } else if (currentTheme === 'modern-skyscraper') {
+        console.log('Creating cityscape...');
+        backgroundScene = new CityscapeBackground(canvas);
+      }
+    }
+
+    class StarfieldBackground {
+      constructor(canvas, ctx) {
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.w = canvas.width;
+        this.h = canvas.height;
+        this.stars = [];
+        this.animationId = null;
+        
+        this.createStars();
+        this.animate();
+      }
+      
+      createStars() {
+        for (let i = 0; i < 100; i++) {
+          this.stars.push({
+            x: Math.random() * this.w,
+            y: Math.random() * this.h,
+            r: Math.random() * 2 + 1,
+            speed: Math.random() * 0.5 + 0.1
+          });
+        }
+      }
+      
+      animate() {
+        this.ctx.clearRect(0, 0, this.w, this.h);
+        
+        for (const star of this.stars) {
+          this.ctx.beginPath();
+          this.ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+          this.ctx.fillStyle = 'white';
+          this.ctx.fill();
+          
+          star.x -= star.speed;
+          if (star.x < 0) star.x = this.w;
+        }
+        
+        this.animationId = requestAnimationFrame(() => this.animate());
+      }
+      
+      cleanup() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+      }
+    }
+
+    class CityscapeBackground {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.scene = null;
+        this.camera = null;
+        this.renderer = null;
+        this.animationId = null;
+        
+        this.init();
+      }
+      
+      init() {
+        console.log('CityscapeBackground: Starting...');
+        
+        if (typeof THREE === 'undefined') {
+          console.error('Three.js not loaded!');
+          this.canvas.style.background = 'linear-gradient(135deg, #0a1a2e 0%, #16213e 30%, #1a2847 60%, #2d4a73 100%)';
+          return;
+        }
+        
+        console.log('Three.js loaded, creating scene...');
+        
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({
+          canvas: this.canvas,
+          alpha: true
+        });
+        
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setClearColor(0x0a1a2e, 1);
+        
+        // Create a simple building
+        const geometry = new THREE.BoxGeometry(2, 4, 2);
+        const material = new THREE.MeshBasicMaterial({ color: 0x2a3b47 });
+        const building = new THREE.Mesh(geometry, material);
+        building.position.set(0, 2, -5);
+        this.scene.add(building);
+        
+        this.camera.position.set(0, 0, 5);
+        this.camera.lookAt(0, 0, 0);
+        
+        this.animate();
+      }
+      
+      animate() {
+        this.animationId = requestAnimationFrame(() => this.animate());
+        this.renderer.render(this.scene, this.camera);
+      }
+      
+      cleanup() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+        if (this.renderer) {
+          this.renderer.dispose();
+        }
+      }
+    }
+
+    // Initialize
+    document.getElementById('theme-toggle').addEventListener('click', switchTheme);
+    initBackground();
+  </script>
+</body>
+</html> 

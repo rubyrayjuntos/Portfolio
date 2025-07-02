@@ -1,0 +1,20 @@
+[
+  {
+    "tag": "generative",
+    "label": "Generative",
+    "emotion": "curious",
+    "visual": "swirling particles"
+  },
+  {
+    "tag": "retrofuturism",
+    "label": "Retro-futurism",
+    "emotion": "wistful thrill",
+    "visual": "vaporwave grid"
+  },
+  {
+    "tag": "playful",
+    "label": "Playful",
+    "emotion": "light joy",
+    "visual": "bouncing colors"
+  }
+]

@@ -196,14 +196,7 @@ class PortfolioManager {
         // Clear container safely
         container.innerHTML = '';
         
-        // Create section header
-        const sectionHeader = createSafeElement('div', 'section-header');
-        const headerTitle = createSafeElement('h2', '', 'Work');
-        const headerDesc = createSafeElement('p', '', 'Explore my creative projects across different mediums and disciplines.');
-        sectionHeader.appendChild(headerTitle);
-        sectionHeader.appendChild(headerDesc);
-        container.appendChild(sectionHeader);
-        
+        // Removed section header (Work heading and subheading)
         // Create project types grid
         const typesGrid = createSafeElement('div', 'project-types-grid');
         
@@ -546,26 +539,7 @@ class PortfolioManager {
     }
 
     renderStoriesDetail(item) {
-        return `
-            <div class="stories-detail">
-                <div class="stories-info">
-                    <p class="description">${item.description}</p>
-                    <div class="stories-meta">
-                        <span class="genre">${item.genre || 'N/A'}</span>
-                        <span class="word-count">${item.wordCount || 0} words</span>
-                        <span class="date">${item.date ? new Date(item.date).toLocaleDateString() : 'N/A'}</span>
-                    </div>
-                </div>
-                <div class="story-content">
-                    <div class="story-description">
-                        <p>${this.parseMarkdown(item.content)}</p>
-                    </div>
-                    <div class="story-tags">
-                        ${item.tags ? item.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
-                    </div>
-                </div>
-            </div>
-        `;
+        return '';
     }
 
     renderBrandDetail(item) {
@@ -584,45 +558,18 @@ class PortfolioManager {
                     </div>
                     ${item.services && item.services.length > 0 ? `
                         <div class="brand-services">
-                            <h4>Services Provided:</h4>
+                            <h3>Services</h3>
                             <ul>
                                 ${item.services.map(service => `<li>${service}</li>`).join('')}
                             </ul>
                         </div>
                     ` : ''}
-                    <div class="brand-tags">
-                        ${item.tags ? item.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
-                    </div>
                 </div>
             </div>
         `;
     }
 
     renderGithubDetail(item) {
-        // Render image thumbnails if available
-        let imagesHTML = '';
-        if (item.images && item.images.length > 0) {
-            imagesHTML = `
-                <div class="github-thumbnails">
-                    ${item.images.map(image => `
-                        <div class="github-thumbnail" onclick="portfolio.openLightbox('${image.src}', '${image.alt || ''}', '${image.description || ''}')">
-                            <img src="${image.src}" alt="${image.alt || ''}">
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        // Render markdown content
-        let markdownHTML = '';
-        if (window.marked && typeof window.marked.parse === 'function') {
-            markdownHTML = window.marked.parse(item.content || '');
-        } else if (window.markdownParser && typeof window.markdownParser.parse === 'function') {
-            markdownHTML = window.markdownParser.parse(item.content || '');
-        } else {
-            markdownHTML = `<p>${item.content || ''}</p>`;
-        }
-
         return `
             <div class="github-detail">
                 <div class="github-info">
@@ -634,255 +581,18 @@ class PortfolioManager {
                     </div>
                 </div>
                 <div class="github-content">
-                    ${imagesHTML}
-                    <div class="github-description markdown-body">
-                        ${markdownHTML}
+                    <div class="github-description">
+                        <p>${item.content}</p>
                     </div>
-                    ${item.technologies && item.technologies.length > 0 ? `
-                        <div class="github-technologies">
-                            <h4>Technologies</h4>
-                            <div class="tech-tags">
-                                ${item.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
-                    <div class="github-tags">
-                        ${item.tags ? item.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+                    <div class="github-links">
+                        ${item.githubUrl ? `
+                            <a href="${item.githubUrl}" target="_blank" class="btn btn-primary">
+                                View on GitHub
+                            </a>
+                        ` : ''}
                     </div>
-                    ${item.githubUrl ? `
-                        <a href="${item.githubUrl}" target="_blank" class="btn btn-primary">
-                            View on GitHub
-                        </a>
-                    ` : ''}
                 </div>
             </div>
         `;
     }
-
-    parseMarkdown(content) {
-        // Simple markdown parsing - you might want to use a proper markdown parser
-        return content
-            .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-            .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-            .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-            .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-            .replace(/\*(.*)\*/gim, '<em>$1</em>')
-            .replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>')
-            .replace(/`(.*?)`/gim, '<code>$1</code>')
-            .replace(/\n/gim, '<br>');
-    }
-
-    openLightbox(src, title, description) {
-        const lightbox = document.createElement('div');
-        lightbox.className = 'lightbox';
-        lightbox.innerHTML = `
-            <div class="lightbox-content">
-                <button class="lightbox-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
-                <img src="${src}" alt="${title}">
-                <div class="lightbox-info">
-                    <h3>${title}</h3>
-                    <p>${description}</p>
-                </div>
-            </div>
-        `;
-        document.body.appendChild(lightbox);
-    }
-
-    showStoryContent(storyId) {
-        // Implementation for showing full story content
-        console.log('Show story content:', storyId);
-    }
-
-    updateURL(view, type = null, projectId = null) {
-        let url = '/';
-        if (view === 'list' && type) {
-            url = `/${type}`;
-        } else if (view === 'detail' && type && projectId) {
-            url = `/${type}/${projectId}`;
-        }
-
-        const state = { view, type, projectId };
-        window.history.pushState(state, '', url);
-    }
-
-    setupEventListeners() {
-        // Handle browser back/forward navigation
-        window.addEventListener('popstate', (event) => {
-            if (event.state) {
-                const { view, type, projectId } = event.state;
-                if (view === 'list' && type) {
-                    this.showProjectList(type);
-                } else if (view === 'detail' && type && projectId) {
-                    this.showProjectDetail(type, projectId);
-                } else {
-                    this.renderProjectTypes();
-                }
-            }
-        });
-
-        // Handle back button clicks
-        document.addEventListener('click', (event) => {
-            const target = event.target.closest('[data-action]');
-            if (!target) return;
-
-            const action = target.getAttribute('data-action');
-            
-            switch (action) {
-                case 'back-to-types':
-                    this.renderProjectTypes();
-                    this.updateURL('types');
-                    break;
-                case 'back-to-list':
-                    if (this.currentType) {
-                        this.showProjectList(this.currentType);
-                    }
-                    break;
-            }
-        });
-
-        // Handle direct URL access - ensure portfolio section is expanded
-        const path = window.location.pathname;
-        if (path !== '/' && path !== '') {
-            const pathParts = path.split('/').filter(part => part);
-            if (pathParts.length >= 1) {
-                // Ensure portfolio section is expanded
-                this.expandPortfolioSection();
-                
-                // Handle navigation after a short delay to ensure accordion is ready
-                setTimeout(() => {
-                    if (pathParts.length === 1) {
-                        // /type format - show project list
-                        this.showProjectList(pathParts[0]);
-                    } else if (pathParts.length === 2) {
-                        // /type/project format - show project detail
-                        this.showProjectDetail(pathParts[0], pathParts[1]);
-                    }
-                }, 200);
-            }
-        }
-
-        console.log('PortfolioManager: Event listeners setup completed');
-    }
-
-    expandPortfolioSection() {
-        // Ensure the portfolio accordion section is expanded
-        const portfolioSection = document.getElementById('portfolio');
-        if (portfolioSection && !portfolioSection.classList.contains('active')) {
-            // Trigger accordion expansion
-            if (window.toggleAccordionSection) {
-                window.toggleAccordionSection('portfolio');
-            } else {
-                // Fallback: manually expand the section
-                const allSections = document.querySelectorAll('.accordion-section');
-                allSections.forEach(section => {
-                    section.classList.remove('active');
-                    const icon = section.querySelector('.accordion-icon');
-                    if (icon) icon.textContent = '▶';
-                });
-                
-                portfolioSection.classList.add('active');
-                const targetIcon = portfolioSection.querySelector('.accordion-icon');
-                if (targetIcon) targetIcon.textContent = '▼';
-            }
-        }
-    }
-
-    showError(message) {
-        const container = document.getElementById('portfolio-container');
-        if (container) {
-            container.innerHTML = `
-                <div class="error-message">
-                    <h3>Error</h3>
-                    <p>${message}</p>
-                    <button onclick="portfolio.init()">Retry</button>
-                </div>
-            `;
-        }
-    }
-
-    openModal(title, content) {
-        const modal = document.getElementById('portfolioModal');
-        if (modal) {
-            const modalTitle = modal.querySelector('#modalTitle');
-            const modalBody = modal.querySelector('.modal-body');
-            
-            if (modalTitle) modalTitle.textContent = title;
-            if (modalBody) {
-                // Safely set content
-                setSafeInnerHTML(modalBody, content);
-            }
-            
-            modal.classList.add('active');
-            modal.setAttribute('aria-hidden', 'false');
-            
-            // Focus management
-            const closeBtn = modal.querySelector('.modal-close');
-            if (closeBtn) closeBtn.focus();
-            
-            // Prevent body scroll
-            document.body.style.overflow = 'hidden';
-            
-            // Add click outside to close
-            const handleOutsideClick = (e) => {
-                if (e.target === modal) {
-                    this.closeModal();
-                    modal.removeEventListener('click', handleOutsideClick);
-                }
-            };
-            modal.addEventListener('click', handleOutsideClick);
-            
-            // Add escape key to close
-            const handleEscape = (e) => {
-                if (e.key === 'Escape') {
-                    this.closeModal();
-                    document.removeEventListener('keydown', handleEscape);
-                }
-            };
-            document.addEventListener('keydown', handleEscape);
-        }
-    }
-
-    closeModal() {
-        const modal = document.getElementById('portfolioModal');
-        if (modal) {
-            modal.classList.remove('active');
-            modal.setAttribute('aria-hidden', 'true');
-            
-            // Restore body scroll
-            document.body.style.overflow = '';
-            
-            // Clear content
-            const modalBody = modal.querySelector('.modal-body');
-            if (modalBody) modalBody.innerHTML = '';
-        }
-    }
 }
-
-// Initialize portfolio manager globally
-let portfolioManager;
-
-// Only initialize if not already done by app.js
-document.addEventListener('DOMContentLoaded', () => {
-    if (!window.portfolioManager) {
-        portfolioManager = new PortfolioManager();
-        window.portfolioManager = portfolioManager;
-        // Also set up global portfolio reference for HTML onclick handlers
-        window.portfolio = portfolioManager;
-        console.log('PortfolioManager initialized from portfolio.js');
-    }
-});
-
-// Export for global access
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PortfolioManager;
-}
-
-// Global modal functions for HTML onclick handlers
-function closeModal() {
-    if (window.portfolioManager) {
-        window.portfolioManager.closeModal();
-    }
-}
-
-// Make closeModal available globally
-window.closeModal = closeModal;

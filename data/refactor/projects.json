@@ -1,0 +1,214 @@
+{
+  "projects": [
+    {
+      "id": "astronova-asteroids",
+      "title": "AstroNova: Mobile Asteroids",
+      "slug": "astronova-asteroids",
+      "subtitle": "A modern-retro arcade rebirth in your pocket",
+      "description": "AstroNova is a Progressive Web App (PWA) reimagining the classic Asteroids game. Designed for instant, offline play with crisp visuals and responsive touch controls, it balances nostalgia with modern polish\u2014earning praise for its addictive gameplay, stylish neon aesthetic, and flawless mobile experience.",
+      "year": 2025,
+      "type": [
+        "Game Design",
+        "Frontend Development",
+        "PWA"
+      ],
+      "tools": [
+        "HTML5",
+        "Canvas",
+        "JavaScript",
+        "CSS",
+        "Service Workers"
+      ],
+      "tags": [
+        "mobile",
+        "arcade",
+        "offline-first",
+        "retro",
+        "pwa"
+      ],
+      "media": {
+        "thumbnail": "/images/projects/astronova-asteroids-thumb.jpg",
+        "gallery": [
+          "/images/projects/astro-asteroids-1.jpg",
+          "/images/projects/astro-asteroids-2.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://rubyrayjuntos.github.io/AstroNova/",
+        "github": "https://github.com/rubyrayjuntos/AstroNova"
+      },
+      "highlight": true,
+      "emotion": "electrified nostalgia"
+    },
+    {
+      "id": "cartas-del-deseo",
+      "title": "Cartas del Deseo",
+      "slug": "cartas-del-deseo",
+      "subtitle": "Interactive Tarot Powered by Papi Chispa \ud83d\udd2e",
+      "description": "A real-time, bilingual tarot reading experience led by Papi Chispa, your velvet-voiced digital mystic. Built with React, Tailwind, and FastAPI, this app offers dramatic card flips, live poetic chat, and themed UI settings ranging from cyberpunk to ceremonial gold.",
+      "year": 2025,
+      "type": [
+        "Creative Technology",
+        "Conversational AI",
+        "Frontend & Backend"
+      ],
+      "tools": [
+        "React",
+        "Vite",
+        "TypeScript",
+        "TailwindCSS",
+        "FastAPI",
+        "OpenAI API"
+      ],
+      "tags": [
+        "tarot",
+        "AI",
+        "interactive",
+        "spanglish",
+        "generative"
+      ],
+      "media": {
+        "thumbnail": "/images/projects/cartas-del-deseo-thumb.jpg",
+        "gallery": [
+          "/images/projects/cartas-reading-1.jpg",
+          "/images/projects/cartas-reading-2.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://vitea-tsre.vercel.app",
+        "github": "https://github.com/rubyrayjuntos/cartas-del-deseo"
+      },
+      "highlight": true,
+      "emotion": "sacred seduction"
+    },
+    {
+      "id": "nova-writers-conspiracy",
+      "title": "NOVA: The Writers' Conspiracy",
+      "slug": "nova-writers-conspiracy",
+      "subtitle": "Where words become worlds, and storytellers become gods.",
+      "description": "A collaborative storycrafting platform built around sacred roles, AI agents, and real-time cosmic creation. NOVA is part atelier, part oracle\u2014powered by FastAPI, React, CrewAI, and OpenAI. This isn't just software, it's a conspiracy of creators across space and soul.",
+      "year": 2025,
+      "type": [
+        "Creative Technology",
+        "AI Collaboration",
+        "Platform Design"
+      ],
+      "tools": [
+        "React",
+        "FastAPI",
+        "OpenAI",
+        "CrewAI",
+        "PostgreSQL",
+        "Redis",
+        "TailwindCSS",
+        "Docker"
+      ],
+      "tags": [
+        "ai",
+        "writing",
+        "collaborative",
+        "multi-agent",
+        "creative-tools",
+        "studio"
+      ],
+      "media": {
+        "thumbnail": "/images/projects/nova-thumb.jpg",
+        "gallery": [
+          "/images/projects/nova-dashboard.jpg",
+          "/images/projects/nova-agents.jpg",
+          "/images/projects/nova-reading-thread.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://your-nova-deployment-url.com",
+        "github": "https://github.com/your-org/nova-writers-conspiracy"
+      },
+      "highlight": true,
+      "emotion": "divine co-creation"
+    },
+    {
+      "id": "brand-identity-workflow",
+      "title": "Brand Identity Management Workflow",
+      "slug": "brand-identity-workflow",
+      "subtitle": "Automated brand creation powered by AI agents & HTML magic",
+      "description": "A dual-mode branding system: a no-install HTML interface for instant identity generation and an advanced multi-agent CrewAI workflow for scalable brand strategy. Generate brand voice, color palettes, typography, logo directions, and more\u2014all powered by OpenAI and orchestrated like a marketing s\u00e9ance.",
+      "year": 2025,
+      "type": [
+        "AI Workflow",
+        "Creative Tools",
+        "Branding System"
+      ],
+      "tools": [
+        "HTML",
+        "JavaScript",
+        "Python",
+        "FastAPI",
+        "OpenAI",
+        "CrewAI"
+      ],
+      "tags": [
+        "branding",
+        "identity",
+        "automation",
+        "creative-tools",
+        "multi-agent"
+      ],
+      "media": {
+        "thumbnail": "/images/projects/brand-identity-thumb.jpg",
+        "gallery": [
+          "/images/projects/brand-gui-preview.jpg",
+          "/images/projects/brand-workflow-diagram.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://your-deploy-url.com/simple_brand_gui.html",
+        "github": "https://github.com/your-org/brand-identity-workflow"
+      },
+      "highlight": true,
+      "emotion": "empowered clarity"
+    },
+    {
+      "id": "ray-swan-portfolio",
+      "title": "Ray Swan - Creative Portfolio",
+      "slug": "ray-swan-portfolio",
+      "subtitle": "A blazing altar of code, creativity, and cosmic elegance",
+      "description": "A fully custom, secure, and high-performance personal portfolio showcasing digital art, creative code, and writing. Featuring an AI assistant, dark/light theming, offline PWA support, a secure admin panel, and interactive content\u2014all built with vanilla JavaScript and Node.js.",
+      "year": 2025,
+      "type": [
+        "Portfolio",
+        "Full Stack App",
+        "Personal Brand"
+      ],
+      "tools": [
+        "JavaScript",
+        "Node.js",
+        "Express",
+        "PWA",
+        "CSS Grid",
+        "Service Worker"
+      ],
+      "tags": [
+        "pwa",
+        "ai",
+        "portfolio",
+        "secure",
+        "responsive",
+        "accessibility"
+      ],
+      "media": {
+        "thumbnail": "/images/projects/portfolio-cover.jpg",
+        "gallery": [
+          "/images/projects/portfolio-home.jpg",
+          "/images/projects/portfolio-admin.jpg",
+          "/images/projects/portfolio-chat-assistant.jpg"
+        ]
+      },
+      "links": {
+        "demo": "https://your-deployed-site.com",
+        "github": "https://github.com/yourusername/portfolio"
+      },
+      "highlight": true,
+      "emotion": "divine professionalism"
+    }
+  ]
+}

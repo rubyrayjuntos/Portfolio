@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ray Swan – Portfolio Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Montserrat:wght@400;600;700&family=Exo+2:wght@300;400;600&family=Cinzel:wght@700&family=Prata&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================= */
+    /* THEME SCAFFOLDING SYSTEM 🎭                   */
+    /* ============================================= */
+    
+    /* Base Theme: Cyberpunk Noir (Current) */
+    :root {
+      /* --- Color Palette --- */
+      --primary-accent: #a900ff;
+      --secondary-accent: #4f46e5;
+      --text-primary: #ffffff;
+      --text-secondary: #eaeaea;
+      --text-muted: #b0b0c3;
+      --text-placeholder: rgba(255, 255, 255, 0.4);
+      
+      /* --- Backgrounds --- */
+      --bg-primary: #101225;
+      --bg-secondary: #181a2b;
+      --bg-gradient: linear-gradient(135deg, #101225 0%, #1a1e2a 100%);
+      --card-bg: #181a2b;
+      --input-bg: rgba(40, 40, 40, 0.6);
+      
+      /* --- Borders & Shadows --- */
+      --border-radius: 18px;
+      --border-color: rgba(169, 0, 255, 0.2);
+      --shadow-primary: 0 4px 32px rgba(169, 0, 255, 0.22);
+      --shadow-secondary: 0 2px 16px rgba(169, 0, 255, 0.33);
+      --shadow-glow: 0 0 20px rgba(169, 0, 255, 0.3);
+      
+      /* --- Typography --- */
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-size-large: 2rem;
+      --font-size-medium: 1.1rem;
+      --font-size-small: 0.95rem;
+      
+      /* --- Animations --- */
+      --transition-fast: 0.18s;
+      --transition-medium: 0.3s;
+      --transition-slow: 0.5s;
+      --easing-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      
+      /* --- Spacing --- */
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 2.5rem;
+      --spacing-xxl: 3rem;
+    }
+
+    /* ============================================= */
+    /* THEME: Cartas del Deseo 🎭                    */
+    /* ============================================= */
+    .theme-cartas-deseo {
+      --primary-accent: #f77f00;
+      --secondary-accent: #c91c1c;
+      --text-primary: #f4e8d8;
+      --text-secondary: rgba(244, 232, 216, 0.8);
+      --text-muted: rgba(244, 232, 216, 0.6);
+      --bg-primary: #1d1a1a;
+      --bg-secondary: #2b2121;
+      --bg-gradient: linear-gradient(135deg, #1d1a1a, #100c0d);
+      --card-bg: #2b2121;
+      --input-bg: rgba(16, 12, 13, 0.7);
+      --font-heading: 'Cinzel', serif;
+      --border-radius: 8px;
+      --shadow-primary: 0 16px 64px rgba(247, 127, 0, 0.2);
+    }
+
+    /* ============================================= */
+    /* THEME: Arcanum ✨                             */
+    /* ============================================= */
+    .theme-arcanum {
+      --primary-accent: #00e5ff;
+      --secondary-accent: #ffc300;
+      --text-primary: #eafcff;
+      --text-secondary: rgba(234, 252, 255, 0.8);
+      --text-muted: rgba(234, 252, 255, 0.6);
+      --bg-primary: #020024;
+      --bg-secondary: #0d1d35;
+      --bg-gradient: linear-gradient(135deg, #020024, #0a1a2e);
+      --card-bg: rgba(13, 29, 53, 0.8);
+      --input-bg: rgba(6, 13, 24, 0.7);
+      --font-heading: 'Exo 2', sans-serif;
+      --border-radius: 4px;
+      --shadow-primary: 0 0 60px -20px rgba(0, 229, 255, 0.3);
+    }
+
+    /* ============================================= */
+    /* THEME: Elysian 🏛️                             */
+    /* ============================================= */
+    .theme-elysian {
+      --primary-accent: #c4a873;
+      --secondary-accent: #00ddca;
+      --text-primary: #1a2e35;
+      --text-secondary: rgba(26, 46, 53, 0.8);
+      --text-muted: rgba(26, 46, 53, 0.6);
+      --bg-primary: #e4e9f0;
+      --bg-secondary: #fafcff;
+      --bg-gradient: linear-gradient(135deg, #e4e9f0, #d5dde6);
+      --card-bg: rgba(250, 252, 255, 0.9);
+      --input-bg: rgba(220, 229, 237, 0.7);
+      --font-heading: 'Prata', serif;
+      --border-radius: 12px;
+      --shadow-primary: 0 16px 40px rgba(26, 46, 53, 0.15);
+    }
+
+    /* ============================================= */
+    /* THEME: Modern Skyscraper 🏙️                   */
+    /* ============================================= */
+    .theme-modern-skyscraper {
+      --primary-accent: #ffb74d;
+      --secondary-accent: #00a2ff;
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.8);
+      --text-muted: rgba(255, 255, 255, 0.6);
+      --bg-primary: #0a1a2e;
+      --bg-secondary: #16213e;
+      --bg-gradient: linear-gradient(135deg, #0a1a2e 0%, #16213e 30%, #1a2847 60%, #2d4a73 100%);
+      --card-bg: rgba(26, 26, 26, 0.95);
+      --input-bg: rgba(40, 40, 40, 0.6);
+      --font-heading: 'Montserrat', sans-serif;
+      --border-radius: 24px;
+      --shadow-primary: 0 32px 64px rgba(0, 0, 0, 0.4), 0 0 80px rgba(255, 183, 77, 0.1);
+      --shadow-secondary: 0 8px 32px rgba(255, 183, 77, 0.15);
+      --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    /* ============================================= */
+    /* BASE STYLES (Theme-Agnostic)                 */
+    /* ============================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      background: var(--bg-gradient);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      transition: all var(--transition-medium) var(--easing-smooth);
+      overflow-x: hidden;
+    }
+
+    /* Ensure body background updates with theme changes */
+    body.theme-default {
+      background: linear-gradient(135deg, #101225 0%, #1a1e2a 100%);
+    }
+
+    body.theme-cartas-deseo {
+      background: linear-gradient(135deg, #1d1a1a, #100c0d);
+    }
+
+    body.theme-arcanum {
+      background: linear-gradient(135deg, #020024, #0a1a2e);
+    }
+
+    body.theme-elysian {
+      background: linear-gradient(135deg, #e4e9f0, #d5dde6);
+    }
+
+    body.theme-modern-skyscraper {
+      background: linear-gradient(135deg, #0a1a2e 0%, #16213e 30%, #1a2847 60%, #2d4a73 100%);
+    }
+
+    /* ============================================= */
+    /* THEME-AWARE BACKGROUNDS 🌌                    */
+    /* ============================================= */
+    
+    /* Background Canvas */
+    .background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Floating Particles (for themes without 3D backgrounds) */
+    .floating-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, var(--primary-accent), transparent);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+      box-shadow: 0 0 10px var(--primary-accent);
+      opacity: 0.6;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+      50% { transform: translateY(-40px) scale(1.3); opacity: 1; }
+    }
+
+    .particle:nth-child(1) { top: 15%; left: 8%; animation-delay: 0s; }
+    .particle:nth-child(2) { top: 25%; right: 12%; animation-delay: 1.5s; }
+    .particle:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 3s; }
+    .particle:nth-child(4) { bottom: 20%; right: 8%; animation-delay: 0.8s; }
+    .particle:nth-child(5) { top: 60%; left: 5%; animation-delay: 2.2s; }
+    .particle:nth-child(6) { top: 40%; right: 5%; animation-delay: 4.1s; }
+
+    /* Flicker animation for CSS fallback */
+    @keyframes flicker {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Theme-specific background visibility */
+    .theme-default .floating-particles,
+    .theme-cartas-deseo .floating-particles,
+    .theme-arcanum .floating-particles,
+    .theme-elysian .floating-particles,
+    .theme-modern-skyscraper .floating-particles {
+      display: block;
+    }
+
+    /* ============================================= */
+    /* COMPONENT STYLES (Theme-Driven)              */
+    /* ============================================= */
+    
+    /* Main content container */
+    .main-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .hero {
+      text-align: center;
+      padding: var(--spacing-xxl) var(--spacing-sm) var(--spacing-xl) var(--spacing-sm);
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: var(--font-heading);
+      margin-bottom: var(--spacing-xs);
+      letter-spacing: -2px;
+      color: var(--text-primary);
+      text-shadow: var(--shadow-glow);
+      transition: color var(--transition-medium) var(--easing-smooth);
+    }
+
+    .hero p {
+      font-size: var(--font-size-medium);
+      color: var(--text-muted);
+      margin-bottom: var(--spacing-xl);
+      transition: color var(--transition-medium) var(--easing-smooth);
+    }
+
+    .cta-btn {
+      font-size: var(--font-size-medium);
+      padding: var(--spacing-sm) var(--spacing-xl);
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));
+      color: var(--text-primary);
+      border: none;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      box-shadow: var(--shadow-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      outline: none;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: var(--shadow-primary);
+      filter: brightness(1.1);
+    }
+
+    /* Enhanced button effects for all themes */
+    .theme-default .cta-btn {
+      background: linear-gradient(135deg, #a900ff, #4f46e5);
+      border: 1px solid rgba(169, 0, 255, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(169, 0, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .theme-default .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 16px 48px rgba(169, 0, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #b91cff, #6366f1);
+    }
+
+    .theme-cartas-deseo .cta-btn {
+      background: linear-gradient(135deg, #f77f00, #c91c1c);
+      border: 1px solid rgba(247, 127, 0, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(247, 127, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .theme-cartas-deseo .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 16px 48px rgba(247, 127, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #ff8f00, #dc2626);
+    }
+
+    .theme-arcanum .cta-btn {
+      background: linear-gradient(135deg, #00e5ff, #ffc300);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(0, 229, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .theme-arcanum .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 16px 48px rgba(0, 229, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #00f5ff, #ffd700);
+    }
+
+    .theme-elysian .cta-btn {
+      background: linear-gradient(135deg, #c4a873, #00ddca);
+      border: 1px solid rgba(196, 168, 115, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(196, 168, 115, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-elysian .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 16px 48px rgba(196, 168, 115, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      background: linear-gradient(135deg, #d4b883, #00eddc);
+    }
+
+    .theme-modern-skyscraper .cta-btn {
+      background: linear-gradient(135deg, #ffb74d, #00a2ff);
+      border: 1px solid rgba(255, 183, 77, 0.3);
+      box-shadow: 
+        0 8px 32px rgba(255, 183, 77, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+
+    .theme-modern-skyscraper .cta-btn:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        0 16px 48px rgba(255, 183, 77, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #ffc107, #00b2ff);
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .card-base {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-primary);
+      transition: all var(--transition-medium) var(--easing-smooth);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transform: translateZ(0);
+    }
+
+    .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        var(--shadow-primary),
+        0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Enhanced card effects for all themes */
+    .theme-default .card-base {
+      background: rgba(24, 26, 43, 0.9);
+      border: 1px solid rgba(169, 0, 255, 0.3);
+      box-shadow: 
+        0 32px 64px rgba(169, 0, 255, 0.2),
+        0 0 80px rgba(169, 0, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .theme-default .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 48px 96px rgba(169, 0, 255, 0.3),
+        0 0 120px rgba(169, 0, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-color: rgba(169, 0, 255, 0.5);
+    }
+
+    .theme-cartas-deseo .card-base {
+      background: rgba(43, 33, 33, 0.9);
+      border: 1px solid rgba(247, 127, 0, 0.3);
+      box-shadow: 
+        0 32px 64px rgba(247, 127, 0, 0.2),
+        0 0 80px rgba(247, 127, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .theme-cartas-deseo .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 48px 96px rgba(247, 127, 0, 0.3),
+        0 0 120px rgba(247, 127, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-color: rgba(247, 127, 0, 0.5);
+    }
+
+    .theme-arcanum .card-base {
+      background: rgba(13, 29, 53, 0.9);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 
+        0 32px 64px rgba(0, 229, 255, 0.2),
+        0 0 80px rgba(0, 229, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .theme-arcanum .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 48px 96px rgba(0, 229, 255, 0.3),
+        0 0 120px rgba(0, 229, 255, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-color: rgba(0, 229, 255, 0.5);
+    }
+
+    .theme-elysian .card-base {
+      background: rgba(250, 252, 255, 0.9);
+      border: 1px solid rgba(196, 168, 115, 0.3);
+      box-shadow: 
+        0 32px 64px rgba(196, 168, 115, 0.2),
+        0 0 80px rgba(196, 168, 115, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .theme-elysian .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 48px 96px rgba(196, 168, 115, 0.3),
+        0 0 120px rgba(196, 168, 115, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      border-color: rgba(196, 168, 115, 0.5);
+    }
+
+    .theme-modern-skyscraper .card-base {
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid rgba(255, 183, 77, 0.3);
+      box-shadow: 
+        0 32px 64px rgba(0, 0, 0, 0.4),
+        0 0 80px rgba(255, 183, 77, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .theme-modern-skyscraper .card-base:hover {
+      transform: translateY(-8px) scale(1.02) translateZ(0);
+      box-shadow: 
+        0 48px 96px rgba(0, 0, 0, 0.5),
+        0 0 120px rgba(255, 183, 77, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 183, 77, 0.5);
+    }
+
+    .about-skills-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-start;
+      gap: var(--spacing-xl);
+      max-width: 1200px;
+      margin: 0 auto var(--spacing-xl) auto;
+      padding: var(--spacing-lg) var(--spacing-md);
+    }
+    #about-section {
+      flex: 1 1 50%;
+      max-width: 600px;
+      min-width: 320px;
+    }
+    #skills-section {
+      flex: 1 1 50%;
+      max-width: 500px;
+      min-width: 320px;
+      margin-top: 0;
+    }
+    /* Skills grid meters */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--spacing-md);
+    }
+    .skill-meters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+      gap: var(--spacing-sm);
+    }
+    .skill-meter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-xs);
+    }
+    .skill-name {
+      text-align: center;
+      margin-top: var(--spacing-xs);
+      flex: unset;
+    }
+    /* Responsive for mobile */
+    @media (max-width: 900px) {
+      .about-skills-row {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-md) var(--spacing-xs);
+      }
+      #about-section, #skills-section {
+        max-width: 100%;
+        min-width: 0;
+      }
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      z-index: 1000;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-sm) var(--spacing-md);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      font-family: var(--font-heading);
+      font-size: var(--font-size-small);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transform: translateZ(0);
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px) scale(1.05) translateZ(0);
+      box-shadow: var(--shadow-secondary);
+    }
+
+    /* Enhanced theme toggle for all themes */
+    .theme-default .theme-toggle {
+      background: rgba(24, 26, 43, 0.9);
+      border: 1px solid rgba(169, 0, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(169, 0, 255, 0.2);
+    }
+
+    .theme-default .theme-toggle:hover {
+      box-shadow: 0 16px 48px rgba(169, 0, 255, 0.3);
+      border-color: rgba(169, 0, 255, 0.5);
+    }
+
+    .theme-cartas-deseo .theme-toggle {
+      background: rgba(43, 33, 33, 0.9);
+      border: 1px solid rgba(247, 127, 0, 0.3);
+      box-shadow: 0 8px 32px rgba(247, 127, 0, 0.2);
+    }
+
+    .theme-cartas-deseo .theme-toggle:hover {
+      box-shadow: 0 16px 48px rgba(247, 127, 0, 0.3);
+      border-color: rgba(247, 127, 0, 0.5);
+    }
+
+    .theme-arcanum .theme-toggle {
+      background: rgba(13, 29, 53, 0.9);
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 229, 255, 0.2);
+    }
+
+    .theme-arcanum .theme-toggle:hover {
+      box-shadow: 0 16px 48px rgba(0, 229, 255, 0.3);
+      border-color: rgba(0, 229, 255, 0.5);
+    }
+
+    .theme-elysian .theme-toggle {
+      background: rgba(250, 252, 255, 0.9);
+      border: 1px solid rgba(196, 168, 115, 0.3);
+      box-shadow: 0 8px 32px rgba(196, 168, 115, 0.2);
+    }
+
+    .theme-elysian .theme-toggle:hover {
+      box-shadow: 0 16px 48px rgba(196, 168, 115, 0.3);
+      border-color: rgba(196, 168, 115, 0.5);
+    }
+
+    .theme-modern-skyscraper .theme-toggle {
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid rgba(255, 183, 77, 0.3);
+      box-shadow: 0 8px 32px rgba(255, 183, 77, 0.2);
+    }
+
+    .theme-modern-skyscraper .theme-toggle:hover {
+      box-shadow: 0 16px 48px rgba(255, 183, 77, 0.3);
+      border-color: rgba(255, 183, 77, 0.5);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.1rem; }
+      .section-title { font-size: 1.3rem; }
+      .project-thumb { height: 140px; }
+      
+      .about-avatar {
+        flex: 0 0 100px;
+        width: 100px;
+        height: 100px;
+      }
+      
+      .skill-circle {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .skill-circle svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(10, 10, 30, 0.65);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      position: relative;
+      max-width: 520px;
+      width: 90vw;
+      padding: var(--spacing-lg) var(--spacing-md);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-primary);
+      background: var(--card-bg);
+      animation: modalIn 0.3s var(--easing-smooth);
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--primary-accent);
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: var(--secondary-accent);
+    }
+  </style>
+</head>
+<body>
+  <!-- Theme-Aware Backgrounds -->
+  <canvas id="background-canvas" class="background-canvas"></canvas>
+  
+  <!-- Floating Particles (for themes without 3D backgrounds) -->
+  <div class="floating-particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" id="theme-toggle">Switch Theme</button>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Ray Swan</h1>
+      <p>Designing emotional futures in code, color, and story.</p>
+      <button class="cta-btn" id="see-work-btn">See My Work</button>
+    </section>
+
+    <!-- About Section (restored, full width, .card-base) -->
+    <section class="section">
+      <div id="about-section" class="card-base"></div>
+    </section>
+
+    <!-- Tag Constellation Section (dynamically rendered) -->
+    <section class="section">
+      <div id="tag-constellation-section" class="card-base"></div>
+    </section>
+
+    <!-- Featured Project Section (dynamically rendered) -->
+    <section class="section">
+      <div id="featured-section" class="card-base"></div>
+    </section>
+
+    <!-- Project Grid Section -->
+    <section class="section">
+      <h2 class="section-title">Projects</h2>
+      <div class="filter-bar" id="filter-bar"></div>
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+  </div>
+
+  <script>
+    // Theme Management System
+    const themes = ['default', 'cartas-deseo', 'arcanum', 'elysian', 'modern-skyscraper'];
+    let currentThemeIndex = 0;
+    let backgroundScene = null;
+    
+    console.log('Available themes:', themes);
+    console.log('Theme order:', themes.map((theme, index) => `${index}: ${theme}`).join(', '));
+
+    function switchTheme() {
+      console.log('Switching theme from:', themes[currentThemeIndex]);
+      
+      // Remove current theme
+      document.body.classList.remove(`theme-${themes[currentThemeIndex]}`);
+      
+      // Clean up current background
+      if (backgroundScene) {
+        backgroundScene.cleanup();
+        backgroundScene = null;
+      }
+      
+      // Move to next theme
+      currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+      
+      console.log('Switching theme to:', themes[currentThemeIndex]);
+      
+      // Apply new theme
+      if (themes[currentThemeIndex] !== 'default') {
+        document.body.classList.add(`theme-${themes[currentThemeIndex]}`);
+      }
+      
+      // Initialize new background
+      initBackground();
+      
+      // Update button text
+      const themeNames = {
+        'default': 'Cyberpunk',
+        'cartas-deseo': 'Cartas del Deseo',
+        'arcanum': 'Arcanum',
+        'elysian': 'Elysian',
+        'modern-skyscraper': 'Modern Skyscraper'
+      };
+      
+      const buttonText = `Theme: ${themeNames[themes[currentThemeIndex]]}`;
+      console.log('Setting button text to:', buttonText);
+      document.getElementById('theme-toggle').textContent = buttonText;
+    }
+
+    // Background Management
+    function initBackground() {
+      const canvas = document.getElementById('background-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Clear any existing content
+      canvas.innerHTML = '';
+      
+      // Set canvas size
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      
+      const currentTheme = themes[currentThemeIndex];
+      console.log('Initializing background for theme:', currentTheme);
+      
+      if (currentTheme === 'default') {
+        console.log('Creating StarfieldBackground');
+        // Starfield background (converted from React component)
+        backgroundScene = new StarfieldBackground(canvas, ctx);
+      } else {
+        console.log('Using floating particles for theme:', currentTheme);
+        // All other themes use floating particles (including modern-skyscraper)
+        backgroundScene = null;
+        // Clear canvas for particle themes
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    // Starfield Background (vanilla JS version)
+    class StarfieldBackground {
+      constructor(canvas, ctx) {
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.w = canvas.width;
+        this.h = canvas.height;
+        this.numStars = 180;
+        this.starSpeed = 0.2;
+        this.starColor = "#ffffff";
+        this.stars = [];
+        this.animationId = null;
+        
+        this.createStars();
+        this.animate();
+      }
+      
+      createStars() {
+        this.stars = [];
+        for (let i = 0; i < this.numStars; i++) {
+          this.stars.push({
+            x: Math.random() * this.w,
+            y: Math.random() * this.h,
+            r: Math.random() * 1.2 + 0.2,
+            speed: Math.random() * this.starSpeed + 0.05,
+            alpha: Math.random() * 0.5 + 0.5
+          });
+        }
+      }
+      
+      animate() {
+        this.ctx.clearRect(0, 0, this.w, this.h);
+        
+        for (const star of this.stars) {
+          this.ctx.save();
+          this.ctx.globalAlpha = star.alpha;
+          this.ctx.beginPath();
+          this.ctx.arc(star.x, star.y, star.r, 0, 2 * Math.PI);
+          this.ctx.fillStyle = this.starColor;
+          this.ctx.shadowColor = this.starColor;
+          this.ctx.shadowBlur = 8;
+          this.ctx.fill();
+          this.ctx.restore();
+          
+          star.x -= star.speed;
+          if (star.x < 0) star.x = this.w;
+        }
+        
+        this.animationId = requestAnimationFrame(() => this.animate());
+      }
+      
+      cleanup() {
+        if (this.animationId) {
+          cancelAnimationFrame(this.animationId);
+        }
+      }
+    }
+
+    // Initialize theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', switchTheme);
+    
+    // Set initial button text
+    const themeNames = {
+      'default': 'Cyberpunk',
+      'cartas-deseo': 'Cartas del Deseo',
+      'arcanum': 'Arcanum',
+      'elysian': 'Elysian',
+      'modern-skyscraper': 'Modern Skyscraper'
+    };
+    
+    document.getElementById('theme-toggle').textContent = `Theme: ${themeNames[themes[currentThemeIndex]]}`;
+    console.log('Initial theme:', themes[currentThemeIndex]);
+    console.log('Initial button text:', `Theme: ${themeNames[themes[currentThemeIndex]]}`);
+    
+    // Initialize background on load
+    initBackground();
+
+    // Utility: fetch JSON
+    async function fetchJSON(path) {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error('Failed to load ' + path);
+      return await res.json();
+    }
+
+    // State
+    let allProjects = [];
+    let allTags = [];
+    let allTypes = [];
+    let currentFilter = 'All';
+
+    // Load data and render
+    async function initProjectGrid() {
+      // Load about section
+      renderAboutSection(await fetchAbout());
+      // Load tag constellation
+      renderTagConstellation(await fetchTags());
+      // Load projects
+      const projectsData = await fetchJSON('data/refactor/projects.json');
+      allProjects = projectsData.projects || projectsData; // Handle both structures
+      console.log('Loaded projects:', allProjects.length);
+      console.log('First project:', allProjects[0]);
+      
+      // Collect all types and tags
+      const typeSet = new Set();
+      const tagSet = new Set();
+      allProjects.forEach(p => {
+        (p.type || []).forEach(t => typeSet.add(t));
+        (p.tags || []).forEach(t => tagSet.add(t));
+      });
+      console.log('Types found:', Array.from(typeSet));
+      console.log('Tags found:', Array.from(tagSet));
+      allTypes = Array.from(typeSet);
+      allTags = Array.from(tagSet);
+      renderFeaturedProject();
+      renderFilterBar();
+      renderProjectGrid();
+    }
+
+    // Fetch about.json or use placeholder
+    async function fetchAbout() {
+      try {
+        return await fetchJSON('data/refactor/about.json');
+      } catch {
+        return {
+          name: 'Ray Swan',
+          headline: 'I design with emotion, code, and color.',
+          bio: 'I\'m a multidisciplinary creative focused on weaving emotional resonance through digital tools. I build interactive experiences, speculative fiction, and modular identities.',
+          avatar: '',
+        };
+      }
+    }
+
+    // Fetch tags.json or use placeholder
+    async function fetchTags() {
+      try {
+        return await fetchJSON('data/refactor/tags.json');
+      } catch {
+        return [
+          { tag: 'generative', label: 'Generative', emotion: 'curious', visual: 'swirling particles' },
+          { tag: 'playful', label: 'Playful', emotion: 'light joy', visual: 'bouncing colors' },
+          { tag: 'retrofuturism', label: 'Retro-futurism', emotion: 'wistful thrill', visual: 'vaporwave grid' }
+        ];
+      }
+    }
+
+    // Render about section
+    function renderAboutSection(about) {
+      const section = document.getElementById('about-section');
+      section.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'about-section card-base';
+      // Avatar
+      const avatar = document.createElement('img');
+      avatar.className = 'about-avatar';
+      avatar.src = about.avatar || '';
+      avatar.alt = about.name || 'Avatar';
+      card.appendChild(avatar);
+      // Content
+      const content = document.createElement('div');
+      content.className = 'about-content';
+      // Name
+      const name = document.createElement('div');
+      name.className = 'about-name';
+      name.textContent = about.name || 'Ray Swan';
+      content.appendChild(name);
+      // Headline
+      if (about.headline) {
+        const headline = document.createElement('div');
+        headline.className = 'about-headline';
+        headline.textContent = about.headline;
+        content.appendChild(headline);
+      }
+      // Bio
+      if (about.bio) {
+        const bio = document.createElement('div');
+        bio.className = 'about-bio';
+        bio.textContent = about.bio;
+        content.appendChild(bio);
+      }
+      // More About Me button (future: link to full about page or modal)
+      const btn = document.createElement('a');
+      btn.className = 'about-btn';
+      btn.textContent = 'More About Me';
+      btn.href = '#';
+      content.appendChild(btn);
+      // TODO: Add social links, contact, etc.
+      card.appendChild(content);
+      section.appendChild(card);
+    }
+
+    // Render tag constellation section
+    function renderTagConstellation(tagsData) {
+      const section = document.getElementById('tag-constellation-section');
+      section.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'tag-constellation-section card-base';
+      // Title
+      const title = document.createElement('div');
+      title.className = 'tag-constellation-title';
+      title.textContent = 'Tag Constellation';
+      card.appendChild(title);
+      // Orbs
+      const orbs = document.createElement('div');
+      orbs.className = 'tag-orbs';
+      tagsData.forEach(tag => {
+        const orb = document.createElement('div');
+        orb.className = 'tag-orb';
+        // Label
+        const label = document.createElement('div');
+        label.className = 'tag-orb-label';
+        label.textContent = tag.label || tag.tag;
+        orb.appendChild(label);
+        // Emotion
+        if (tag.emotion) {
+          const emotion = document.createElement('div');
+          emotion.className = 'tag-orb-emotion';
+          emotion.textContent = tag.emotion;
+          orb.appendChild(emotion);
+        }
+        // TODO: Add hover/tooltip for visual, click to filter, etc.
+        orbs.appendChild(orb);
+      });
+      card.appendChild(orbs);
+      section.appendChild(card);
+    }
+
+    // Render featured project
+    function renderFeaturedProject() {
+      const section = document.getElementById('featured-section');
+      section.innerHTML = '';
+      // Find first highlighted project
+      const featured = allProjects.find(p => p.highlight);
+      // Placeholder if none found
+      const p = featured || {
+        title: 'Featured Project',
+        subtitle: 'Your best work, front and center',
+        description: 'Highlight a project here by setting "highlight": true in your projects.json.',
+        media: { thumbnail: '' },
+        links: { live: '#' }
+      };
+      // Card
+      const card = document.createElement('div');
+      card.className = 'featured-section card-base';
+      // Image
+      const img = document.createElement('img');
+      img.className = 'featured-img';
+      img.src = p.media && p.media.thumbnail ? p.media.thumbnail : '';
+      img.alt = p.title;
+      card.appendChild(img);
+      // Content
+      const content = document.createElement('div');
+      content.className = 'featured-content';
+      // Title
+      const title = document.createElement('div');
+      title.className = 'featured-title';
+      title.textContent = p.title;
+      content.appendChild(title);
+      // Subtitle
+      if (p.subtitle) {
+        const subtitle = document.createElement('div');
+        subtitle.className = 'featured-subtitle';
+        subtitle.textContent = p.subtitle;
+        content.appendChild(subtitle);
+      }
+      // Description
+      if (p.description) {
+        const desc = document.createElement('div');
+        desc.className = 'featured-desc';
+        desc.textContent = p.description;
+        content.appendChild(desc);
+      }
+      // Button
+      const btn = document.createElement('a');
+      btn.className = 'featured-btn';
+      btn.textContent = 'See My Work';
+      btn.href = p.links && p.links.demo ? p.links.demo : '#';
+      btn.target = '_blank';
+      content.appendChild(btn);
+      card.appendChild(content);
+      section.appendChild(card);
+    }
+
+    // Render filter bar
+    function renderFilterBar() {
+      const bar = document.getElementById('filter-bar');
+      bar.innerHTML = '';
+      const filters = ['All', ...allTypes, ...allTags];
+      filters.forEach(f => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (currentFilter === f ? ' active' : '');
+        btn.textContent = f;
+        btn.onclick = () => {
+          currentFilter = f;
+          renderFilterBar();
+          renderProjectGrid();
+        };
+        bar.appendChild(btn);
+      });
+    }
+
+    // Render project grid
+    function renderProjectGrid() {
+      const grid = document.getElementById('project-grid');
+      grid.innerHTML = '';
+      console.log('Rendering project grid with', allProjects.length, 'projects');
+      console.log('Current filter:', currentFilter);
+      
+      let filtered = allProjects;
+      if (currentFilter !== 'All') {
+        filtered = allProjects.filter(p =>
+          (p.type && p.type.includes(currentFilter)) ||
+          (p.tags && p.tags.includes(currentFilter))
+        );
+      }
+      console.log('Filtered projects:', filtered.length);
+      
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.tabIndex = 0;
+        // Thumbnail
+        const img = document.createElement('img');
+        img.className = 'project-thumb';
+        img.src = p.media && p.media.thumbnail ? p.media.thumbnail : '';
+        img.alt = p.title;
+        card.appendChild(img);
+        // Content
+        const content = document.createElement('div');
+        content.className = 'project-content';
+        // Title
+        const title = document.createElement('div');
+        title.className = 'project-title';
+        title.textContent = p.title;
+        content.appendChild(title);
+        // Subtitle
+        if (p.subtitle) {
+          const subtitle = document.createElement('div');
+          subtitle.className = 'project-subtitle';
+          subtitle.textContent = p.subtitle;
+          content.appendChild(subtitle);
+        }
+        // Tags
+        if (p.tags && p.tags.length) {
+          const tags = document.createElement('div');
+          tags.className = 'project-tags';
+          p.tags.forEach(tag => {
+            const tagEl = document.createElement('span');
+            tagEl.className = 'tag';
+            tagEl.textContent = tag;
+            tags.appendChild(tagEl);
+          });
+          content.appendChild(tags);
+        }
+        // Meta
+        const meta = document.createElement('div');
+        meta.className = 'project-meta';
+        meta.textContent = `${p.year || ''} ${p.tools ? '· ' + p.tools.join(', ') : ''}`;
+        content.appendChild(meta);
+        card.appendChild(content);
+        grid.appendChild(card);
+      });
+    }
+
+    // Scroll to projects on CTA click
+    document.getElementById('see-work-btn').onclick = () => {
+      document.getElementById('projects-section').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Init
+    initProjectGrid();
+  </script>
+</body>
+</html> 

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy Leon Stay Connected</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+```
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0a1a2e 0%, #16213e 30%, #1a2847 60%, #2d4a73 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    #bg-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+    
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 26, 46, 0.85);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+    }
+    
+    .modal-container {
+        position: relative;
+        max-width: 520px;
+        width: 90%;
+        background: linear-gradient(145deg, 
+            rgba(26, 26, 26, 0.95) 0%, 
+            rgba(35, 35, 35, 0.95) 50%, 
+            rgba(28, 28, 28, 0.95) 100%);
+        border-radius: 24px;
+        border: 1px solid rgba(255, 183, 77, 0.2);
+        box-shadow: 
+            0 32px 64px rgba(0, 0, 0, 0.4),
+            0 0 80px rgba(255, 183, 77, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+        animation: modalAppear 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        backdrop-filter: blur(20px);
+    }
+    
+    @keyframes modalAppear {
+        to {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .glass-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+            rgba(255, 183, 77, 0.05) 0%, 
+            rgba(0, 162, 255, 0.05) 50%, 
+            rgba(255, 183, 77, 0.05) 100%);
+        pointer-events: none;
+    }
+    
+    .modal-header {
+        text-align: center;
+        padding: 40px 30px 30px;
+        background: linear-gradient(135deg, 
+            rgba(45, 45, 45, 0.6) 0%, 
+            rgba(35, 35, 35, 0.6) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .modal-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 183, 77, 0.8), 
+            transparent);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+    
+    @keyframes shimmer {
+        0% { left: -100%; }
+        50% { left: 100%; }
+        100% { left: 100%; }
+    }
+    
+    .modal-title {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2.4em;
+        font-weight: 600;
+        color: #ffffff;
+        text-shadow: 0 0 20px rgba(255, 183, 77, 0.3);
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 2;
+        letter-spacing: -0.02em;
+    }
+    
+    .modal-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1em;
+        color: #ffb74d;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+    
+    .geometric-accent {
+        position: absolute;
+        width: 60px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffb74d, transparent);
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .modal-content {
+        padding: 30px;
+        position: relative;
+    }
+    
+    .content-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1em;
+        text-align: center;
+        margin-bottom: 32px;
+        font-weight: 300;
+        line-height: 1.6;
+    }
+    
+    .form-group {
+        margin-bottom: 24px;
+        position: relative;
+    }
+    
+    .form-input {
+        width: 100%;
+        padding: 18px 24px;
+        border: 1px solid rgba(255, 183, 77, 0.2);
+        border-radius: 12px;
+        background: rgba(40, 40, 40, 0.6);
+        font-size: 1em;
+        font-family: 'Inter', sans-serif;
+        color: #ffffff;
+        backdrop-filter: blur(10px);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        font-weight: 300;
+    }
+    
+    .form-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    
+    .form-input:focus {
+        outline: none;
+        border-color: #ffb74d;
+        background: rgba(50, 50, 50, 0.8);
+        box-shadow: 
+            0 0 0 3px rgba(255, 183, 77, 0.1),
+            0 8px 32px rgba(255, 183, 77, 0.15);
+        transform: translateY(-2px);
+    }
+    
+    .button-group {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 32px;
+    }
+    
+    .option-btn {
+        flex: 1;
+        padding: 16px 24px;
+        border: 1px solid rgba(255, 183, 77, 0.2);
+        border-radius: 12px;
+        background: rgba(40, 40, 40, 0.4);
+        color: rgba(255, 255, 255, 0.8);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95em;
+        font-weight: 400;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        position: relative;
+        overflow: hidden;
+        backdrop-filter: blur(10px);
+    }
+    
+    .option-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 183, 77, 0.1), 
+            transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .option-btn:hover::before {
+        left: 100%;
+    }
+    
+    .option-btn:hover {
+        border-color: rgba(255, 183, 77, 0.4);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(255, 183, 77, 0.1);
+    }
+    
+    .option-btn.active {
+        background: linear-gradient(135deg, 
+            rgba(255, 183, 77, 0.2), 
+            rgba(255, 183, 77, 0.1));
+        border-color: #ffb74d;
+        color: #ffffff;
+        box-shadow: 0 0 24px rgba(255, 183, 77, 0.2);
+    }
+    
+    .subscribe-btn {
+        width: 100%;
+        padding: 20px;
+        border: none;
+        border-radius: 12px;
+        background: linear-gradient(135deg, 
+            #ffb74d 0%, 
+            #ffa726 50%, 
+            #ff9800 100%);
+        color: #1a1a1a;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 
+            0 8px 32px rgba(255, 183, 77, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .subscribe-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.2), 
+            transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .subscribe-btn:hover::before {
+        left: 100%;
+    }
+    
+    .subscribe-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+            0 12px 48px rgba(255, 183, 77, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        background: linear-gradient(135deg, 
+            #ffc947 0%, 
+            #ffb74d 50%, 
+            #ffa726 100%);
+    }
+    
+    .subscribe-btn:active {
+        transform: translateY(-1px);
+    }
+    
+    .footer-text {
+        text-align: center;
+        color: rgba(255, 183, 77, 0.6);
+        font-size: 0.9em;
+        margin-top: 24px;
+        font-weight: 300;
+        font-style: italic;
+    }
+    
+    .architectural-lines {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        opacity: 0.1;
+        pointer-events: none;
+    }
+    
+    .architectural-lines::before,
+    .architectural-lines::after {
+        content: '';
+        position: absolute;
+        background: #ffb74d;
+    }
+    
+    .architectural-lines::before {
+        width: 2px;
+        height: 100%;
+        right: 20px;
+    }
+    
+    .architectural-lines::after {
+        width: 100%;
+        height: 2px;
+        top: 20px;
+    }
+    
+    .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 183, 77, 0.2);
+        background: rgba(40, 40, 40, 0.6);
+        color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+    }
+    
+    .close-btn:hover {
+        background: rgba(255, 183, 77, 0.1);
+        border-color: #ffb74d;
+        transform: rotate(90deg);
+        color: #ffffff;
+    }
+    
+    .water-reflection {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(180deg, 
+            transparent 0%, 
+            rgba(0, 162, 255, 0.05) 50%, 
+            rgba(0, 162, 255, 0.1) 100%);
+        pointer-events: none;
+    }
+    
+    .floating-lights {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: radial-gradient(circle, #ffb74d, transparent);
+        border-radius: 50%;
+        animation: float 4s ease-in-out infinite;
+        box-shadow: 0 0 10px rgba(255, 183, 77, 0.6);
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) scale(1); opacity: 0.8; }
+        50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+    }
+    
+    .light-1 { top: 15%; left: 8%; animation-delay: 0s; }
+    .light-2 { top: 25%; right: 12%; animation-delay: 1.5s; }
+    .light-3 { bottom: 30%; left: 15%; animation-delay: 3s; }
+    .light-4 { bottom: 20%; right: 8%; animation-delay: 0.8s; }
+    
+    @media (max-width: 600px) {
+        .modal-container {
+            margin: 20px;
+            width: calc(100% - 40px);
+        }
+        
+        .modal-title {
+            font-size: 2em;
+        }
+        
+        .button-group {
+            flex-direction: column;
+        }
+        
+        .modal-content {
+            padding: 24px;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+```
+<div class="modal-overlay">
+    <div class="modal-container">
+        <div class="glass-overlay"></div>
+        <button class="close-btn">&times;</button>
+        
+        <!-- Floating lights -->
+        <div class="floating-lights light-1"></div>
+        <div class="floating-lights light-2"></div>
+        <div class="floating-lights light-3"></div>
+        <div class="floating-lights light-4"></div>
+        
+        <!-- Architectural elements -->
+        <div class="architectural-lines"></div>
+        
+        <div class="modal-header">
+            <h1 class="modal-title">Stay Connected</h1>
+            <p class="modal-subtitle">Lazy Leon</p>
+            <div class="geometric-accent"></div>
+        </div>
+        
+        <div class="modal-content">
+            <p class="content-text">
+                Get updates, tips, stories delivered directly to your inbox.
+            </p>
+            
+            <form id="subscriptionForm">
+                <div class="form-group">
+                    <input type="text" class="form-input" placeholder="Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="email" class="form-input" placeholder="Email Address" required>
+                </div>
+                
+                <div class="button-group">
+                    <button type="button" class="option-btn active" data-option="updates">Updates</button>
+                    <button type="button" class="option-btn" data-option="tips">Tips & Stories</button>
+                </div>
+                
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+            
+            <p class="footer-text">
+                Your memories delivered directly to your inbox.
+            </p>
+        </div>
+        
+        <div class="water-reflection"></div>
+    </div>
+</div>
+
+<script>
+    // Three.js cityscape background
+    let scene, camera, renderer, buildings = [], lights = [];
+    
+    function initThreeJS() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ 
+            canvas: document.getElementById('bg-canvas'), 
+            alpha: true,
+            antialias: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x0a1a2e, 1);
+        
+        // Create city buildings
+        createCityscape();
+        
+        // Add atmospheric lighting
+        const ambientLight = new THREE.AmbientLight(0x1a2847, 0.3);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xffb74d, 0.8, 50);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+        
+        camera.position.set(0, 5, 15);
+        camera.lookAt(0, 0, 0);
+        
+        animate();
+    }
+    
+    function createCityscape() {
+        const buildingCount = 12;
+        
+        for (let i = 0; i < buildingCount; i++) {
+            const width = Math.random() * 2 + 1;
+            const height = Math.random() * 8 + 3;
+            const depth = Math.random() * 2 + 1;
+            
+            const geometry = new THREE.BoxGeometry(width, height, depth);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x2a3b47,
+                transparent: true,
+                opacity: 0.8
+            });
+            
+            const building = new THREE.Mesh(geometry, material);
+            building.position.x = (Math.random() - 0.5) * 30;
+            building.position.y = height / 2;
+            building.position.z = (Math.random() - 0.5) * 20 - 10;
+            
+            scene.add(building);
+            buildings.push(building);
+            
+            // Add window lights
+            if (Math.random() > 0.3) {
+                const lightGeometry = new THREE.PlaneGeometry(0.3, 0.3);
+                const lightMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xffb74d,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                const windowLight = new THREE.Mesh(lightGeometry, lightMaterial);
+                windowLight.position.copy(building.position);
+                windowLight.position.y += Math.random() * height - height/2;
+                windowLight.position.z += depth/2 + 0.1;
+                
+                scene.add(windowLight);
+                lights.push(windowLight);
+            }
+        }
+    }
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        
+        // Gentle camera movement
+        camera.position.x = Math.sin(Date.now() * 0.0005) * 2;
+        camera.position.y = 5 + Math.sin(Date.now() * 0.0003) * 1;
+        
+        // Flickering lights
+        lights.forEach((light, index) => {
+            if (Math.random() > 0.98) {
+                light.material.opacity = Math.random() * 0.8 + 0.2;
+            }
+        });
+        
+        renderer.render(scene, camera);
+    }
+    
+    // Form interactions
+    document.addEventListener('DOMContentLoaded', function() {
+        initThreeJS();
+        
+        // Option button functionality
+        const optionBtns = document.querySelectorAll('.option-btn');
+        optionBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                optionBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Form submission
+        document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const subscribeBtn = document.querySelector('.subscribe-btn');
+            const originalText = subscribeBtn.textContent;
+            
+            subscribeBtn.textContent = 'Processing...';
+            subscribeBtn.style.background = 'linear-gradient(135deg, #64b5f6, #42a5f5)';
+            
+            setTimeout(() => {
+                subscribeBtn.textContent = 'Welcome!';
+                subscribeBtn.style.background = 'linear-gradient(135deg, #81c784, #66bb6a)';
+                
+                setTimeout(() => {
+                    document.querySelector('.modal-overlay').style.opacity = '0';
+                    document.querySelector('.modal-container').style.transform = 'scale(0.9) translateY(20px)';
+                    setTimeout(() => {
+                        document.querySelector('.modal-overlay').style.display = 'none';
+                    }, 400);
+                }, 2000);
+            }, 1200);
+        });
+        
+        // Close button
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.modal-overlay').style.opacity = '0';
+            document.querySelector('.modal-container').style.transform = 'scale(0.9) translateY(20px)';
+            setTimeout(() => {
+                document.querySelector('.modal-overlay').style.display = 'none';
+            }, 400);
+        });
+    });
+    
+    // Resize handler
+    window.addEventListener('resize', function() {
+        if (camera && renderer) {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+    });
+    
+    // Subtle parallax effect
+    document.addEventListener('mousemove', function(e) {
+        const modal = document.querySelector('.modal-container');
+        const rect = modal.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+        const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+        
+        const rotateX = y * 2;
+        const rotateY = x * -2;
+        
+        modal.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1)`;
+    });
+    
+    document.querySelector('.modal-overlay').addEventListener('mouseleave', function() {
+        document.querySelector('.modal-container').style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+</script>
+```
+
+</body>
+</html>
