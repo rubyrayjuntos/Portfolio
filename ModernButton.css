@@ -1,0 +1,326 @@
+/* Modern Button Component CSS */
+
+:root {
+  --primary: #363ae7;
+  --primary-dark: #05023a;
+  --secondary: #f13ba2;
+  --accent: #a98a1c;
+  --text: #1f2937;
+  --text-light: #6b7280;
+  --bg: #ffffff;
+  --bg-secondary: #f8fafc;
+  --border: #e5e7eb;
+  --glass: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+}
+
+[data-theme="dark"] {
+  --text: #f9fafb;
+  --text-light: #9ca3af;
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
+  --border: #374151;
+  --glass: rgba(15, 23, 42, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base Modern Button */
+.modern-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+.modern-btn:disabled,
+.modern-btn-disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Variants */
+
+/* Glass Button */
+.modern-btn-glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.modern-btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.modern-btn-glass:hover::before {
+  left: 100%;
+}
+
+.modern-btn-glass:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Gradient Button */
+.modern-btn-gradient {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  border: none;
+}
+
+.modern-btn-gradient::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modern-btn-gradient:hover::before {
+  opacity: 1;
+}
+
+.modern-btn-gradient:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+}
+
+.modern-btn-gradient .btn-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Neon Button */
+.modern-btn-neon {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  z-index: 1;
+}
+
+.modern-btn-neon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.modern-btn-neon:hover::before {
+  left: 0;
+}
+
+.modern-btn-neon:hover {
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+}
+
+/* 3D Button */
+.modern-btn-3d {
+  background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  box-shadow: 
+    0 6px 0 var(--primary-dark),
+    0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  transition: all 0.2s ease;
+}
+
+.modern-btn-3d:hover {
+  transform: translateY(2px);
+  box-shadow: 
+    0 4px 0 var(--primary-dark),
+    0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modern-btn-3d:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 var(--primary-dark),
+    0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Floating Button */
+.modern-btn-floating {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.modern-btn-floating::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  border-radius: 50%;
+}
+
+.modern-btn-floating:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.modern-btn-floating:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.modern-btn-floating .btn-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Button Sizes */
+.modern-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.modern-btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.modern-btn-xl {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+}
+
+/* Icon Button */
+.modern-btn-icon {
+  padding: 0.75rem;
+  border-radius: 50%;
+  min-width: 48px;
+  height: 48px;
+}
+
+.modern-btn-icon.modern-btn-sm {
+  min-width: 36px;
+  height: 36px;
+  padding: 0.5rem;
+}
+
+.modern-btn-icon.modern-btn-lg {
+  min-width: 56px;
+  height: 56px;
+  padding: 1rem;
+}
+
+/* Loading State */
+.modern-btn-loading {
+  pointer-events: none;
+}
+
+.modern-btn-loading .btn-content {
+  opacity: 0;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .modern-btn-glass {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .modern-btn-floating {
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .modern-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+  }
+  
+  .modern-btn-lg {
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+  }
+  
+  .modern-btn-xl {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .modern-btn,
+  .modern-btn-glass,
+  .modern-btn-gradient,
+  .modern-btn-neon,
+  .modern-btn-3d,
+  .modern-btn-floating {
+    transition: none;
+  }
+  
+  .modern-btn-glass::before,
+  .modern-btn-gradient::before,
+  .modern-btn-neon::before,
+  .modern-btn-floating::before {
+    transition: none;
+  }
+} 

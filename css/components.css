@@ -1202,33 +1202,291 @@ nav {
     color: white;
 }
 
-/* Responsive Design */
+/* Modern Glassmorphism Buttons - Similar to bottom row in image */
+.btn-glass {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-glass:hover::before {
+    left: 100%;
+}
+
+.btn-glass:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.btn-gradient:hover::before {
+    opacity: 1;
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(99, 102, 241, 0.4);
+}
+
+.btn-gradient span {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-neon {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-neon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-neon:hover::before {
+    left: 0;
+}
+
+.btn-neon:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+}
+
+.btn-3d {
+    background: linear-gradient(145deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    box-shadow: 
+        0 6px 0 var(--primary-dark),
+        0 8px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: all 0.2s ease;
+}
+
+.btn-3d:hover {
+    transform: translateY(2px);
+    box-shadow: 
+        0 4px 0 var(--primary-dark),
+        0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-3d:active {
+    transform: translateY(4px);
+    box-shadow: 
+        0 2px 0 var(--primary-dark),
+        0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-floating {
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    color: var(--text);
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-floating::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    border-radius: 50%;
+}
+
+.btn-floating:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-floating:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.btn-floating span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Button sizes */
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-xl {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.25rem;
+}
+
+/* Button with icons */
+.btn-icon {
+    padding: 0.75rem;
+    border-radius: 50%;
+    min-width: 48px;
+    height: 48px;
+    justify-content: center;
+}
+
+.btn-icon.btn-sm {
+    min-width: 36px;
+    height: 36px;
+    padding: 0.5rem;
+}
+
+.btn-icon.btn-lg {
+    min-width: 56px;
+    height: 56px;
+    padding: 1rem;
+}
+
+/* Loading state */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.btn-loading span {
+    opacity: 0;
+}
+
+/* Disabled state */
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Focus states for accessibility */
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+
+.btn-glass:focus {
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3), 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .btn-glass {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .btn-floating {
+    background: rgba(15, 23, 42, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .project-types-grid {
-        grid-template-columns: 1fr;
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.875rem;
     }
     
-    .project-list {
-        grid-template-columns: 1fr;
+    .btn-lg {
+        padding: 0.875rem 1.75rem;
+        font-size: 1rem;
     }
     
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    .btn-xl {
+        padding: 1rem 2rem;
+        font-size: 1.125rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn-glass,
+    .btn-gradient,
+    .btn-neon,
+    .btn-3d,
+    .btn-floating {
+        transition: none;
     }
     
-    .demo-data {
-        grid-template-columns: 1fr;
-    }
-    
-    .color-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    }
-    
-    .blog-meta,
-    .gallery-meta,
-    .story-meta {
-        flex-direction: column;
-        align-items: center;
+    .btn-glass::before,
+    .btn-gradient::before,
+    .btn-neon::before,
+    .btn-floating::before {
+        transition: none;
     }
 }
 

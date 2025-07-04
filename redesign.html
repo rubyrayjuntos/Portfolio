@@ -502,60 +502,418 @@
       border-color: rgba(255, 183, 77, 0.5);
     }
 
-    .about-skills-row {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: flex-start;
-      gap: var(--spacing-xl);
-      max-width: 1200px;
+    .about-section {
+      max-width: 900px;
       margin: 0 auto var(--spacing-xl) auto;
-      padding: var(--spacing-lg) var(--spacing-md);
+      padding: var(--spacing-xl) var(--spacing-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--spacing-xl);
     }
-    #about-section {
-      flex: 1 1 50%;
-      max-width: 600px;
-      min-width: 320px;
+
+    .about-avatar {
+      flex: 0 0 180px;
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-secondary);
+      border: 2.5px solid var(--primary-accent);
+      transition: all var(--transition-medium) var(--easing-smooth);
     }
-    #skills-section {
-      flex: 1 1 50%;
-      max-width: 500px;
-      min-width: 320px;
-      margin-top: 0;
-    }
-    /* Skills grid meters */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: var(--spacing-md);
-    }
-    .skill-meters {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+
+    .about-content {
+      flex: 1 1 320px;
+      min-width: 220px;
+      display: flex;
+      flex-direction: column;
       gap: var(--spacing-sm);
     }
+
+    .about-name {
+      font-size: var(--font-size-large);
+      font-weight: 900;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .about-headline {
+      font-size: var(--font-size-medium);
+      color: var(--primary-accent);
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .about-bio {
+      font-size: var(--font-size-medium);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .about-btn {
+      align-self: flex-start;
+      margin-top: var(--spacing-sm);
+      font-size: var(--font-size-medium);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: 999px;
+      background: var(--primary-accent);
+      color: var(--text-primary);
+      border: none;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      box-shadow: var(--shadow-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      outline: none;
+    }
+
+    .about-btn:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-primary);
+      filter: brightness(1.1);
+    }
+
+    .skills-section {
+      max-width: 1100px;
+      margin: 0 auto var(--spacing-xl) auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: center;
+    }
+
+    .skills-title {
+      font-size: var(--font-size-large);
+      font-weight: 900;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+      text-align: center;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xl);
+      justify-content: center;
+    }
+
+    .skill-category {
+      min-width: 180px;
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .skill-category-title {
+      font-size: var(--font-size-medium);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      color: var(--primary-accent);
+      margin-bottom: var(--spacing-xs);
+      text-align: center;
+    }
+
+    .skill-meters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+      justify-content: center;
+    }
+
     .skill-meter {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: var(--spacing-xs);
     }
+
+    .skill-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-secondary);
+      transition: all var(--transition-medium) var(--easing-smooth);
+    }
+
+    .skill-circle svg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 64px;
+      height: 64px;
+      z-index: 1;
+    }
+
+    .skill-level {
+      font-size: var(--font-size-medium);
+      font-weight: 700;
+      color: var(--primary-accent);
+      z-index: 2;
+    }
+
     .skill-name {
+      font-size: var(--font-size-small);
+      color: var(--text-secondary);
       text-align: center;
       margin-top: var(--spacing-xs);
-      flex: unset;
     }
-    /* Responsive for mobile */
-    @media (max-width: 900px) {
-      .about-skills-row {
-        flex-direction: column;
-        gap: var(--spacing-lg);
-        padding: var(--spacing-md) var(--spacing-xs);
-      }
-      #about-section, #skills-section {
-        max-width: 100%;
-        min-width: 0;
-      }
+
+    .tag-constellation-section {
+      max-width: 1100px;
+      margin: 0 auto var(--spacing-xl) auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: center;
+    }
+
+    .tag-constellation-title {
+      font-size: var(--font-size-large);
+      font-weight: 900;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+      text-align: center;
+    }
+
+    .tag-orbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      justify-content: center;
+      align-items: center;
+      min-height: 180px;
+      margin-top: var(--spacing-md);
+    }
+
+    .tag-orb {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--bg-secondary) 60%, var(--primary-accent) 100%);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-secondary);
+      font-weight: 700;
+      font-size: var(--font-size-medium);
+      position: relative;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      cursor: pointer;
+      border: 2px solid var(--secondary-accent);
+    }
+
+    .tag-orb:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: var(--shadow-primary);
+      z-index: 2;
+    }
+
+    .tag-orb-label {
+      font-size: var(--font-size-medium);
+      font-weight: 700;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .tag-orb-emotion {
+      font-size: var(--font-size-small);
+      color: var(--text-secondary);
+      opacity: 0.7;
+      font-weight: 400;
+    }
+
+    .featured-section {
+      max-width: 1100px;
+      margin: 0 auto var(--spacing-xl) auto;
+      padding: var(--spacing-xl) var(--spacing-md);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--spacing-xl);
+      background: linear-gradient(120deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    }
+
+    .featured-img {
+      flex: 0 0 320px;
+      width: 320px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: var(--border-radius);
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-secondary);
+      border: 1.5px solid var(--border-color);
+      transition: all var(--transition-medium) var(--easing-smooth);
+    }
+
+    .featured-content {
+      flex: 1 1 320px;
+      min-width: 260px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+
+    .featured-title {
+      font-size: 2.1rem;
+      font-weight: 900;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .featured-subtitle {
+      font-size: var(--font-size-medium);
+      color: var(--primary-accent);
+      font-weight: 600;
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .featured-desc {
+      font-size: var(--font-size-medium);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .featured-btn {
+      align-self: flex-start;
+      margin-top: var(--spacing-sm);
+      font-size: var(--font-size-medium);
+      padding: var(--spacing-sm) var(--spacing-lg);
+      border-radius: 999px;
+      background: var(--primary-accent);
+      color: var(--text-primary);
+      border: none;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      box-shadow: var(--shadow-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      outline: none;
+    }
+
+    .featured-btn:hover {
+      transform: scale(1.04);
+      box-shadow: var(--shadow-primary);
+      filter: brightness(1.1);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 900;
+      font-family: var(--font-heading);
+      margin-bottom: var(--spacing-lg);
+      color: var(--text-primary);
+      letter-spacing: -1px;
+      text-align: center;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      justify-content: center;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .filter-btn {
+      background: none;
+      border: 1.5px solid var(--primary-accent);
+      color: var(--primary-accent);
+      border-radius: 999px;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: var(--font-size-small);
+      cursor: pointer;
+      transition: all var(--transition-fast) var(--easing-smooth);
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary-accent);
+      color: var(--text-primary);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-secondary);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-fast) var(--easing-smooth);
+      cursor: pointer;
+      position: relative;
+      border: 1px solid var(--border-color);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .project-thumb {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-content {
+      padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-md) var(--spacing-sm);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      font-family: var(--font-heading);
+      margin-bottom: var(--spacing-xs);
+      color: var(--text-primary);
+    }
+
+    .project-subtitle {
+      font-size: var(--font-size-medium);
+      color: var(--text-muted);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .tag {
+      background: var(--bg-secondary);
+      color: var(--primary-accent);
+      border-radius: 999px;
+      padding: var(--spacing-xs) var(--spacing-sm);
+      font-size: var(--font-size-small);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .project-meta {
+      font-size: var(--font-size-small);
+      color: var(--text-muted);
+      margin-top: var(--spacing-xs);
     }
 
     /* Theme Toggle */
@@ -640,68 +998,42 @@
     }
 
     /* Responsive Design */
+    @media (max-width: 900px) {
+      .skills-grid {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+      }
+      .skill-category {
+        min-width: 0;
+        width: 100%;
+      }
+      .tag-orbs {
+        gap: var(--spacing-sm);
+      }
+      .tag-orb {
+        width: 70px;
+        height: 70px;
+        font-size: var(--font-size-small);
+      }
+      .featured-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+      }
+      .featured-img {
+        width: 100%;
+        height: 220px;
+        max-width: 100%;
+      }
+      .featured-content {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 600px) {
       .hero h1 { font-size: 2.1rem; }
       .section-title { font-size: 1.3rem; }
       .project-thumb { height: 140px; }
-      
-      .about-avatar {
-        flex: 0 0 100px;
-        width: 100px;
-        height: 100px;
-      }
-      
-      .skill-circle {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .skill-circle svg {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(10, 10, 30, 0.65);
-      z-index: 2000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(4px);
-    }
-    .modal-content {
-      position: relative;
-      max-width: 520px;
-      width: 90vw;
-      padding: var(--spacing-lg) var(--spacing-md);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow-primary);
-      background: var(--card-bg);
-      animation: modalIn 0.3s var(--easing-smooth);
-    }
-    @keyframes modalIn {
-      from { opacity: 0; transform: translateY(40px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      color: var(--primary-accent);
-      font-size: 2rem;
-      cursor: pointer;
-      z-index: 10;
-      transition: color 0.2s;
-    }
-    .modal-close:hover {
-      color: var(--secondary-accent);
     }
   </style>
 </head>
@@ -725,29 +1057,26 @@
   <!-- Main Content -->
   <div class="main-content">
     <!-- Hero Section -->
-    <section class="hero">
-      <h1>Ray Swan</h1>
+     <section class="hero"> 
+      <h1>Ray Swan</h1> 
       <p>Designing emotional futures in code, color, and story.</p>
       <button class="cta-btn" id="see-work-btn">See My Work</button>
-    </section>
+    </section> 
 
-    <!-- About Section (restored, full width, .card-base) -->
-    <section class="section">
-      <div id="about-section" class="card-base"></div>
-    </section>
+    <!-- About Section (dynamically rendered) -->
+    <section class="section" id="about-section"></section>
+
+    <!-- Skills Section (dynamically rendered) -->
+    <section class="section" id="skills-section"></section>
 
     <!-- Tag Constellation Section (dynamically rendered) -->
-    <section class="section">
-      <div id="tag-constellation-section" class="card-base"></div>
-    </section>
+    <section class="section" id="tag-constellation-section"></section>
 
     <!-- Featured Project Section (dynamically rendered) -->
-    <section class="section">
-      <div id="featured-section" class="card-base"></div>
-    </section>
+    <section class="section" id="featured-section"></section>
 
     <!-- Project Grid Section -->
-    <section class="section">
+    <section class="section" id="projects-section">
       <h2 class="section-title">Projects</h2>
       <div class="filter-bar" id="filter-bar"></div>
       <div class="project-grid" id="project-grid"></div>
@@ -892,6 +1221,8 @@
       }
     }
 
+
+
     // Initialize theme toggle
     document.getElementById('theme-toggle').addEventListener('click', switchTheme);
     
@@ -928,6 +1259,8 @@
     async function initProjectGrid() {
       // Load about section
       renderAboutSection(await fetchAbout());
+      // Load skills section
+      renderSkillsSection(await fetchSkills());
       // Load tag constellation
       renderTagConstellation(await fetchTags());
       // Load projects
@@ -963,6 +1296,30 @@
           bio: 'I\'m a multidisciplinary creative focused on weaving emotional resonance through digital tools. I build interactive experiences, speculative fiction, and modular identities.',
           avatar: '',
         };
+      }
+    }
+
+    // Fetch skills.json or use placeholder
+    async function fetchSkills() {
+      try {
+        return await fetchJSON('data/refactor/skills.json');
+      } catch {
+        return [
+          {
+            category: 'Digital Art',
+            skills: [
+              { name: 'Generative Art', level: 82 },
+              { name: 'Digital Painting', level: 75 }
+            ]
+          },
+          {
+            category: 'Development',
+            skills: [
+              { name: 'JavaScript / React', level: 90 },
+              { name: 'Python / ML', level: 78 }
+            ]
+          }
+        ];
       }
     }
 
@@ -1021,6 +1378,104 @@
       content.appendChild(btn);
       // TODO: Add social links, contact, etc.
       card.appendChild(content);
+      section.appendChild(card);
+    }
+
+    // Render skills section
+    function renderSkillsSection(skillsData) {
+      const section = document.getElementById('skills-section');
+      section.innerHTML = '';
+      const card = document.createElement('div');
+      card.className = 'skills-section card-base';
+      // Title
+      const title = document.createElement('div');
+      title.className = 'skills-title';
+      title.textContent = 'Skills';
+      card.appendChild(title);
+      // Grid
+      const grid = document.createElement('div');
+      grid.className = 'skills-grid';
+      skillsData.forEach(cat => {
+        const catDiv = document.createElement('div');
+        catDiv.className = 'skill-category';
+        // Category title
+        const catTitle = document.createElement('div');
+        catTitle.className = 'skill-category-title';
+        catTitle.textContent = cat.category;
+        catDiv.appendChild(catTitle);
+        // Meters
+        const meters = document.createElement('div');
+        meters.className = 'skill-meters';
+        cat.skills.forEach(skill => {
+          const meter = document.createElement('div');
+          meter.className = 'skill-meter';
+          // Animated circle (SVG)
+          const circle = document.createElement('div');
+          circle.className = 'skill-circle';
+          const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+          svg.setAttribute('width', '64');
+          svg.setAttribute('height', '64');
+          svg.setAttribute('viewBox', '0 0 64 64');
+          // Background circle
+          const bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          bg.setAttribute('cx', '32');
+          bg.setAttribute('cy', '32');
+          bg.setAttribute('r', '28');
+          bg.setAttribute('stroke', '#23234a');
+          bg.setAttribute('stroke-width', '7');
+          bg.setAttribute('fill', 'none');
+          svg.appendChild(bg);
+          // Foreground circle (animated)
+          const fg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          fg.setAttribute('cx', '32');
+          fg.setAttribute('cy', '32');
+          fg.setAttribute('r', '28');
+          fg.setAttribute('stroke', 'url(#grad)');
+          fg.setAttribute('stroke-width', '7');
+          fg.setAttribute('fill', 'none');
+          fg.setAttribute('stroke-linecap', 'round');
+          fg.setAttribute('transform', 'rotate(-90 32 32)');
+          fg.setAttribute('stroke-dasharray', 2 * Math.PI * 28);
+          fg.setAttribute('stroke-dashoffset', 2 * Math.PI * 28);
+          // Gradient
+          const grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+          grad.setAttribute('id', 'grad');
+          grad.setAttribute('x1', '0%');
+          grad.setAttribute('y1', '0%');
+          grad.setAttribute('x2', '100%');
+          grad.setAttribute('y2', '0%');
+          const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+          stop1.setAttribute('offset', '0%');
+          stop1.setAttribute('stop-color', '#a900ff');
+          grad.appendChild(stop1);
+          const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+          stop2.setAttribute('offset', '100%');
+          stop2.setAttribute('stop-color', '#4f46e5');
+          grad.appendChild(stop2);
+          svg.appendChild(grad);
+          svg.appendChild(fg);
+          circle.appendChild(svg);
+          // Animate the foreground circle
+          setTimeout(() => {
+            fg.setAttribute('stroke-dashoffset', (2 * Math.PI * 28) * (1 - skill.level / 100));
+          }, 100);
+          // Level
+          const level = document.createElement('div');
+          level.className = 'skill-level';
+          level.textContent = skill.level + '%';
+          circle.appendChild(level);
+          meter.appendChild(circle);
+          // Name
+          const name = document.createElement('div');
+          name.className = 'skill-name';
+          name.textContent = skill.name;
+          meter.appendChild(name);
+          meters.appendChild(meter);
+        });
+        catDiv.appendChild(meters);
+        grid.appendChild(catDiv);
+      });
+      card.appendChild(grid);
       section.appendChild(card);
     }
 

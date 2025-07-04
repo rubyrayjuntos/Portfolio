@@ -27,10 +27,10 @@
         "pwa"
       ],
       "media": {
-        "thumbnail": "/images/projects/astronova-asteroids-thumb.jpg",
+        "thumbnail": "/uploads/image-1751275271504-412693276.jpg",
         "gallery": [
-          "/images/projects/astro-asteroids-1.jpg",
-          "/images/projects/astro-asteroids-2.jpg"
+          "/uploads/astro-asteroids-1.jpg",
+          "/uploads/astro-asteroids-2.jpg"
         ]
       },
       "links": {
@@ -68,7 +68,7 @@
         "generative"
       ],
       "media": {
-        "thumbnail": "/images/projects/cartas-del-deseo-thumb.jpg",
+        "thumbnail": "/uploads/cartas-del-deseo-thumb.jpg",
         "gallery": [
           "/images/projects/cartas-reading-1.jpg",
           "/images/projects/cartas-reading-2.jpg"
@@ -112,7 +112,7 @@
         "studio"
       ],
       "media": {
-        "thumbnail": "/images/projects/nova-thumb.jpg",
+        "thumbnail": "/uploads/nova-thumb.png",
         "gallery": [
           "/images/projects/nova-dashboard.jpg",
           "/images/projects/nova-agents.jpg",
@@ -154,7 +154,7 @@
         "multi-agent"
       ],
       "media": {
-        "thumbnail": "/images/projects/brand-identity-thumb.jpg",
+        "thumbnail": "/uploads/brand-identity-thumb.jpg",
         "gallery": [
           "/images/projects/brand-gui-preview.jpg",
           "/images/projects/brand-workflow-diagram.jpg"
@@ -196,7 +196,7 @@
         "accessibility"
       ],
       "media": {
-        "thumbnail": "/images/projects/portfolio-cover.jpg",
+        "thumbnail": "/uploads/portfolio-cover.png",
         "gallery": [
           "/images/projects/portfolio-home.jpg",
           "/images/projects/portfolio-admin.jpg",
